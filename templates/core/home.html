@@ -1,202 +1,324 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Home | Harborlight Multispecialty Hospital{% endblock %}
+{% block title %}Harborlight Multispecialty Hospital | Compassionate Care, Modern Medicine{% endblock %}
 
 {% block content %}
-<!-- Hero Scaffold / It Works Section -->
-<section class="hero-scaffold">
-  <div class="container text-center">
-    <div class="mb-3">
-      <span class="badge-status">
-        <span class="status-dot"></span>
-        Django 5.x Project Scaffold Online
-      </span>
-    </div>
-    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">
-      Harborlight Multispecialty Hospital
-    </h1>
-    <p class="lead text-muted mb-4 mx-auto" style="max-width: 680px;">
-      <em>"Compassionate Care, Modern Medicine"</em>
-    </p>
-    <p class="mb-4 text-secondary mx-auto" style="max-width: 720px;">
-      <strong>It works!</strong> The project structure, branding palette, template engine, static assets, WhiteNoise pipeline, and all modular apps are configured and ready.
-    </p>
-    <div class="d-flex flex-wrap justify-content-center gap-3">
-      <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom shadow-sm">
-        <i class="bi bi-calendar2-plus me-1"></i>Book an Appointment
-      </a>
-      <a href="{% url 'departments:department_list' %}" class="btn btn-primary-custom shadow-sm">
-        <i class="bi bi-grid-3x3-gap me-1"></i>Explore Departments
-      </a>
-      <a href="{% url 'doctors:doctor_list' %}" class="btn btn-outline-custom">
-        <i class="bi bi-people me-1"></i>Meet Doctors
-      </a>
-      <a href="{% url 'dashboard:index' %}" class="btn btn-outline-custom">
-        <i class="bi bi-speedometer2 me-1"></i>Staff Portal
-      </a>
+
+<!-- =========================================================================
+     1. HERO SECTION
+     ========================================================================= -->
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <div class="hero-badge">
+          <i class="bi bi-hospital-fill"></i>
+          <span>Welcome to Harborlight Hospital</span>
+        </div>
+        <h1 class="hero-title">
+          Compassionate Care, <br>
+          <span style="color: var(--accent-color);">Modern Medicine</span>
+        </h1>
+        <p class="hero-subtitle">
+          Dedicated to providing clinical excellence, innovative medical technologies, and individualized patient healing across multi-specialty disciplines 24 hours a day, 7 days a week.
+        </p>
+        <div class="hero-actions">
+          <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom btn-lg shadow-sm">
+            <i class="bi bi-calendar-check-fill"></i>
+            <span>Book Appointment</span>
+          </a>
+          <a href="{% url 'departments:department_list' %}" class="btn btn-outline-custom btn-lg">
+            <i class="bi bi-grid-fill"></i>
+            <span>Our Services</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-5 d-none d-lg-block">
+        <div class="hero-illustration-box shadow-sm">
+          <div class="d-inline-flex p-3 rounded-circle mb-3" style="background-color: var(--support-light); color: var(--primary-color); font-size: 2.5rem;">
+            <i class="bi bi-shield-plus"></i>
+          </div>
+          <h3 class="h4 fw-bold mb-2">24/7 Emergency Ready</h3>
+          <p class="text-muted small mb-4">
+            Advanced cardiac trauma center, neonatal ICU, high-precision imaging diagnostics, and pharmacy standing by.
+          </p>
+          <div class="d-flex justify-content-center gap-2">
+            <span class="badge bg-white text-dark border px-3 py-2 rounded-pill shadow-sm">
+              <i class="bi bi-check-circle-fill text-success me-1"></i>Accredited Care
+            </span>
+            <span class="badge bg-white text-dark border px-3 py-2 rounded-pill shadow-sm">
+              <i class="bi bi-check-circle-fill text-success me-1"></i>Board Specialists
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Scaffold Apps Status Grid -->
-<section class="py-5">
+
+<!-- =========================================================================
+     2. STATS BAR (Animated counters via IntersectionObserver)
+     ========================================================================= -->
+<section class="stats-section" id="statsSection">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="h3 fw-bold">Active Project Architecture</h2>
-      <p class="text-muted">All 6 project applications are registered, routed, and ready for domain models and workflows.</p>
+    <div class="stats-bar-card">
+      <div class="row g-0 align-items-center">
+        <!-- Stat 1: Years of Service -->
+        <div class="col-6 col-md-3 stat-item">
+          <div class="stat-number" data-target="{{ stats.years|default:25 }}" data-suffix="+">0</div>
+          <p class="stat-label">Years of Service</p>
+        </div>
+
+        <!-- Stat 2: Expert Doctors -->
+        <div class="col-6 col-md-3 stat-item">
+          <div class="stat-number" data-target="{{ stats.doctors_count|default:18 }}" data-suffix="+">0</div>
+          <p class="stat-label">Expert Doctors</p>
+        </div>
+
+        <!-- Stat 3: Departments -->
+        <div class="col-6 col-md-3 stat-item">
+          <div class="stat-number" data-target="{{ stats.departments_count|default:6 }}" data-suffix="+">0</div>
+          <p class="stat-label">Clinical Departments</p>
+        </div>
+
+        <!-- Stat 4: Happy Patients -->
+        <div class="col-6 col-md-3 stat-item">
+          <div class="stat-number" data-target="{{ stats.patients_count|default:50000 }}" data-suffix="+">0</div>
+          <p class="stat-label">Happy Patients</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     3. DEPARTMENTS PREVIEW (Responsive grid pulled from Department model)
+     ========================================================================= -->
+<section class="departments-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Clinical Excellence</span>
+      <h2 class="section-title">Specialized Medical Departments</h2>
+      <p class="section-description">
+        State-of-the-art medical disciplines offering comprehensive diagnostic, surgical, and therapeutic treatments.
+      </p>
     </div>
 
     <div class="row g-4">
-      <!-- Core App -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card-custom">
-          <div class="card-icon">
-            <i class="bi bi-house-door"></i>
-          </div>
-          <h4 class="h5 fw-bold mb-2">core</h4>
-          <p class="text-muted small mb-3">
-            Public pages including Homepage, About Us story, Leadership overview, and Contact / Inquiry forms.
-          </p>
-          <div class="d-flex gap-2">
-            <a href="{% url 'core:home' %}" class="btn btn-sm btn-outline-custom">Home</a>
-            <a href="{% url 'core:about' %}" class="btn btn-sm btn-outline-custom">About</a>
-            <a href="{% url 'core:contact' %}" class="btn btn-sm btn-outline-custom">Contact</a>
+      {% for dept in departments %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card-custom dept-card">
+            <div>
+              <div class="card-icon">
+                <i class="bi {{ dept.icon|default:'bi-heart-pulse-fill' }}"></i>
+              </div>
+              <h3 class="h5 fw-bold mb-2">{{ dept.name }}</h3>
+              <p class="text-muted small mb-3">
+                {{ dept.short_description|truncatewords:24 }}
+              </p>
+            </div>
+            <div>
+              <a href="{% url 'departments:department_list' %}" class="dept-link">
+                <span>Explore Department</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      {% empty %}
+        <div class="col-12 text-center py-4">
+          <p class="text-muted">Clinical departments will be listed shortly.</p>
+        </div>
+      {% endfor %}
+    </div>
 
-      <!-- Departments App -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card-custom">
-          <div class="card-icon">
-            <i class="bi bi-heart-pulse"></i>
-          </div>
-          <h4 class="h5 fw-bold mb-2">departments</h4>
-          <p class="text-muted small mb-3">
-            Clinical specialties and hospital departments directory, services list, treatments, and procedures.
-          </p>
-          <div>
-            <a href="{% url 'departments:department_list' %}" class="btn btn-sm btn-outline-custom">View Departments</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Doctors App -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card-custom">
-          <div class="card-icon">
-            <i class="bi bi-person-badge"></i>
-          </div>
-          <h4 class="h5 fw-bold mb-2">doctors</h4>
-          <p class="text-muted small mb-3">
-            Medical staff directory, physician credentials, bios, specializations, and OPD consultation schedules.
-          </p>
-          <div>
-            <a href="{% url 'doctors:doctor_list' %}" class="btn btn-sm btn-outline-custom">View Doctors</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Appointments App -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card-custom">
-          <div class="card-icon" style="color: var(--accent-color); background-color: rgba(255, 111, 89, 0.12);">
-            <i class="bi bi-calendar-check"></i>
-          </div>
-          <h4 class="h5 fw-bold mb-2">appointments</h4>
-          <p class="text-muted small mb-3">
-            Online patient booking workflow, doctor slot selection, appointment confirmation, and notifications.
-          </p>
-          <div>
-            <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-accent-custom">Book Consultation</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Gallery App -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card-custom">
-          <div class="card-icon">
-            <i class="bi bi-images"></i>
-          </div>
-          <h4 class="h5 fw-bold mb-2">gallery</h4>
-          <p class="text-muted small mb-3">
-            Facility tours, ICU and surgical suites, diagnostic imaging labs, patient wards, and campus showcases.
-          </p>
-          <div>
-            <a href="{% url 'gallery:gallery_list' %}" class="btn btn-sm btn-outline-custom">Open Gallery</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dashboard App -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card-custom">
-          <div class="card-icon">
-            <i class="bi bi-speedometer2"></i>
-          </div>
-          <h4 class="h5 fw-bold mb-2">dashboard</h4>
-          <p class="text-muted small mb-3">
-            Staff and administration workspace for managing appointments, updating schedules, and reviewing inquiries.
-          </p>
-          <div>
-            <a href="{% url 'dashboard:index' %}" class="btn btn-sm btn-outline-custom">Staff Dashboard</a>
-          </div>
-        </div>
-      </div>
+    <div class="text-center mt-5">
+      <a href="{% url 'departments:department_list' %}" class="btn btn-outline-custom">
+        <span>View All Services & Procedures</span>
+        <i class="bi bi-arrow-right"></i>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- Brand Palette Reference Card -->
-<section class="py-5 bg-white border-top">
+
+<!-- =========================================================================
+     4. FEATURED DOCTORS (Horizontal scrollable cards / carousel)
+     ========================================================================= -->
+<section class="doctors-section">
   <div class="container">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-5">
-        <h3 class="h4 fw-bold mb-2">Harborlight Brand Identity</h3>
-        <p class="text-muted small mb-3">
-          Codified into <code>static/css/style.css</code> variables and Bootstrap 5 theme tokens.
-        </p>
-        <ul class="list-unstyled small text-secondary">
-          <li><strong>Site Name:</strong> Harborlight Multispecialty Hospital</li>
-          <li><strong>Tagline:</strong> "Compassionate Care, Modern Medicine"</li>
-          <li><strong>Location:</strong> 12 Wellness Avenue, Riverdale, TX 75001</li>
-          <li><strong>Contact:</strong> +1 (555) 010-7890 | info@harborlighthospital.example</li>
-          <li><strong>Typography:</strong> Poppins (Headings), Inter (Body)</li>
-        </ul>
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
+      <div>
+        <span class="section-tag">Our Faculty</span>
+        <h2 class="section-title mb-0">Meet Our Dedicated Physicians</h2>
       </div>
-      <div class="col-lg-7">
-        <div class="d-flex flex-wrap gap-3">
-          <div class="p-3 text-white rounded text-center shadow-sm" style="background-color: #0E5F5C; min-width: 130px;">
-            <div class="fw-bold">Deep Teal</div>
-            <div class="small opacity-75">#0E5F5C</div>
-            <div class="badge bg-light text-dark mt-1">Primary</div>
+      <!-- Scroll Navigation Buttons -->
+      <div class="d-flex gap-2 mt-3 mt-md-0">
+        <button class="btn btn-outline-custom btn-sm rounded-circle p-2" id="doctorsScrollPrev" aria-label="Previous doctors" style="width: 40px; height: 40px;">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="btn btn-outline-custom btn-sm rounded-circle p-2" id="doctorsScrollNext" aria-label="Next doctors" style="width: 40px; height: 40px;">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="doctors-carousel-wrapper">
+      <div class="doctors-scroll-track" id="doctorsScrollTrack">
+        {% for doc in doctors %}
+          <div class="doctor-card-item">
+            <div class="card-custom text-center h-100 p-4">
+              <!-- Doctor Photo or Icon -->
+              <div class="doctor-avatar-box">
+                {% if doc.photo %}
+                  <img src="{{ doc.photo.url }}" alt="Dr. {{ doc.name }}">
+                {% else %}
+                  <i class="bi bi-person-fill"></i>
+                {% endif %}
+              </div>
+
+              <!-- Doctor Details -->
+              <h3 class="doctor-name">Dr. {{ doc.name }}</h3>
+              <div class="doctor-specialty">{{ doc.specialization }}</div>
+              <div class="doctor-qualification">{{ doc.qualification }}</div>
+
+              <div class="mb-3">
+                <span class="badge bg-light text-dark border rounded-pill small">
+                  {{ doc.department.name|truncatewords:3 }}
+                </span>
+              </div>
+
+              <div class="small text-muted mb-3">
+                <i class="bi bi-calendar-event me-1"></i>{{ doc.available_days }}
+              </div>
+
+              <div class="mt-auto">
+                <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-primary-custom w-100">
+                  <span>Consult Doctor</span>
+                </a>
+              </div>
+            </div>
           </div>
-          <div class="p-3 text-white rounded text-center shadow-sm" style="background-color: #FF6F59; min-width: 130px;">
-            <div class="fw-bold">Warm Coral</div>
-            <div class="small opacity-75">#FF6F59</div>
-            <div class="badge bg-light text-dark mt-1">Accent</div>
+        {% empty %}
+          <div class="w-100 text-center py-4">
+            <p class="text-muted">Physician roster is currently updating.</p>
           </div>
-          <div class="p-3 text-dark rounded text-center shadow-sm border" style="background-color: #FAF7F2; min-width: 130px;">
-            <div class="fw-bold">Soft Ivory</div>
-            <div class="small text-muted">#FAF7F2</div>
-            <div class="badge bg-secondary text-white mt-1">Background</div>
-          </div>
-          <div class="p-3 text-white rounded text-center shadow-sm" style="background-color: #26333D; min-width: 130px;">
-            <div class="fw-bold">Charcoal</div>
-            <div class="small opacity-75">#26333D</div>
-            <div class="badge bg-light text-dark mt-1">Text Dark</div>
-          </div>
-          <div class="p-3 text-dark rounded text-center shadow-sm" style="background-color: #8FB996; min-width: 130px;">
-            <div class="fw-bold">Sage Green</div>
-            <div class="small opacity-75">#8FB996</div>
-            <div class="badge bg-light text-dark mt-1">Support</div>
-          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     5. TESTIMONIALS SLIDER (Patient reviews from Testimonial model)
+     ========================================================================= -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Patient Stories</span>
+      <h2 class="section-title">What Our Patients Say</h2>
+      <p class="section-description">
+        Real experiences and heartfelt words from patients and families cared for at Harborlight.
+      </p>
+    </div>
+
+    {% if testimonials %}
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+        <!-- Indicators -->
+        <div class="carousel-indicators" style="bottom: -45px;">
+          {% for t in testimonials %}
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="{% if forloop.first %}true{% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
+          {% endfor %}
+        </div>
+
+        <!-- Carousel Slides -->
+        <div class="carousel-inner pb-4">
+          {% for t in testimonials %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="testimonial-card-single text-center">
+                <div class="quote-icon">
+                  <i class="bi bi-quote"></i>
+                </div>
+                
+                <p class="testimonial-quote-text">
+                  "{{ t.message }}"
+                </p>
+
+                <!-- Star Rating -->
+                <div class="star-rating">
+                  {% if t.rating >= 1 %}<i class="bi bi-star-fill"></i>{% endif %}
+                  {% if t.rating >= 2 %}<i class="bi bi-star-fill"></i>{% endif %}
+                  {% if t.rating >= 3 %}<i class="bi bi-star-fill"></i>{% endif %}
+                  {% if t.rating >= 4 %}<i class="bi bi-star-fill"></i>{% endif %}
+                  {% if t.rating >= 5 %}<i class="bi bi-star-fill"></i>{% endif %}
+                </div>
+
+                <h4 class="patient-author">{{ t.patient_name }}</h4>
+                <div class="small text-muted">Verified Patient Experience</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev d-none d-md-flex" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev" style="width: 5%;">
+          <span class="carousel-control-prev-icon p-3 rounded-circle bg-dark bg-opacity-25" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next d-none d-md-flex" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next" style="width: 5%;">
+          <span class="carousel-control-next-icon p-3 rounded-circle bg-dark bg-opacity-25" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    {% else %}
+      <div class="text-center py-4">
+        <p class="text-muted">Patient testimonials will appear here soon.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     6. CALL-TO-ACTION (CTA) BANNER (Just above the footer)
+     ========================================================================= -->
+<section class="cta-banner-section">
+  <div class="container">
+    <div class="row align-items-center justify-content-between g-4">
+      <div class="col-lg-8">
+        <span class="badge bg-white text-dark rounded-pill px-3 py-2 mb-3 fw-semibold shadow-sm">
+          <i class="bi bi-heart-pulse-fill me-1" style="color: var(--accent-color);"></i>Ready to Take the Next Step?
+        </span>
+        <h2 class="cta-title">Your Health & Healing Are Our Highest Priority</h2>
+        <p class="cta-subtitle">
+          Whether you need a routine consultation, specialized diagnostic assessment, or surgical care, our clinical experts are here for you.
+        </p>
+        <div class="d-flex flex-wrap align-items-center gap-3">
+          <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom btn-lg shadow">
+            <i class="bi bi-calendar2-plus-fill"></i>
+            <span>Book an Appointment Now</span>
+          </a>
+          <a href="tel:+15550107890" class="cta-phone-box">
+            <i class="bi bi-telephone-fill"></i>
+            <span>Emergency: +1 (555) 010-7890</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 text-lg-end d-none d-lg-block">
+        <div class="p-4 rounded-4 bg-white bg-opacity-10 border border-white border-opacity-25 text-start">
+          <h4 class="h5 fw-bold text-white mb-2"><i class="bi bi-clock-history me-2"></i>Outpatient & OPD Hours</h4>
+          <p class="small text-white-70 mb-2">Monday – Saturday: 08:00 AM – 08:00 PM</p>
+          <p class="small text-white-70 mb-0">Emergency / Trauma Unit: Open 24/7/365</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-{% endblock %}
 
+{% endblock %}
