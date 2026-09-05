@@ -777,6 +777,188 @@ a:hover {
   }
 }
 
+/* Quick Emergency & Facilities Highlights (Down side of stats bar) */
+.emergency-highlights-grid {
+  margin-top: 1.5rem;
+}
+
+.quick-feature-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 1.5rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(15, 61, 105, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.quick-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15, 61, 105, 0.09);
+  border-color: rgba(2, 132, 199, 0.3);
+}
+
+.quick-feature-card.emergency-card {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: linear-gradient(180deg, rgba(254, 242, 242, 0.45) 0%, var(--white) 100%);
+  border-top: 3px solid #EF4444;
+}
+
+.quick-feature-card.emergency-card:hover {
+  border-color: #EF4444;
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.12);
+}
+
+.quick-feature-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.quick-feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  transition: transform 0.25s ease;
+}
+
+.quick-feature-card:hover .quick-feature-icon {
+  transform: scale(1.08);
+}
+
+.quick-feature-icon.icon-emergency {
+  background-color: #FEE2E2;
+  color: #DC2626;
+}
+
+.quick-feature-icon.icon-ambulance {
+  background-color: #E0F2FE;
+  color: var(--primary-color);
+}
+
+.quick-feature-icon.icon-pharmacy {
+  background-color: #E0F7FA;
+  color: #0284C7;
+}
+
+.quick-feature-icon.icon-specialist {
+  background-color: #ECFDF5;
+  color: #059669;
+}
+
+.live-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 50rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #EF4444;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  animation: emergencyPulse 1.8s infinite;
+}
+
+@keyframes emergencyPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.quick-feature-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.quick-feature-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.quick-feature-action {
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+
+.emergency-tel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #DC2626;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 10px rgba(220, 38, 38, 0.25);
+}
+
+.emergency-tel-btn:hover {
+  background-color: #B91C1C;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(220, 38, 38, 0.35);
+}
+
+.quick-feature-meta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-color);
+  display: inline-flex;
+  align-items: center;
+}
+
+.quick-feature-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: var(--transition-fast);
+}
+
+.quick-feature-link:hover {
+  color: var(--accent-color);
+  gap: 0.55rem;
+}
+
 /* ==========================================================================
    HOME PAGE: SECTION 3 - DEPARTMENTS PREVIEW
    ========================================================================== */
