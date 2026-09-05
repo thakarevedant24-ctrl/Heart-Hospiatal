@@ -9,6 +9,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from appointments import views as appointment_views
+from dashboard import views as dashboard_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,6 +20,10 @@ urlpatterns = [
     path('appointments/', include('appointments.urls', namespace='appointments')),
     path('book/', appointment_views.book_appointment, name='book_alias'),
     path('dashboard/', include('dashboard.urls', namespace='dashboard')),
+    path('login/', dashboard_views.admin_login_view, name='admin_login'),
+    path('admin-login/', dashboard_views.admin_login_view, name='admin_login_alias'),
+    path('staff-login/', dashboard_views.admin_login_view, name='staff_login_alias'),
+    path('logout/', dashboard_views.admin_logout_view, name='admin_logout'),
 ]
 
 if settings.DEBUG:
