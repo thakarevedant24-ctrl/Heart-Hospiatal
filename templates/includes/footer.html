@@ -1,81 +1,94 @@
 {% load static %}
-<footer>
+<footer class="site-footer">
   <div class="container">
     <div class="row g-4">
+      <!-- Column 1: About Snippet -->
       <div class="col-lg-4 col-md-6">
         <div class="d-flex align-items-center gap-2 mb-3">
-          <div class="navbar-brand-logo" style="width: 36px; height: 36px; font-size: 1.1rem;">
+          <div class="navbar-logo-icon" style="width: 38px; height: 38px; font-size: 1.2rem; border-radius: 10px;">
             <i class="bi bi-hospital"></i>
           </div>
-          <h5 class="mb-0 text-white border-0 pb-0">Harborlight Hospital</h5>
+          <h4 class="mb-0 text-white fw-bold" style="font-size: 1.2rem;">Harborlight Hospital</h4>
         </div>
-        <p class="text-white-50 mb-3">
-          <em>"Compassionate Care, Modern Medicine"</em>
+        <p class="text-white-50 mb-3" style="font-style: italic; font-size: 0.95rem;">
+          "Compassionate Care, Modern Medicine"
         </p>
-        <p class="text-white-50 small">
-          Delivering advanced healthcare with human empathy, state-of-the-art diagnostic facilities, and round-the-clock emergency medical response.
+        <p class="footer-about-text">
+          Harborlight Multispecialty Hospital is dedicated to delivering patient-centric medical excellence with state-of-the-art diagnostic technologies, multidisciplinary specialized clinicians, and round-the-clock emergency care.
         </p>
       </div>
 
+      <!-- Column 2: Quick Links -->
       <div class="col-lg-2 col-md-6">
-        <h5>Quick Links</h5>
-        <ul class="list-unstyled">
-          <li class="mb-2"><a href="{% url 'core:home' %}"><i class="bi bi-chevron-right small me-1"></i>Home</a></li>
-          <li class="mb-2"><a href="{% url 'core:about' %}"><i class="bi bi-chevron-right small me-1"></i>About Us</a></li>
-          <li class="mb-2"><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small me-1"></i>Departments</a></li>
-          <li class="mb-2"><a href="{% url 'doctors:doctor_list' %}"><i class="bi bi-chevron-right small me-1"></i>Doctors</a></li>
-          <li class="mb-2"><a href="{% url 'gallery:gallery_list' %}"><i class="bi bi-chevron-right small me-1"></i>Gallery</a></li>
-          <li class="mb-2"><a href="{% url 'appointments:book_appointment' %}"><i class="bi bi-chevron-right small me-1"></i>Book Visit</a></li>
+        <h5 class="footer-heading">Quick Links</h5>
+        <ul class="footer-links-list">
+          <li><a href="{% url 'core:home' %}"><i class="bi bi-chevron-right small"></i>Home</a></li>
+          <li><a href="{% url 'core:about' %}"><i class="bi bi-chevron-right small"></i>About Us</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Services</a></li>
+          <li><a href="{% url 'doctors:doctor_list' %}"><i class="bi bi-chevron-right small"></i>Doctors</a></li>
+          <li><a href="{% url 'gallery:gallery_list' %}"><i class="bi bi-chevron-right small"></i>Gallery</a></li>
+          <li><a href="{% url 'core:contact' %}"><i class="bi bi-chevron-right small"></i>Contact</a></li>
+          <li><a href="{% url 'appointments:book_appointment' %}"><i class="bi bi-chevron-right small"></i>Book Appointment</a></li>
         </ul>
       </div>
 
+      <!-- Column 3: Departments List -->
       <div class="col-lg-3 col-md-6">
-        <h5>Key Departments</h5>
-        <ul class="list-unstyled">
-          <li class="mb-2"><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small me-1"></i>Cardiology</a></li>
-          <li class="mb-2"><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small me-1"></i>Neurology</a></li>
-          <li class="mb-2"><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small me-1"></i>Pediatrics</a></li>
-          <li class="mb-2"><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small me-1"></i>Orthopedics</a></li>
-          <li class="mb-2"><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small me-1"></i>24/7 Trauma & ER</a></li>
+        <h5 class="footer-heading">Departments</h5>
+        <ul class="footer-links-list">
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Cardiology & Heart Care</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Neurology & Neurosurgery</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Pediatrics & Neonatal Care</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Orthopedics & Joint Surgery</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>24/7 Emergency & Trauma Center</a></li>
         </ul>
       </div>
 
+      <!-- Column 4: Contact Info & Social Icons -->
       <div class="col-lg-3 col-md-6">
-        <h5>Contact Us</h5>
-        <ul class="list-unstyled text-white-50">
-          <li class="mb-2 d-flex align-items-start">
-            <i class="bi bi-geo-alt-fill text-accent me-2 mt-1" style="color: var(--accent-color);"></i>
+        <h5 class="footer-heading">Contact Info</h5>
+        <ul class="footer-contact-list">
+          <li>
+            <i class="bi bi-geo-alt-fill"></i>
             <span>12 Wellness Avenue, Riverdale, TX 75001</span>
           </li>
-          <li class="mb-2 d-flex align-items-center">
-            <i class="bi bi-telephone-fill text-accent me-2" style="color: var(--accent-color);"></i>
+          <li>
+            <i class="bi bi-telephone-fill"></i>
             <a href="tel:+15550107890">+1 (555) 010-7890</a>
           </li>
-          <li class="mb-2 d-flex align-items-center">
-            <i class="bi bi-envelope-fill text-accent me-2" style="color: var(--accent-color);"></i>
+          <li>
+            <i class="bi bi-envelope-fill"></i>
             <a href="mailto:info@harborlighthospital.example">info@harborlighthospital.example</a>
           </li>
-          <li class="mt-3">
-            <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-accent-custom text-white">
-              Schedule Appointment
-            </a>
+          <li>
+            <i class="bi bi-clock-fill"></i>
+            <span>Emergency Dept: Open 24/7</span>
           </li>
         </ul>
+
+        <!-- Social Media Icons -->
+        <div class="footer-social-links">
+          <a href="#" class="social-icon-btn" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-icon-btn" aria-label="Twitter" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="social-icon-btn" aria-label="Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-icon-btn" aria-label="LinkedIn" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="social-icon-btn" aria-label="YouTube" title="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
       </div>
     </div>
 
-    <div class="footer-bottom text-center text-white-50">
+    <!-- Copyright Line -->
+    <div class="footer-bottom-bar">
       <div class="row align-items-center">
-        <div class="col-md-6 text-md-start mb-2 mb-md-0">
+        <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
           &copy; 2026 Harborlight Multispecialty Hospital. All rights reserved.
         </div>
-        <div class="col-md-6 text-md-end">
+        <div class="col-md-6 text-center text-md-end">
           <a href="{% url 'core:about' %}" class="me-3">Privacy Policy</a>
           <a href="{% url 'core:about' %}" class="me-3">Terms of Care</a>
-          <a href="{% url 'dashboard:index' %}">Staff Portal</a>
+          <a href="{% url 'dashboard:index' %}">Staff Access</a>
         </div>
       </div>
     </div>
   </div>
 </footer>
-
