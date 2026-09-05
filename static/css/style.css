@@ -424,28 +424,37 @@ a:hover {
 }
 
 /* ==========================================================================
-   HOME PAGE: SECTION 1 - HERO SECTION
+   HOME PAGE: FULL-BLEED HERO BACKGROUND SLIDESHOW WITH FLOATING CARD
+   Matching user specification & reference layout
    ========================================================================== */
 
-.hero-section {
+.hero-slider-section {
   position: relative;
-  padding: 5.5rem 0 5rem;
-  background-color: var(--bg-color);
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   overflow: hidden;
+  padding-bottom: 2.5rem;
 }
 
-/* Subtle Hospital Background Slideshow */
-.hero-slideshow {
+@media (min-width: 992px) {
+  .hero-slider-section {
+    min-height: 670px;
+    padding-bottom: 3.5rem;
+  }
+}
+
+.hero-slides-wrapper {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none;
   overflow: hidden;
 }
 
-.hero-slide {
+.hero-slide-item {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -454,29 +463,215 @@ a:hover {
   background-position: center center;
   background-repeat: no-repeat;
   opacity: 0;
-  transform: scale(1.05);
-  transition: opacity 2s ease-in-out, transform 8s ease-out;
+  visibility: hidden;
+  transform: scale(1.04);
+  transition: opacity 1s ease-in-out, transform 7s ease-out, visibility 1s;
   will-change: opacity, transform;
 }
 
-.hero-slide.is-active {
-  opacity: 0.20; /* Subtly visible, preserving full text readability */
+.hero-slide-item.is-active {
+  opacity: 1;
+  visibility: visible;
   transform: scale(1);
-}
-
-.hero-slideshow-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 90% 10%, rgba(2, 132, 199, 0.12) 0%, transparent 50%),
-              radial-gradient(circle at 10% 90%, rgba(15, 61, 105, 0.08) 0%, transparent 60%),
-              linear-gradient(135deg, rgba(248, 250, 252, 0.86) 0%, rgba(248, 250, 252, 0.78) 55%, rgba(241, 245, 249, 0.85) 100%);
-  pointer-events: none;
   z-index: 2;
 }
 
-.hero-content-container {
+/* Subtle soft lighting overlay across the photo */
+.hero-slide-backdrop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(248, 250, 252, 0.12) 40%, rgba(248, 250, 252, 0.40) 100%);
+  pointer-events: none;
+}
+
+/* Floating Circular Arrow Buttons (Left & Right - Exactly like reference) */
+.hero-slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(44, 181, 196, 0.65);
+  border: none;
+  color: #ffffff;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(4px);
+}
+
+.hero-slider-arrow:hover,
+.hero-slider-arrow:focus {
+  background: rgba(35, 154, 167, 0.95);
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.hero-slider-prev {
+  left: 20px;
+}
+
+.hero-slider-next {
+  right: 20px;
+}
+
+@media (min-width: 992px) {
+  .hero-slider-prev {
+    left: 36px;
+  }
+  .hero-slider-next {
+    right: 36px;
+  }
+}
+
+/* Centered Floating White Card Container (Matching reference) */
+.hero-floating-card-container {
   position: relative;
-  z-index: 3;
+  z-index: 6;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-floating-card {
+  background-color: #ffffff;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(15, 61, 105, 0.10), 0 2px 8px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  text-align: center;
+}
+
+/* Distinct Top Cyan/Teal Stripe on Card */
+.hero-card-top-stripe {
+  height: 5px;
+  width: 100%;
+  background: #2cb5c4; /* Teal line matching reference screenshot */
+}
+
+.hero-card-inner {
+  padding: 2.25rem 2.5rem 1.85rem;
+}
+
+@media (max-width: 575.98px) {
+  .hero-card-inner {
+    padding: 1.5rem 1.25rem 1.5rem;
+  }
+}
+
+.hero-slide-caption {
+  display: none;
+}
+
+.hero-slide-caption.is-active {
+  display: block;
+  animation: heroCaptionIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroCaptionIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-caption-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.45rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.hero-caption-desc {
+  font-size: clamp(0.9rem, 1.35vw, 1.02rem);
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.hero-caption-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-slider-primary {
+  background-color: #2cb5c4 !important;
+  border-color: #2cb5c4 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  padding: 0.65rem 2.2rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(44, 181, 196, 0.35);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-slider-primary:hover,
+.btn-slider-primary:focus {
+  background-color: #239aa7 !important;
+  border-color: #239aa7 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(44, 181, 196, 0.45);
+}
+
+/* Pagination Dots (Matching reference dots below card) */
+.hero-slider-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1.25rem;
+  z-index: 6;
+}
+
+.hero-slider-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  padding: 0;
+}
+
+.hero-slider-dot:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: scale(1.15);
+}
+
+.hero-slider-dot.is-active {
+  background: #2cb5c4;
+  width: 24px;
+  border-radius: 50rem;
 }
 
 .hero-badge {
@@ -530,7 +725,7 @@ a:hover {
 
 .stats-section {
   padding: 2.5rem 0;
-  margin-top: -2rem;
+  margin-top: 0.5rem;
   position: relative;
   z-index: 10;
 }

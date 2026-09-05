@@ -8,68 +8,62 @@
 {% block content %}
 
 <!-- =========================================================================
-     1. HERO SECTION
+     1. HERO SECTION (Full-Bleed Slider with Centered Floating Card)
      ========================================================================= -->
-<section class="hero-section">
-  <!-- Subtle Background Slideshow (Gently Visible Hospital Imagery) -->
-  <div class="hero-slideshow" id="heroSlideshow" aria-hidden="true">
-    {% for h_img in hero_images %}
-      <div class="hero-slide {% if forloop.first %}is-active{% endif %}"
-           style="background-image: url('{{ h_img.image.url }}');">
-      </div>
-    {% empty %}
-      <div class="hero-slide is-active"
-           style="background-image: url('{% static "images/harborlight-og-banner.svg" %}');">
+<section class="hero-slider-section" id="heroSliderSection" aria-label="Hospital Showcase">
+  <!-- Slides Container -->
+  <div class="hero-slides-wrapper" id="heroSlidesWrapper">
+    {% for slide in hero_slides %}
+      <div class="hero-slide-item {% if forloop.first %}is-active{% endif %}" 
+           data-slide-index="{{ forloop.counter0 }}"
+           style="background-image: url('{{ slide.image_url }}');">
+        <div class="hero-slide-backdrop"></div>
       </div>
     {% endfor %}
-    <div class="hero-slideshow-overlay"></div>
   </div>
 
-  <div class="container hero-content-container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-7">
-        <div class="hero-badge">
-          <i class="bi bi-hospital-fill"></i>
-          <span>Welcome to Harborlight Hospital</span>
-        </div>
-        <h1 class="hero-title">
-          Compassionate Care, <br>
-          <span style="color: var(--accent-color);">Modern Medicine</span>
-        </h1>
-        <p class="hero-subtitle">
-          Dedicated to providing clinical excellence, innovative medical technologies, and individualized patient healing across multi-specialty disciplines 24 hours a day, 7 days a week.
-        </p>
-        <div class="hero-actions">
-          <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom btn-lg shadow-sm">
-            <i class="bi bi-calendar-check-fill"></i>
-            <span>Book Appointment</span>
-          </a>
-          <a href="{% url 'departments:department_list' %}" class="btn btn-outline-custom btn-lg">
-            <i class="bi bi-grid-fill"></i>
-            <span>Our Services</span>
-          </a>
-        </div>
-      </div>
+  <!-- Left / Right Navigation Buttons (Matching reference screenshot) -->
+  <button type="button" class="hero-slider-arrow hero-slider-prev" id="heroPrevBtn" aria-label="Previous Slide">
+    <i class="bi bi-chevron-left"></i>
+  </button>
+  <button type="button" class="hero-slider-arrow hero-slider-next" id="heroNextBtn" aria-label="Next Slide">
+    <i class="bi bi-chevron-right"></i>
+  </button>
 
-      <div class="col-lg-5 d-none d-lg-block">
-        <div class="hero-illustration-box shadow-sm" style="background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(12px); border: 1px solid var(--border-light);">
-          <div class="d-inline-flex p-3 rounded-circle mb-3" style="background-color: var(--support-light); color: var(--primary-color); font-size: 2.5rem;">
-            <i class="bi bi-shield-plus"></i>
+  <!-- Centered Floating White Card with Top Cyan Stripe -->
+  <div class="hero-floating-card-container">
+    <div class="hero-floating-card" id="heroCardContent">
+      <div class="hero-card-top-stripe"></div>
+      <div class="hero-card-inner">
+        {% for slide in hero_slides %}
+          <div class="hero-slide-caption {% if forloop.first %}is-active{% endif %}" data-caption-index="{{ forloop.counter0 }}">
+            <h1 class="hero-caption-title">{{ slide.title }}</h1>
+            <p class="hero-caption-desc">{{ slide.subtitle }}</p>
+            <div class="hero-caption-actions">
+              <a href="{{ slide.primary_btn_url }}" class="btn btn-slider-primary">
+                {{ slide.primary_btn_text }}
+              </a>
+              {% if slide.secondary_btn_text %}
+                <a href="{{ slide.secondary_btn_url }}" class="btn btn-outline-custom">
+                  {{ slide.secondary_btn_text }}
+                </a>
+              {% endif %}
+            </div>
           </div>
-          <h3 class="h4 fw-bold mb-2">24/7 Emergency Ready</h3>
-          <p class="text-muted small mb-4">
-            Advanced cardiac trauma center, neonatal ICU, high-precision imaging diagnostics, and pharmacy standing by.
-          </p>
-          <div class="d-flex justify-content-center gap-2">
-            <span class="badge bg-white text-dark border px-3 py-2 rounded-pill shadow-sm">
-              <i class="bi bi-check-circle-fill text-success me-1"></i>Accredited Care
-            </span>
-            <span class="badge bg-white text-dark border px-3 py-2 rounded-pill shadow-sm">
-              <i class="bi bi-check-circle-fill text-success me-1"></i>Board Specialists
-            </span>
-          </div>
-        </div>
+        {% endfor %}
       </div>
+    </div>
+
+    <!-- Pagination Dots (Matching reference dots) -->
+    <div class="hero-slider-dots" id="heroSliderDots" role="tablist">
+      {% for slide in hero_slides %}
+        <button type="button" 
+                class="hero-slider-dot {% if forloop.first %}is-active{% endif %}" 
+                data-dot-index="{{ forloop.counter0 }}" 
+                role="tab" 
+                aria-label="Go to slide {{ forloop.counter }}">
+        </button>
+      {% endfor %}
     </div>
   </div>
 </section>

@@ -221,13 +221,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 8. Hero Background Slideshow Crossfade Controller
-  const heroSlides = document.querySelectorAll('#heroSlideshow .hero-slide');
-  if (heroSlides.length > 1) {
-    let currentHeroIdx = 0;
-    const slideDuration = 5500; // 5.5 seconds per slide
+  // 8. Full-Bleed Hero Slider Controller (Matching Reference Design)
+  const heroSlides = document.querySelectorAll('#heroSlidesWrapper .hero-slide-item');
+  const heroCaptions = document.querySelectorAll('#heroCardContent .hero-slide-caption');
+  const heroDots = document.querySelectorAll('#heroSliderDots .hero-slider-dot');
+  const heroPrevBtn = document.getElementById('heroPrevBtn');
+  const heroNextBtn = document.getElementById('heroNextBtn');
+  const heroSection = document.getElementById('heroSliderSection');
 
-    // Preload all background images for seamless transitions
+  if (heroSlides.length > 0) {
+    let currentIdx = 0;
+    let slideTimer = null;
+    const slideDuration = 5500; // 5.5s autoplay interval
+
+    // Preload background images
     heroSlides.forEach(slide => {
       const bgStyle = slide.style.backgroundImage;
       if (bgStyle) {
@@ -239,12 +246,74 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    setInterval(() => {
-      if (document.hidden) return; // Pause when tab is not visible
-      heroSlides[currentHeroIdx].classList.remove('is-active');
-      currentHeroIdx = (currentHeroIdx + 1) % heroSlides.length;
-      heroSlides[currentHeroIdx].classList.add('is-active');
-    }, slideDuration);
+    const showSlide = (index) => {
+      currentIdx = (index + heroSlides.length) % heroSlides.length;
+      heroSlides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === currentIdx);
+      });
+      heroCaptions.forEach((cap, i) => {
+        cap.classList.toggle('is-active', i === currentIdx);
+      });
+      heroDots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === currentIdx);
+      });
+    };
+
+    const nextSlide = () => showSlide(currentIdx + 1);
+    const prevSlide = () => showSlide(currentIdx - 1);
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (heroSlides.length > 1) {
+        slideTimer = setInterval(() => {
+          if (!document.hidden) nextSlide();
+        }, slideDuration);
+      }
+    };
+
+    const stopAutoplay = () => {
+      if (slideTimer) {
+        clearInterval(slideTimer);
+        slideTimer = null;
+      }
+    };
+
+    if (heroPrevBtn) {
+      heroPrevBtn.addEventListener('click', () => {
+        prevSlide();
+        startAutoplay();
+      });
+    }
+
+    if (heroNextBtn) {
+      heroNextBtn.addEventListener('click', () => {
+        nextSlide();
+        startAutoplay();
+      });
+    }
+
+    heroDots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        showSlide(idx);
+        startAutoplay();
+      });
+    });
+
+    if (heroSection) {
+      heroSection.addEventListener('mouseenter', stopAutoplay);
+      heroSection.addEventListener('mouseleave', startAutoplay);
+      heroSection.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          prevSlide();
+          startAutoplay();
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+          startAutoplay();
+        }
+      });
+    }
+
+    startAutoplay();
   }
 });
 

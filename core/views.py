@@ -12,8 +12,37 @@ def home(request):
     departments = Department.objects.all()[:6]
     doctors = Doctor.objects.filter(is_active=True).select_related('department')[:8]
     testimonials = Testimonial.objects.filter(is_approved=True)[:6]
-    hero_images = GalleryImage.objects.all()[:6]
     
+    hero_slides = [
+        {
+            'image_url': '/media/gallery/hospital_clinical_suite.jpg',
+            'title': 'Excellence Services In Healthcare Management',
+            'subtitle': 'Dedicated to clinical expertise and compassionate care that transforms patient healing across all medical specialties.',
+            'primary_btn_text': 'Book Appointment',
+            'primary_btn_url': '/book/',
+            'secondary_btn_text': 'Our Services',
+            'secondary_btn_url': '/departments/',
+        },
+        {
+            'image_url': '/media/gallery/hospital_operating_theatre.jpg',
+            'title': 'Compassionate Care, Modern Medicine',
+            'subtitle': 'State-of-the-art operating suites, certified surgical faculty, and advanced medical infrastructure available 24/7.',
+            'primary_btn_text': 'Our Services',
+            'primary_btn_url': '/departments/',
+            'secondary_btn_text': 'Meet Our Doctors',
+            'secondary_btn_url': '/doctors/',
+        },
+        {
+            'image_url': '/media/gallery/hospital_main_campus.jpg',
+            'title': 'Advanced Diagnostics & Clinical Facilities',
+            'subtitle': 'High-precision 3-Tesla imaging, rapid ambulance response, and personalized recovery environments for your entire family.',
+            'primary_btn_text': 'Take a Tour',
+            'primary_btn_url': '/gallery/',
+            'secondary_btn_text': 'About Harborlight',
+            'secondary_btn_url': '/about/',
+        },
+    ]
+
     stats = {
         'years': 25,
         'doctors_count': Doctor.objects.filter(is_active=True).count() or 18,
@@ -25,7 +54,7 @@ def home(request):
         'departments': departments,
         'doctors': doctors,
         'testimonials': testimonials,
-        'hero_images': hero_images,
+        'hero_slides': hero_slides,
         'stats': stats,
     }
     return render(request, 'core/home.html', context)
