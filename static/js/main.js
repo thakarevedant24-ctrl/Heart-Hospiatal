@@ -220,5 +220,31 @@ document.addEventListener('DOMContentLoaded', () => {
       revealElements.forEach(el => revealObserver.observe(el));
     }
   }
+
+  // 8. Hero Background Slideshow Crossfade Controller
+  const heroSlides = document.querySelectorAll('#heroSlideshow .hero-slide');
+  if (heroSlides.length > 1) {
+    let currentHeroIdx = 0;
+    const slideDuration = 5500; // 5.5 seconds per slide
+
+    // Preload all background images for seamless transitions
+    heroSlides.forEach(slide => {
+      const bgStyle = slide.style.backgroundImage;
+      if (bgStyle) {
+        const match = bgStyle.match(/url\(['"]?(.*?)['"]?\)/);
+        if (match && match[1]) {
+          const img = new Image();
+          img.src = match[1];
+        }
+      }
+    });
+
+    setInterval(() => {
+      if (document.hidden) return; // Pause when tab is not visible
+      heroSlides[currentHeroIdx].classList.remove('is-active');
+      currentHeroIdx = (currentHeroIdx + 1) % heroSlides.length;
+      heroSlides[currentHeroIdx].classList.add('is-active');
+    }, slideDuration);
+  }
 });
 

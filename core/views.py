@@ -6,11 +6,13 @@ from .forms import ContactForm
 from departments.models import Department
 from doctors.models import Doctor
 from core.models import Testimonial
+from gallery.models import GalleryImage
 
 def home(request):
     departments = Department.objects.all()[:6]
     doctors = Doctor.objects.filter(is_active=True).select_related('department')[:8]
     testimonials = Testimonial.objects.filter(is_approved=True)[:6]
+    hero_images = GalleryImage.objects.all()[:6]
     
     stats = {
         'years': 25,
@@ -23,6 +25,7 @@ def home(request):
         'departments': departments,
         'doctors': doctors,
         'testimonials': testimonials,
+        'hero_images': hero_images,
         'stats': stats,
     }
     return render(request, 'core/home.html', context)
