@@ -4,7 +4,7 @@ from doctors.models import Doctor
 from core.models import Testimonial
 
 class Command(BaseCommand):
-    help = 'Seeds initial demonstration data for Harborlight Hospital'
+    help = 'Seeds initial demonstration data for City Hospital'
 
     def handle(self, *args, **options):
         self.stdout.write('Seeding initial data...')
@@ -147,7 +147,7 @@ class Command(BaseCommand):
         testimonials_data = [
             {
                 'patient_name': 'Eleanor Vance',
-                'message': 'The cardiology team at Harborlight provided extraordinary care during my surgery. Every doctor and nurse treated me with deep kindness and patience.',
+                'message': 'The cardiology team at City Hospital provided extraordinary care during my surgery. Every doctor and nurse treated me with deep kindness and patience.',
                 'rating': 5,
                 'is_approved': True,
             },
@@ -159,7 +159,7 @@ class Command(BaseCommand):
             },
             {
                 'patient_name': 'Sophie Lin & Family',
-                'message': 'Dr. Jenkins took such great care of our daughter during her hospital stay. Harborlight’s pediatric department is warm, reassuring, and second to none.',
+                'message': 'Dr. Jenkins took such great care of our daughter during her hospital stay. City Hospital’s pediatric department is warm, reassuring, and second to none.',
                 'rating': 5,
                 'is_approved': True,
             },
@@ -350,7 +350,7 @@ class Command(BaseCommand):
                     draw = ImageDraw.Draw(img)
                     draw.rectangle([20, 20, 780, 540], outline='#0284C7', width=3)
                     draw.rectangle([40, 240, 760, 320], fill='#FFFFFF')
-                    draw.text((60, 260), "HARBORLIGHT HOSPITAL", fill='#0F3D69')
+                    draw.text((60, 260), "CITY HOSPITAL", fill='#0F3D69')
                     draw.text((60, 285), g['title'], fill='#0F172A')
                     buf = io.BytesIO()
                     img.save(buf, format='JPEG', quality=90)
@@ -358,5 +358,5 @@ class Command(BaseCommand):
                     item.image.save(g['file_name'], ContentFile(buf.getvalue()), save=True)
                     self.stdout.write(f"Created Fallback Photo: {item.title}")
 
-        self.stdout.write(self.style.SUCCESS('Successfully seeded database with Harborlight demonstration data!'))
+        self.stdout.write(self.style.SUCCESS('Successfully seeded database with City Hospital demonstration data!'))
 

@@ -38,7 +38,7 @@ def home(request):
             'subtitle': 'High-precision 3-Tesla imaging, rapid ambulance response, and personalized recovery environments for your entire family.',
             'primary_btn_text': 'Take a Tour',
             'primary_btn_url': '/gallery/',
-            'secondary_btn_text': 'About Harborlight',
+            'secondary_btn_text': 'About City Hospital',
             'secondary_btn_url': '/about/',
         },
     ]
@@ -72,16 +72,16 @@ def contact(request):
             
             # Send email notification to admin via console backend
             try:
-                subject = f"[Harborlight Hospital] New Inquiry: {contact_msg.subject}"
+                subject = f"[City Hospital] New Inquiry: {contact_msg.subject}"
                 body = (
-                    f"New patient message submitted via Harborlight Hospital website:\n\n"
+                    f"New patient message submitted via City Hospital website:\n\n"
                     f"From: {contact_msg.name}\n"
                     f"Email: {contact_msg.email}\n"
                     f"Phone: {contact_msg.phone or 'Not provided'}\n"
                     f"Subject: {contact_msg.subject}\n\n"
                     f"Message:\n{contact_msg.message}\n"
                 )
-                admin_email = getattr(settings, 'ADMIN_EMAIL', 'admin@harborlighthospital.example')
+                admin_email = getattr(settings, 'ADMIN_EMAIL', 'admin@cityhospital.example')
                 send_mail(
                     subject,
                     body,

@@ -39,10 +39,10 @@ def book_appointment(request):
                 if appointment.doctor else "Any Available Clinical Specialist"
             )
 
-            email_subject = f"Appointment Request Received [{ref_code}] - Harborlight Hospital"
+            email_subject = f"Appointment Request Received [{ref_code}] - City Hospital"
             email_body = f"""Dear {appointment.patient_name},
 
-Thank you for choosing Harborlight Multispecialty Hospital. We have successfully received your consultation request.
+Thank you for choosing City Hospital. We have successfully received your consultation request.
 
 ==================================================
 APPOINTMENT SUMMARY
@@ -70,11 +70,11 @@ Our 24/7 Emergency & Trauma Hotline is available at +1 (555) 010-7890.
 
 Warm regards,
 Patient Services Coordination Desk
-Harborlight Multispecialty Hospital
+City Hospital
 12 Wellness Avenue, Riverdale, TX 75001
-Phone: +1 (555) 010-7890 | Email: info@harborlighthospital.example
+Phone: +1 (555) 010-7890 | Email: info@cityhospital.example
 """
-            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@harborlighthospital.example')
+            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@cityhospital.example')
             try:
                 send_mail(
                     email_subject,
