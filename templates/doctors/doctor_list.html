@@ -1,44 +1,155 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Our Doctors | Harborlight Multispecialty Hospital{% endblock %}
+{% block title %}Medical Faculty & Specialists | Harborlight Multispecialty Hospital{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <div class="text-center mb-5">
-    <span class="badge-status mb-2">Medical Faculty</span>
-    <h1 class="display-5 fw-bold">Meet Our Specialists</h1>
-    <p class="text-muted">Dedicated clinicians and surgeons committed to exceptional clinical outcomes.</p>
-  </div>
 
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card-custom text-center p-4">
-        <div class="card-icon mx-auto"><i class="bi bi-person-badge"></i></div>
-        <h3 class="h5 fw-bold mb-1">Dr. Elena Rostova</h3>
-        <p class="text-accent fw-medium small mb-2" style="color: var(--accent-color);">Chief of Cardiology</p>
-        <p class="text-muted small">MD, FACC - 15+ years experience in interventional cardiology and structural heart disease.</p>
-        <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-outline-custom mt-2">Book with Doctor</a>
-      </div>
+<!-- =========================================================================
+     PAGE HEADER BANNER
+     ========================================================================= -->
+<section class="page-header-banner">
+  <div class="container text-center">
+    <div class="breadcrumb-custom">
+      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; <span>Doctors & Faculty</span>
     </div>
-    <div class="col-md-4">
-      <div class="card-custom text-center p-4">
-        <div class="card-icon mx-auto"><i class="bi bi-person-badge"></i></div>
-        <h3 class="h5 fw-bold mb-1">Dr. Marcus Chen</h3>
-        <p class="text-accent fw-medium small mb-2" style="color: var(--accent-color);">Senior Neurosurgeon</p>
-        <p class="text-muted small">MD, FACS - Specializing in minimally invasive neurosurgical procedures and cerebrovascular health.</p>
-        <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-outline-custom mt-2">Book with Doctor</a>
-      </div>
+    <span class="badge-status mb-2">Our Clinical Faculty</span>
+    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">Meet Our Medical Specialists</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 680px;">
+      Our distinguished physicians and surgeons combine world-class credentials with human empathy to provide individualized care for every patient.
+    </p>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     DOCTORS DIRECTORY & FILTER
+     ========================================================================= -->
+<section class="py-5">
+  <div class="container">
+
+    <!-- Department Filter Tabs -->
+    <div class="d-none d-md-flex flex-wrap justify-content-center gap-2 mb-5">
+      <a href="{% url 'doctors:doctor_list' %}" 
+         class="btn btn-sm {% if not selected_department_slug or selected_department_slug == 'all' %}btn-primary-custom{% else %}btn-outline-custom{% endif %}">
+        <i class="bi bi-people-fill me-1"></i>All Physicians ({{ doctors.count }})
+      </a>
+      {% for dept in departments %}
+        <a href="?department={{ dept.slug }}" 
+           class="btn btn-sm {% if selected_department_slug == dept.slug %}btn-primary-custom{% else %}btn-outline-custom{% endif %}">
+          <i class="bi {{ dept.icon|default:'bi-heart-pulse' }} me-1"></i>{{ dept.name }}
+        </a>
+      {% endfor %}
     </div>
-    <div class="col-md-4">
-      <div class="card-custom text-center p-4">
-        <div class="card-icon mx-auto"><i class="bi bi-person-badge"></i></div>
-        <h3 class="h5 fw-bold mb-1">Dr. Sarah Jenkins</h3>
-        <p class="text-accent fw-medium small mb-2" style="color: var(--accent-color);">Head of Pediatrics</p>
-        <p class="text-muted small">MD, FAAP - Passionate advocate for neonatal intensive care and child wellness programs.</p>
-        <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-outline-custom mt-2">Book with Doctor</a>
+
+    <!-- Mobile Dropdown (< 768px) -->
+    <div class="d-md-none mb-4">
+      <label class="form-label fw-bold small text-muted text-uppercase">Filter by Department:</label>
+      <select class="form-select shadow-sm" onchange="location = this.value;">
+        <option value="{% url 'doctors:doctor_list' %}" {% if not selected_department_slug or selected_department_slug == 'all' %}selected{% endif %}>
+          All Physicians
+        </option>
+        {% for dept in departments %}
+          <option value="?department={{ dept.slug }}" {% if selected_department_slug == dept.slug %}selected{% endif %}>
+            {{ dept.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Responsive Doctors Grid -->
+    <div class="row g-4">
+      {% for doc in doctors %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card-custom text-center h-100 d-flex flex-column justify-content-between p-4">
+            <div>
+              <!-- Doctor Photo / Avatar -->
+              <div class="doctor-avatar-box">
+                {% if doc.photo %}
+                  <img src="{{ doc.photo.url }}" alt="Dr. {{ doc.name }}">
+                {% else %}
+                  <i class="bi bi-person-fill"></i>
+                {% endif %}
+              </div>
+
+              <!-- Doctor Name -->
+              <h3 class="h5 fw-bold mb-1" style="color: var(--primary-color);">Dr. {{ doc.name }}</h3>
+
+              <!-- Specialization -->
+              <div class="text-accent fw-medium small mb-2" style="color: var(--accent-color);">
+                {{ doc.specialization }}
+              </div>
+
+              <!-- Department Badge -->
+              {% if doc.department %}
+                <div class="mb-3">
+                  <a href="{% url 'departments:department_detail' doc.department.slug %}" 
+                     class="badge bg-light text-primary border rounded-pill text-decoration-none px-3 py-1 small"
+                     style="color: var(--primary-color) !important; border-color: var(--support-color) !important;">
+                    <i class="bi {{ doc.department.icon|default:'bi-hospital' }} me-1"></i>{{ doc.department.name }}
+                  </a>
+                </div>
+              {% endif %}
+
+              <!-- Qualification & Experience -->
+              <div class="small text-muted mb-2">
+                <strong>{{ doc.qualification }}</strong> &bull; {{ doc.experience_years }}+ Years Experience
+              </div>
+
+              <!-- Schedule Days -->
+              <div class="small text-muted mb-3">
+                <i class="bi bi-calendar3 me-1" style="color: var(--primary-color);"></i>OPD Days: <strong>{{ doc.available_days }}</strong>
+              </div>
+            </div>
+
+            <!-- Two Buttons: "View Profile" & "Book Appointment" -->
+            <div class="pt-3 border-top d-flex gap-2">
+              <a href="{% url 'doctors:doctor_detail' doc.id %}" class="btn btn-sm btn-outline-custom flex-grow-1">
+                <i class="bi bi-person-lines-fill me-1"></i>View Profile
+              </a>
+              <a href="{% url 'appointments:book_appointment' %}?department={{ doc.department.slug }}&doctor={{ doc.id }}" 
+                 class="btn btn-sm btn-accent-custom flex-grow-1">
+                <i class="bi bi-calendar2-check-fill me-1"></i>Book Visit
+              </a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-center py-5 card-custom">
+          <div class="card-icon mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.8rem;">
+            <i class="bi bi-people"></i>
+          </div>
+          <h4 class="h5 fw-bold">No physicians found for this criteria</h4>
+          <p class="text-muted small">Please select another specialty or view all physicians.</p>
+          <a href="{% url 'doctors:doctor_list' %}" class="btn btn-sm btn-primary-custom mt-2">
+            View All Physicians
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     BOTTOM CLINICAL STANDARDS STRIP
+     ========================================================================= -->
+<section class="py-5" style="background-color: #f7f3ec;">
+  <div class="container text-center">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <span class="section-tag">Quality of Care</span>
+        <h2 class="h3 fw-bold mb-3" style="color: var(--primary-color);">Board-Certified, Compassion-Driven</h2>
+        <p class="text-muted mb-4">
+          Every doctor practicing at Harborlight undergoes comprehensive credential verification, continuous medical education (CME), and clinical peer review to ensure that our patients receive gold-standard medical care.
+        </p>
+        <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom">
+          <i class="bi bi-calendar2-plus-fill me-1"></i>Schedule a Consultation Today
+        </a>
       </div>
     </div>
   </div>
-</div>
+</section>
+
 {% endblock %}
-

@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dr. {{ doctor.name }} | {{ doctor.specialization }} | Harborlight Hospital{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================================
+     PAGE HEADER / BREADCRUMB
+     ========================================================================= -->
+<section class="page-header-banner">
+  <div class="container">
+    <div class="breadcrumb-custom text-center text-md-start">
+      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; 
+      <a href="{% url 'doctors:doctor_list' %}">Doctors</a> &nbsp;/&nbsp; 
+      <span>Dr. {{ doctor.name }}</span>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mt-2">
+      <div>
+        <span class="badge-status mb-1">Board-Certified Faculty</span>
+        <h1 class="display-5 fw-bold mb-0" style="color: var(--primary-color);">Dr. {{ doctor.name }}</h1>
+        <div class="text-accent fs-5 fw-semibold mt-1" style="color: var(--accent-color);">
+          {{ doctor.specialization }}
+        </div>
+      </div>
+      <div>
+        <a href="{% url 'appointments:book_appointment' %}?department={{ doctor.department.slug }}&doctor={{ doctor.id }}" 
+           class="btn btn-accent-custom btn-lg shadow">
+          <i class="bi bi-calendar2-check-fill me-1"></i>Book Appointment
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     DOCTOR DETAIL CONTENT
+     ========================================================================= -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- Left Column: Larger Photo & Quick Credentials Card -->
+      <div class="col-lg-4">
+        <div class="sticky-top" style="top: 100px; z-index: 10;">
+          <div class="card-custom text-center p-4 mb-4">
+            <!-- Larger Photo / Avatar Box -->
+            <div class="doctor-avatar-box mx-auto mb-3" style="width: 170px; height: 170px; font-size: 4.5rem; border: 6px solid var(--white); box-shadow: 0 10px 25px rgba(14, 95, 92, 0.2);">
+              {% if doctor.photo %}
+                <img src="{{ doctor.photo.url }}" alt="Dr. {{ doctor.name }}">
+              {% else %}
+                <i class="bi bi-person-fill"></i>
+              {% endif %}
+            </div>
+
+            <h3 class="h5 fw-bold mb-1" style="color: var(--primary-color);">Dr. {{ doctor.name }}</h3>
+            <p class="text-muted small mb-3">{{ doctor.qualification }}</p>
+
+            <!-- Department Badge -->
+            {% if doctor.department %}
+              <div class="mb-4">
+                <a href="{% url 'departments:department_detail' doctor.department.slug %}" 
+                   class="badge bg-light text-primary border rounded-pill text-decoration-none px-3 py-2 small"
+                   style="color: var(--primary-color) !important; border-color: var(--support-color) !important;">
+                  <i class="bi {{ doctor.department.icon|default:'bi-hospital' }} me-1"></i>{{ doctor.department.name }}
+                </a>
+              </div>
+            {% endif %}
+
+            <!-- Credentials List -->
+            <ul class="list-unstyled text-start border-top pt-3 mb-4">
+              <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                <span class="text-muted small"><i class="bi bi-mortarboard-fill text-accent me-2" style="color: var(--accent-color);"></i>Qualification:</span>
+                <span class="fw-semibold small">{{ doctor.qualification }}</span>
+              </li>
+              <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                <span class="text-muted small"><i class="bi bi-clock-history text-accent me-2" style="color: var(--accent-color);"></i>Experience:</span>
+                <span class="fw-semibold small">{{ doctor.experience_years }}+ Years</span>
+              </li>
+              <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                <span class="text-muted small"><i class="bi bi-calendar3 text-accent me-2" style="color: var(--accent-color);"></i>Available Days:</span>
+                <span class="fw-semibold small">{{ doctor.available_days }}</span>
+              </li>
+              <li class="d-flex align-items-center justify-content-between py-2">
+                <span class="text-muted small"><i class="bi bi-patch-check-fill text-success me-2"></i>Status:</span>
+                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2">Active Consulting</span>
+              </li>
+            </ul>
+
+            <!-- Book Appointment Button (Pre-fills Doctor & Department) -->
+            <a href="{% url 'appointments:book_appointment' %}?department={{ doctor.department.slug }}&doctor={{ doctor.id }}" 
+               class="btn btn-accent-custom w-100 shadow-sm">
+              <i class="bi bi-calendar-check-fill me-1"></i>Book Appointment
+            </a>
+          </div>
+
+          <!-- Direct Hospital Contact Assistance -->
+          <div class="p-3 rounded-3 border bg-white shadow-sm text-center">
+            <div class="small text-muted mb-1">Need help scheduling with Dr. {{ doctor.name }}?</div>
+            <a href="tel:+15550107890" class="fw-bold text-decoration-none" style="color: var(--primary-color);">
+              <i class="bi bi-telephone-fill me-1" style="color: var(--accent-color);"></i>+1 (555) 010-7890
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Full Biography, Department Procedures, and Guidance -->
+      <div class="col-lg-8">
+        <!-- Biography Card -->
+        <div class="card-custom p-4 p-md-5 mb-4">
+          <h2 class="h4 fw-bold mb-3" style="color: var(--primary-color);">Professional Biography</h2>
+          <div class="text-secondary leading-relaxed fs-6 mb-4">
+            {{ doctor.bio|linebreaks }}
+          </div>
+
+          <div class="row g-3 pt-3 border-top">
+            <div class="col-sm-6">
+              <div class="p-3 rounded-3 bg-light border">
+                <div class="fw-semibold small" style="color: var(--primary-color);"><i class="bi bi-award-fill me-1 text-warning"></i>Certified Clinical Mastery</div>
+                <div class="text-muted small">Specialized in advanced evidence-based therapeutics and minimally invasive modalities.</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 rounded-3 bg-light border">
+                <div class="fw-semibold small" style="color: var(--primary-color);"><i class="bi bi-heart-pulse-fill me-1" style="color: var(--accent-color);"></i>Patient-Centered Philosophy</div>
+                <div class="text-muted small">Devoted to thorough, compassionate patient consultations and clear family guidance.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Department Procedures & Services Offered -->
+        {% if department_services %}
+          <div class="card-custom p-4 p-md-5 mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <h3 class="h4 fw-bold mb-0" style="color: var(--primary-color);">
+                Clinical Procedures in {{ doctor.department.name }}
+              </h3>
+              <a href="{% url 'departments:department_detail' doctor.department.slug %}" class="small text-decoration-none fw-semibold">
+                View Department <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="row g-3">
+              {% for srv in department_services %}
+                <div class="col-md-6">
+                  <div class="p-3 rounded-3 border bg-white h-100">
+                    <div class="d-flex align-items-start gap-2">
+                      <i class="bi {{ srv.icon|default:'bi-check-circle-fill' }} fs-5" style="color: var(--primary-color);"></i>
+                      <div>
+                        <div class="fw-bold small" style="color: var(--primary-color);">{{ srv.title }}</div>
+                        <div class="text-muted small">{{ srv.short_description }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Consultation Preparation Guidance -->
+        <div class="card-custom p-4">
+          <h4 class="h5 fw-bold mb-3" style="color: var(--primary-color);"><i class="bi bi-info-circle-fill me-2" style="color: var(--support-color);"></i>Preparing for Your Consultation</h4>
+          <ul class="small text-secondary mb-0">
+            <li class="mb-2">Please bring prior medical records, diagnostic lab reports, and medication histories.</li>
+            <li class="mb-2">Arrive 15 minutes prior to your scheduled consultation time for vitals registration.</li>
+            <li>Same-day urgent appointments may be accommodated through our outpatient triage desk.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
