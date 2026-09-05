@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Doctors | Harborlight Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <span class="badge-status mb-2">Medical Faculty</span>
+    <h1 class="display-5 fw-bold">Meet Our Specialists</h1>
+    <p class="text-muted">Dedicated clinicians and surgeons committed to exceptional clinical outcomes.</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card-custom text-center p-4">
+        <div class="card-icon mx-auto"><i class="bi bi-person-badge"></i></div>
+        <h3 class="h5 fw-bold mb-1">Dr. Elena Rostova</h3>
+        <p class="text-accent fw-medium small mb-2" style="color: var(--accent-color);">Chief of Cardiology</p>
+        <p class="text-muted small">MD, FACC - 15+ years experience in interventional cardiology and structural heart disease.</p>
+        <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-outline-custom mt-2">Book with Doctor</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-custom text-center p-4">
+        <div class="card-icon mx-auto"><i class="bi bi-person-badge"></i></div>
+        <h3 class="h5 fw-bold mb-1">Dr. Marcus Chen</h3>
+        <p class="text-accent fw-medium small mb-2" style="color: var(--accent-color);">Senior Neurosurgeon</p>
+        <p class="text-muted small">MD, FACS - Specializing in minimally invasive neurosurgical procedures and cerebrovascular health.</p>
+        <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-outline-custom mt-2">Book with Doctor</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-custom text-center p-4">
+        <div class="card-icon mx-auto"><i class="bi bi-person-badge"></i></div>
+        <h3 class="h5 fw-bold mb-1">Dr. Sarah Jenkins</h3>
+        <p class="text-accent fw-medium small mb-2" style="color: var(--accent-color);">Head of Pediatrics</p>
+        <p class="text-muted small">MD, FAAP - Passionate advocate for neonatal intensive care and child wellness programs.</p>
+        <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-outline-custom mt-2">Book with Doctor</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

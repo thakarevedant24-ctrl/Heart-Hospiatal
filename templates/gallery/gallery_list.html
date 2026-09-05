@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Hospital Gallery | Harborlight Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <span class="badge-status mb-2">Hospital Campus</span>
+    <h1 class="display-5 fw-bold">Facility & Technology Gallery</h1>
+    <p class="text-muted">Take a tour of our modern operating suites, diagnostic suites, and patient care rooms.</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card-custom">
+        <div class="card-icon"><i class="bi bi-camera"></i></div>
+        <h3 class="h5 fw-bold">Advanced Diagnostic Imaging</h3>
+        <p class="text-muted small">High-tesla MRI and ultra-low dose 128-slice CT scanners.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-custom">
+        <div class="card-icon"><i class="bi bi-shield-check"></i></div>
+        <h3 class="h5 fw-bold">Laminar Flow Operating Theatres</h3>
+        <p class="text-muted small">Ultra-clean, state-of-the-art modular surgical suites.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-custom">
+        <div class="card-icon"><i class="bi bi-hospital"></i></div>
+        <h3 class="h5 fw-bold">Comfort Care Patient Suites</h3>
+        <p class="text-muted small">Spacious, private recuperation rooms designed for patient healing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

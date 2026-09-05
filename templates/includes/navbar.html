@@ -1,0 +1,67 @@
+{% load static %}
+<!-- Top Contact Bar -->
+<div class="top-bar d-none d-md-block">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div>
+      <span class="me-3"><i class="bi bi-geo-alt-fill me-1"></i>12 Wellness Avenue, Riverdale, TX 75001</span>
+      <span><i class="bi bi-clock-fill me-1"></i>24/7 Emergency & Outpatient Services</span>
+    </div>
+    <div>
+      <a href="tel:+15550107890" class="me-3"><i class="bi bi-telephone-fill me-1"></i>+1 (555) 010-7890</a>
+      <a href="mailto:info@harborlighthospital.example"><i class="bi bi-envelope-fill me-1"></i>info@harborlighthospital.example</a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'core:home' %}">
+      <div class="navbar-brand-logo">
+        <i class="bi bi-hospital"></i>
+      </div>
+      <div>
+        <span class="brand-title">Harborlight</span>
+        <span class="brand-tagline">Compassionate Care, Modern Medicine</span>
+      </div>
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'core:home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'core:about' %}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.app_name == 'departments' %}active{% endif %}" href="{% url 'departments:department_list' %}">Departments</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.app_name == 'doctors' %}active{% endif %}" href="{% url 'doctors:doctor_list' %}">Doctors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.app_name == 'gallery' %}active{% endif %}" href="{% url 'gallery:gallery_list' %}">Gallery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'core:contact' %}">Contact</a>
+        </li>
+        <li class="nav-item ms-lg-2 my-2 my-lg-0">
+          <a class="btn btn-outline-custom btn-sm" href="{% url 'dashboard:index' %}">
+            <i class="bi bi-shield-lock me-1"></i>Staff
+          </a>
+        </li>
+        <li class="nav-item ms-lg-2 my-2 my-lg-0">
+          <a class="btn btn-accent-custom" href="{% url 'appointments:book_appointment' %}">
+            <i class="bi bi-calendar-check me-1"></i>Book Appointment
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+

@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | Harborlight Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<!-- Hero Scaffold / It Works Section -->
+<section class="hero-scaffold">
+  <div class="container text-center">
+    <div class="mb-3">
+      <span class="badge-status">
+        <span class="status-dot"></span>
+        Django 5.x Project Scaffold Online
+      </span>
+    </div>
+    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">
+      Harborlight Multispecialty Hospital
+    </h1>
+    <p class="lead text-muted mb-4 mx-auto" style="max-width: 680px;">
+      <em>"Compassionate Care, Modern Medicine"</em>
+    </p>
+    <p class="mb-4 text-secondary mx-auto" style="max-width: 720px;">
+      <strong>It works!</strong> The project structure, branding palette, template engine, static assets, WhiteNoise pipeline, and all modular apps are configured and ready.
+    </p>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom shadow-sm">
+        <i class="bi bi-calendar2-plus me-1"></i>Book an Appointment
+      </a>
+      <a href="{% url 'departments:department_list' %}" class="btn btn-primary-custom shadow-sm">
+        <i class="bi bi-grid-3x3-gap me-1"></i>Explore Departments
+      </a>
+      <a href="{% url 'doctors:doctor_list' %}" class="btn btn-outline-custom">
+        <i class="bi bi-people me-1"></i>Meet Doctors
+      </a>
+      <a href="{% url 'dashboard:index' %}" class="btn btn-outline-custom">
+        <i class="bi bi-speedometer2 me-1"></i>Staff Portal
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Scaffold Apps Status Grid -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="h3 fw-bold">Active Project Architecture</h2>
+      <p class="text-muted">All 6 project applications are registered, routed, and ready for domain models and workflows.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Core App -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom">
+          <div class="card-icon">
+            <i class="bi bi-house-door"></i>
+          </div>
+          <h4 class="h5 fw-bold mb-2">core</h4>
+          <p class="text-muted small mb-3">
+            Public pages including Homepage, About Us story, Leadership overview, and Contact / Inquiry forms.
+          </p>
+          <div class="d-flex gap-2">
+            <a href="{% url 'core:home' %}" class="btn btn-sm btn-outline-custom">Home</a>
+            <a href="{% url 'core:about' %}" class="btn btn-sm btn-outline-custom">About</a>
+            <a href="{% url 'core:contact' %}" class="btn btn-sm btn-outline-custom">Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Departments App -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom">
+          <div class="card-icon">
+            <i class="bi bi-heart-pulse"></i>
+          </div>
+          <h4 class="h5 fw-bold mb-2">departments</h4>
+          <p class="text-muted small mb-3">
+            Clinical specialties and hospital departments directory, services list, treatments, and procedures.
+          </p>
+          <div>
+            <a href="{% url 'departments:department_list' %}" class="btn btn-sm btn-outline-custom">View Departments</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Doctors App -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom">
+          <div class="card-icon">
+            <i class="bi bi-person-badge"></i>
+          </div>
+          <h4 class="h5 fw-bold mb-2">doctors</h4>
+          <p class="text-muted small mb-3">
+            Medical staff directory, physician credentials, bios, specializations, and OPD consultation schedules.
+          </p>
+          <div>
+            <a href="{% url 'doctors:doctor_list' %}" class="btn btn-sm btn-outline-custom">View Doctors</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appointments App -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom">
+          <div class="card-icon" style="color: var(--accent-color); background-color: rgba(255, 111, 89, 0.12);">
+            <i class="bi bi-calendar-check"></i>
+          </div>
+          <h4 class="h5 fw-bold mb-2">appointments</h4>
+          <p class="text-muted small mb-3">
+            Online patient booking workflow, doctor slot selection, appointment confirmation, and notifications.
+          </p>
+          <div>
+            <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-accent-custom">Book Consultation</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery App -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom">
+          <div class="card-icon">
+            <i class="bi bi-images"></i>
+          </div>
+          <h4 class="h5 fw-bold mb-2">gallery</h4>
+          <p class="text-muted small mb-3">
+            Facility tours, ICU and surgical suites, diagnostic imaging labs, patient wards, and campus showcases.
+          </p>
+          <div>
+            <a href="{% url 'gallery:gallery_list' %}" class="btn btn-sm btn-outline-custom">Open Gallery</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard App -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom">
+          <div class="card-icon">
+            <i class="bi bi-speedometer2"></i>
+          </div>
+          <h4 class="h5 fw-bold mb-2">dashboard</h4>
+          <p class="text-muted small mb-3">
+            Staff and administration workspace for managing appointments, updating schedules, and reviewing inquiries.
+          </p>
+          <div>
+            <a href="{% url 'dashboard:index' %}" class="btn btn-sm btn-outline-custom">Staff Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brand Palette Reference Card -->
+<section class="py-5 bg-white border-top">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-5">
+        <h3 class="h4 fw-bold mb-2">Harborlight Brand Identity</h3>
+        <p class="text-muted small mb-3">
+          Codified into <code>static/css/style.css</code> variables and Bootstrap 5 theme tokens.
+        </p>
+        <ul class="list-unstyled small text-secondary">
+          <li><strong>Site Name:</strong> Harborlight Multispecialty Hospital</li>
+          <li><strong>Tagline:</strong> "Compassionate Care, Modern Medicine"</li>
+          <li><strong>Location:</strong> 12 Wellness Avenue, Riverdale, TX 75001</li>
+          <li><strong>Contact:</strong> +1 (555) 010-7890 | info@harborlighthospital.example</li>
+          <li><strong>Typography:</strong> Poppins (Headings), Inter (Body)</li>
+        </ul>
+      </div>
+      <div class="col-lg-7">
+        <div class="d-flex flex-wrap gap-3">
+          <div class="p-3 text-white rounded text-center shadow-sm" style="background-color: #0E5F5C; min-width: 130px;">
+            <div class="fw-bold">Deep Teal</div>
+            <div class="small opacity-75">#0E5F5C</div>
+            <div class="badge bg-light text-dark mt-1">Primary</div>
+          </div>
+          <div class="p-3 text-white rounded text-center shadow-sm" style="background-color: #FF6F59; min-width: 130px;">
+            <div class="fw-bold">Warm Coral</div>
+            <div class="small opacity-75">#FF6F59</div>
+            <div class="badge bg-light text-dark mt-1">Accent</div>
+          </div>
+          <div class="p-3 text-dark rounded text-center shadow-sm border" style="background-color: #FAF7F2; min-width: 130px;">
+            <div class="fw-bold">Soft Ivory</div>
+            <div class="small text-muted">#FAF7F2</div>
+            <div class="badge bg-secondary text-white mt-1">Background</div>
+          </div>
+          <div class="p-3 text-white rounded text-center shadow-sm" style="background-color: #26333D; min-width: 130px;">
+            <div class="fw-bold">Charcoal</div>
+            <div class="small opacity-75">#26333D</div>
+            <div class="badge bg-light text-dark mt-1">Text Dark</div>
+          </div>
+          <div class="p-3 text-dark rounded text-center shadow-sm" style="background-color: #8FB996; min-width: 130px;">
+            <div class="fw-bold">Sage Green</div>
+            <div class="small opacity-75">#8FB996</div>
+            <div class="badge bg-light text-dark mt-1">Support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

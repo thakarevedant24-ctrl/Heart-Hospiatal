@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Staff Dashboard | Harborlight Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+    <div>
+      <span class="badge-status mb-1">Administrative Area</span>
+      <h1 class="h3 fw-bold mb-0">Hospital Staff Dashboard</h1>
+    </div>
+    <div class="d-flex gap-2">
+      <a href="/admin/" class="btn btn-sm btn-primary-custom" target="_blank">
+        <i class="bi bi-gear-fill me-1"></i>Django Admin
+      </a>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-4">
+    <div class="col-md-3">
+      <div class="card-custom text-center">
+        <h6 class="text-muted small text-uppercase fw-bold">Today's Appointments</h6>
+        <div class="display-6 fw-bold" style="color: var(--primary-color);">24</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-custom text-center">
+        <h6 class="text-muted small text-uppercase fw-bold">Active Doctors</h6>
+        <div class="display-6 fw-bold" style="color: var(--primary-color);">18</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-custom text-center">
+        <h6 class="text-muted small text-uppercase fw-bold">Available Beds</h6>
+        <div class="display-6 fw-bold" style="color: var(--accent-color);">42</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-custom text-center">
+        <h6 class="text-muted small text-uppercase fw-bold">ER Status</h6>
+        <div class="display-6 fw-bold text-success">Normal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-custom">
+    <h4 class="h6 fw-bold mb-3">Quick Actions</h4>
+    <div class="d-flex flex-wrap gap-2">
+      <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-outline-custom">New Patient Booking</a>
+      <a href="{% url 'doctors:doctor_list' %}" class="btn btn-sm btn-outline-custom">Physician Rosters</a>
+      <a href="{% url 'departments:department_list' %}" class="btn btn-sm btn-outline-custom">Department Workflows</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

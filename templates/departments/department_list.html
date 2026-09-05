@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Departments | Harborlight Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <span class="badge-status mb-2">Medical Specialties</span>
+    <h1 class="display-5 fw-bold">Hospital Departments</h1>
+    <p class="text-muted">Comprehensive medical disciplines staffed by board-certified specialists.</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card-custom">
+        <div class="card-icon"><i class="bi bi-heart-pulse"></i></div>
+        <h3 class="h5 fw-bold">Cardiology</h3>
+        <p class="text-muted small">Interventional cardiac care, echocardiography, stress diagnostics, and coronary ICU.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-custom">
+        <div class="card-icon"><i class="bi bi-cpu"></i></div>
+        <h3 class="h5 fw-bold">Neurology & Neurosurgery</h3>
+        <p class="text-muted small">Advanced neurological diagnostics, stroke rapid response unit, and spinal surgery.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-custom">
+        <div class="card-icon"><i class="bi bi-person-hearts"></i></div>
+        <h3 class="h5 fw-bold">Pediatrics</h3>
+        <p class="text-muted small">Specialized neonatal intensive care (NICU), pediatric surgery, and preventative wellness.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

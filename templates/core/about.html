@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us | Harborlight Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center text-center">
+    <div class="col-lg-8">
+      <span class="badge-status mb-3">About Harborlight</span>
+      <h1 class="display-5 fw-bold mb-3">Compassionate Care, Modern Medicine</h1>
+      <p class="lead text-muted mb-4">
+        Founded with a mission to bring compassionate, world-class medical expertise to our community, Harborlight Multispecialty Hospital combines cutting-edge clinical technology with human warmth.
+      </p>
+      <div class="card-custom text-start p-4 mb-4">
+        <h3 class="h5 fw-bold mb-3">Our Core Principles</h3>
+        <ul class="mb-0">
+          <li class="mb-2"><strong>Patient-Centered Excellence:</strong> Providing individualized treatment plans with dignity and empathy.</li>
+          <li class="mb-2"><strong>Modern Diagnostic Facilities:</strong> High-precision MRI, CT, digital radiography, and automated clinical labs.</li>
+          <li class="mb-2"><strong>Multidisciplinary Care:</strong> Seamless collaboration among board-certified surgeons, cardiologists, and pediatricians.</li>
+          <li><strong>24/7 Availability:</strong> Full emergency, trauma care, and pharmacy facilities always on standby.</li>
+        </ul>
+      </div>
+      <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom">Book an Appointment</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

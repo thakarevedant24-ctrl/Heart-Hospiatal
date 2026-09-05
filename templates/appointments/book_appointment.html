@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Book an Appointment | Harborlight Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="text-center mb-4">
+        <span class="badge-status mb-2">Easy Scheduling</span>
+        <h1 class="display-5 fw-bold">Book a Consultation</h1>
+        <p class="text-muted">Schedule your visit with our specialized clinical faculty.</p>
+      </div>
+
+      <div class="card-custom p-4 p-md-5">
+        <form method="post" action="#">
+          {% csrf_token %}
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Patient Full Name</label>
+              <input type="text" class="form-control" placeholder="e.g. John Doe">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Contact Phone</label>
+              <input type="tel" class="form-control" placeholder="+1 (555) 000-0000">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Email Address</label>
+              <input type="email" class="form-control" placeholder="john@example.com">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Department</label>
+              <select class="form-select">
+                <option selected>Select Department...</option>
+                <option>Cardiology</option>
+                <option>Neurology</option>
+                <option>Pediatrics</option>
+                <option>Orthopedics</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Preferred Date</label>
+              <input type="date" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Preferred Time Slot</label>
+              <select class="form-select">
+                <option>Morning (09:00 AM - 12:00 PM)</option>
+                <option>Afternoon (01:00 PM - 04:00 PM)</option>
+                <option>Evening (05:00 PM - 08:00 PM)</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold">Symptoms / Consultation Reason</label>
+              <textarea class="form-control" rows="3" placeholder="Briefly describe your medical concern..."></textarea>
+            </div>
+            <div class="col-12 mt-4 text-end">
+              <button type="button" class="btn btn-accent-custom px-4 py-2">
+                <i class="bi bi-check2-circle me-1"></i>Confirm Appointment Request
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,254 @@
+/* Harborlight Multispecialty Hospital Brand Kit Stylesheet */
+:root {
+  --primary-color: #0E5F5C;       /* Deep Teal */
+  --primary-hover: #094442;
+  --accent-color: #FF6F59;        /* Warm Coral */
+  --accent-hover: #e85842;
+  --bg-color: #FAF7F2;            /* Soft Ivory */
+  --text-dark: #26333D;           /* Charcoal */
+  --support-color: #8FB996;       /* Sage Green */
+  --support-light: #e6f0e8;
+  --white: #ffffff;
+  --card-shadow: 0 10px 30px rgba(14, 95, 92, 0.08);
+  --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-font {
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Top bar */
+.top-bar {
+  background-color: var(--primary-color);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+  padding: 0.4rem 0;
+}
+
+.top-bar a {
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.top-bar a:hover {
+  opacity: 0.8;
+}
+
+/* Navbar */
+.navbar-custom {
+  background-color: var(--white);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  padding: 0.85rem 0;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar-brand-logo {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--primary-color), var(--support-color));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.35rem;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--primary-color);
+  margin-bottom: 0;
+}
+
+.brand-tagline {
+  font-size: 0.75rem;
+  color: #6c757d;
+  display: block;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: var(--text-dark) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px;
+  transition: var(--transition-smooth);
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary-color) !important;
+  background-color: var(--support-light);
+}
+
+/* Custom Buttons */
+.btn-primary-custom {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  transition: var(--transition-smooth);
+}
+
+.btn-primary-custom:hover, .btn-primary-custom:focus {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(14, 95, 92, 0.25);
+}
+
+.btn-accent-custom {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  transition: var(--transition-smooth);
+}
+
+.btn-accent-custom:hover, .btn-accent-custom:focus {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 111, 89, 0.3);
+}
+
+.btn-outline-custom {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  background: transparent;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.55rem 1.35rem;
+  transition: var(--transition-smooth);
+}
+
+.btn-outline-custom:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+/* Hero Section */
+.hero-scaffold {
+  padding: 5rem 0 4rem;
+  background: radial-gradient(circle at top right, rgba(143, 185, 150, 0.2), transparent 50%),
+              radial-gradient(circle at bottom left, rgba(14, 95, 92, 0.08), transparent 50%);
+}
+
+.badge-status {
+  background-color: var(--support-light);
+  color: var(--primary-color);
+  border: 1px solid var(--support-color);
+  padding: 0.4rem 0.9rem;
+  font-weight: 600;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #28a745;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.3);
+}
+
+/* Feature Cards */
+.card-custom {
+  background: var(--white);
+  border: 1px solid rgba(14, 95, 92, 0.08);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-smooth);
+  padding: 1.5rem;
+  height: 100%;
+}
+
+.card-custom:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(14, 95, 92, 0.12);
+  border-color: var(--support-color);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background-color: var(--support-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  background-color: var(--primary-color);
+  color: rgba(255, 255, 255, 0.85);
+  padding-top: 3.5rem;
+  padding-bottom: 1.5rem;
+}
+
+footer h5 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+footer h5::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  background-color: var(--accent-color);
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1.5rem;
+  margin-top: 2.5rem;
+  font-size: 0.875rem;
+}
+
