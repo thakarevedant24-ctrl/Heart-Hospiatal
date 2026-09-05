@@ -1216,6 +1216,69 @@ a:hover {
   color: var(--white);
 }
 
+/* High-Contrast Outpatient & OPD Hours Box */
+.cta-opd-card {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 16px;
+  padding: 1.65rem;
+  backdrop-filter: blur(8px);
+}
+
+.cta-opd-card h4,
+.cta-opd-card h3 {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.cta-opd-card p,
+.cta-opd-card span,
+.cta-opd-card div {
+  color: #ffffff !important;
+}
+
+.cta-opd-line {
+  color: #ffffff !important;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.65rem;
+}
+
+.cta-opd-line:last-child {
+  margin-bottom: 0;
+}
+
+.cta-opd-badge {
+  background-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50rem;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.cta-opd-badge.emergency {
+  background-color: #EF4444;
+  border-color: #EF4444;
+  color: #ffffff !important;
+}
+
+/* High-Contrast White Text Utility */
+.text-white-70 {
+  color: rgba(255, 255, 255, 0.90) !important;
+}
+
+.text-white-80 {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
 /* ==========================================================================
    FOOTER (4-column layout, social icons, copyright)
    ========================================================================== */
