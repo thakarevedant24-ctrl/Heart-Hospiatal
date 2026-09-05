@@ -184,3 +184,4 @@ class Command(BaseCommand):
                 self.stdout.write(f"Created Testimonial: {testimonial.patient_name}")
 
         self.stdout.write(self.style.SUCCESS('Successfully seeded database with Harborlight demonstration data!'))
+

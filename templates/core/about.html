@@ -1,28 +1,440 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}About Us | Harborlight Multispecialty Hospital{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <div class="row justify-content-center text-center">
-    <div class="col-lg-8">
-      <span class="badge-status mb-3">About Harborlight</span>
-      <h1 class="display-5 fw-bold mb-3">Compassionate Care, Modern Medicine</h1>
-      <p class="lead text-muted mb-4">
-        Founded with a mission to bring compassionate, world-class medical expertise to our community, Harborlight Multispecialty Hospital combines cutting-edge clinical technology with human warmth.
-      </p>
-      <div class="card-custom text-start p-4 mb-4">
-        <h3 class="h5 fw-bold mb-3">Our Core Principles</h3>
-        <ul class="mb-0">
-          <li class="mb-2"><strong>Patient-Centered Excellence:</strong> Providing individualized treatment plans with dignity and empathy.</li>
-          <li class="mb-2"><strong>Modern Diagnostic Facilities:</strong> High-precision MRI, CT, digital radiography, and automated clinical labs.</li>
-          <li class="mb-2"><strong>Multidisciplinary Care:</strong> Seamless collaboration among board-certified surgeons, cardiologists, and pediatricians.</li>
-          <li><strong>24/7 Availability:</strong> Full emergency, trauma care, and pharmacy facilities always on standby.</li>
-        </ul>
+
+<!-- =========================================================================
+     PAGE HEADER BANNER
+     ========================================================================= -->
+<section class="page-header-banner">
+  <div class="container text-center">
+    <div class="breadcrumb-custom">
+      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; <span>About Us</span>
+    </div>
+    <span class="badge-status mb-2">Our Healthcare Legacy</span>
+    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">About Harborlight Hospital</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 680px;">
+      <em>"Compassionate Care, Modern Medicine"</em> — Dedicated to healing, clinical innovation, and community wellness for over 25 years.
+    </p>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     1. HOSPITAL STORY SECTION (Mission and Vision side by side)
+     ========================================================================= -->
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-5 mb-5">
+      <div class="col-lg-6">
+        <span class="section-tag">Who We Are</span>
+        <h2 class="section-title">A Sanctuary for Healing & Clinical Innovation</h2>
+        <p class="text-secondary mb-3">
+          Founded with an unyielding conviction that every individual deserves world-class medical attention paired with human dignity, <strong>Harborlight Multispecialty Hospital</strong> has grown from a humble community clinic into one of the region’s premier healthcare destinations.
+        </p>
+        <p class="text-secondary mb-4">
+          Our campus brings together board-certified surgeons, specialized physicians, dedicated nurses, and modern diagnostic laboratories under one unified roof. We blend evidence-based medical science with empathetic, individualized care.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-check-circle-fill text-success fs-5"></i>
+            <span class="fw-semibold">24/7 Emergency & Trauma</span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-check-circle-fill text-success fs-5"></i>
+            <span class="fw-semibold">15+ Clinical Specialties</span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-check-circle-fill text-success fs-5"></i>
+            <span class="fw-semibold">50,000+ Patients Treated</span>
+          </div>
+        </div>
       </div>
-      <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom">Book an Appointment</a>
+
+      <div class="col-lg-6">
+        <div class="row g-4">
+          <!-- Mission Card -->
+          <div class="col-12">
+            <div class="card-custom story-card p-4">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="card-icon mb-0" style="width: 44px; height: 44px; font-size: 1.25rem;">
+                  <i class="bi bi-bullseye"></i>
+                </div>
+                <h3 class="h4 fw-bold mb-0" style="color: var(--primary-color);">Our Mission</h3>
+              </div>
+              <p class="text-secondary mb-0">
+                To improve community health by providing accessible, compassionate, and uncompromisingly high-quality medical services through advanced clinical technology, continuous staff education, and patient-centered empathy.
+              </p>
+            </div>
+          </div>
+
+          <!-- Vision Card -->
+          <div class="col-12">
+            <div class="card-custom story-card vision-card p-4">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="card-icon mb-0" style="width: 44px; height: 44px; font-size: 1.25rem; background-color: rgba(255, 111, 89, 0.12); color: var(--accent-color);">
+                  <i class="bi bi-eye-fill"></i>
+                </div>
+                <h3 class="h4 fw-bold mb-0" style="color: var(--primary-color);">Our Vision</h3>
+              </div>
+              <p class="text-secondary mb-0">
+                To be the most trusted healthcare institution in the region, recognized for clinical excellence, innovative surgical breakthroughs, and an enduring standard of holistic compassionate care for future generations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-{% endblock %}
+</section>
 
+
+<!-- =========================================================================
+     2. HORIZONTAL TIMELINE OF MILESTONES
+     ========================================================================= -->
+<section class="py-5" style="background-color: #f7f3ec;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Our Journey</span>
+      <h2 class="section-title">Milestones of Medical Growth</h2>
+      <p class="section-description">
+        Over two and a half decades of continuous clinical expansion, innovation, and community service.
+      </p>
+    </div>
+
+    <div class="timeline-horizontal-container">
+      <div class="timeline-track">
+        <!-- Milestone 1 -->
+        <div class="timeline-milestone">
+          <div class="timeline-node-circle">2001</div>
+          <div class="card-custom timeline-card">
+            <h4 class="h6 fw-bold mb-1" style="color: var(--primary-color);">Foundation Laid</h4>
+            <p class="text-muted small mb-0">
+              Established as Riverdale Community Medical Center with 20 beds and general outpatient care.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="timeline-milestone">
+          <div class="timeline-node-circle">2008</div>
+          <div class="card-custom timeline-card">
+            <h4 class="h6 fw-bold mb-1" style="color: var(--primary-color);">Multispecialty Expansion</h4>
+            <p class="text-muted small mb-0">
+              Expanded to 150 beds, opening dedicated Cardiac ICU and round-the-clock trauma surgical suites.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="timeline-milestone">
+          <div class="timeline-node-circle">2015</div>
+          <div class="card-custom timeline-card">
+            <h4 class="h6 fw-bold mb-1" style="color: var(--primary-color);">Neurosciences & Robotics</h4>
+            <p class="text-muted small mb-0">
+              Commissioned advanced neurosurgery units and minimally invasive robotic arthroplasty suites.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 4 -->
+        <div class="timeline-milestone">
+          <div class="timeline-node-circle">2021</div>
+          <div class="card-custom timeline-card">
+            <h4 class="h6 fw-bold mb-1" style="color: var(--primary-color);">Digital Diagnostics & NICU</h4>
+            <p class="text-muted small mb-0">
+              Inaugurated Level-III Neonatal Intensive Care (NICU) and hybrid digital catheterization lab.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 5 -->
+        <div class="timeline-milestone">
+          <div class="timeline-node-circle">2026</div>
+          <div class="card-custom timeline-card">
+            <h4 class="h6 fw-bold mb-1" style="color: var(--accent-color);">Silver Jubilee & Beyond</h4>
+            <p class="text-muted small mb-0">
+              Celebrating 25 years of compassionate care with 50,000+ lives healed and ongoing smart hospital upgrades.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     3. CORE VALUES SECTION (4 Icon Cards)
+     ========================================================================= -->
+<section class="py-5">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">What Drives Us</span>
+      <h2 class="section-title">Our Guiding Core Values</h2>
+      <p class="section-description">
+        Four fundamental pillars govern every patient interaction, clinical diagnosis, and hospital policy.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Value 1: Compassion -->
+      <div class="col-md-6 col-lg-3">
+        <div class="card-custom value-card">
+          <div class="value-icon-box">
+            <i class="bi bi-heart-fill"></i>
+          </div>
+          <h3 class="h5 fw-bold mb-2">Compassion</h3>
+          <p class="text-muted small mb-0">
+            Treating every patient and family member with human warmth, active listening, and profound empathy during vulnerable moments.
+          </p>
+        </div>
+      </div>
+
+      <!-- Value 2: Excellence -->
+      <div class="col-md-6 col-lg-3">
+        <div class="card-custom value-card">
+          <div class="value-icon-box">
+            <i class="bi bi-award-fill"></i>
+          </div>
+          <h3 class="h5 fw-bold mb-2">Excellence</h3>
+          <p class="text-muted small mb-0">
+            Pursuing the highest benchmarks in medical precision, patient safety protocols, and continuous clinical peer review.
+          </p>
+        </div>
+      </div>
+
+      <!-- Value 3: Integrity -->
+      <div class="col-md-6 col-lg-3">
+        <div class="card-custom value-card">
+          <div class="value-icon-box">
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <h3 class="h5 fw-bold mb-2">Integrity</h3>
+          <p class="text-muted small mb-0">
+            Uncompromising medical ethics, absolute confidentiality, transparent treatment guidance, and honest pricing.
+          </p>
+        </div>
+      </div>
+
+      <!-- Value 4: Innovation -->
+      <div class="col-md-6 col-lg-3">
+        <div class="card-custom value-card">
+          <div class="value-icon-box">
+            <i class="bi bi-lightning-charge-fill"></i>
+          </div>
+          <h3 class="h5 fw-bold mb-2">Innovation</h3>
+          <p class="text-muted small mb-0">
+            Embracing state-of-the-art robotic surgery, digital diagnostic imaging, and modernized recovery therapies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     4. WHY CHOOSE US GRID (6 short points with icons)
+     ========================================================================= -->
+<section class="py-5" style="background-color: #f7f3ec;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Patient Benefits</span>
+      <h2 class="section-title">Why Choose Harborlight</h2>
+      <p class="section-description">
+        The key advantages that make Harborlight the chosen healthcare partner for thousands of families.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Point 1 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom why-us-card p-4">
+          <div class="why-icon">
+            <i class="bi bi-hospital"></i>
+          </div>
+          <div>
+            <h3 class="h6 fw-bold mb-2" style="color: var(--primary-color);">Comprehensive Specialties</h3>
+            <p class="text-muted small mb-0">
+              From cardiology and neurology to pediatrics and oncology, access seamless multi-disciplinary medical care under one roof.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Point 2 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom why-us-card p-4">
+          <div class="why-icon">
+            <i class="bi bi-clock-history"></i>
+          </div>
+          <div>
+            <h3 class="h6 fw-bold mb-2" style="color: var(--primary-color);">24/7 Rapid Emergency Response</h3>
+            <p class="text-muted small mb-0">
+              Dedicated trauma resuscitation unit with on-site emergency physicians, cardiac cath lab, and ICU beds ready at all hours.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Point 3 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom why-us-card p-4">
+          <div class="why-icon">
+            <i class="bi bi-person-badge-fill"></i>
+          </div>
+          <div>
+            <h3 class="h6 fw-bold mb-2" style="color: var(--primary-color);">Board-Certified Faculty</h3>
+            <p class="text-muted small mb-0">
+              Senior consultants and surgeons trained at premier medical centers with proven track records of clinical success.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Point 4 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom why-us-card p-4">
+          <div class="why-icon">
+            <i class="bi bi-cpu"></i>
+          </div>
+          <div>
+            <h3 class="h6 fw-bold mb-2" style="color: var(--primary-color);">Advanced Diagnostic Tech</h3>
+            <p class="text-muted small mb-0">
+              High-tesla MRI, 128-slice CT scans, automated pathology, and digital imaging ensuring accurate, timely diagnoses.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Point 5 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom why-us-card p-4">
+          <div class="why-icon">
+            <i class="bi bi-cash-coin"></i>
+          </div>
+          <div>
+            <h3 class="h6 fw-bold mb-2" style="color: var(--primary-color);">Transparent & Ethical Care</h3>
+            <p class="text-muted small mb-0">
+              Clear treatment counseling, transparent billing without hidden costs, and comprehensive cashless insurance desk support.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Point 6 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card-custom why-us-card p-4">
+          <div class="why-icon">
+            <i class="bi bi-people-fill"></i>
+          </div>
+          <div>
+            <h3 class="h6 fw-bold mb-2" style="color: var(--primary-color);">Patient-Centric Continuity</h3>
+            <p class="text-muted small mb-0">
+              Dedicated patient relations officers, streamlined discharge follow-ups, and rehabilitative care support programs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     5. ACCREDITATION / CERTIFICATION BADGES ROW
+     ========================================================================= -->
+<section class="py-5">
+  <div class="container">
+    <div class="section-header mb-4">
+      <span class="section-tag">Quality Assured</span>
+      <h2 class="section-title">Accreditations & Certifications</h2>
+      <p class="section-description">
+        Benchmarked against international healthcare safety and clinical quality standards.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center text-center">
+      <!-- Badge 1: JCI -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="accreditation-card">
+          <div class="accreditation-seal">
+            <i class="bi bi-patch-check-fill"></i>
+          </div>
+          <h4 class="h6 fw-bold mb-1">JCI Accredited</h4>
+          <p class="text-muted small mb-0">Gold Seal of Safety</p>
+        </div>
+      </div>
+
+      <!-- Badge 2: NABH -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="accreditation-card">
+          <div class="accreditation-seal">
+            <i class="bi bi-shield-fill-check"></i>
+          </div>
+          <h4 class="h6 fw-bold mb-1">NABH Certified</h4>
+          <p class="text-muted small mb-0">Healthcare Quality</p>
+        </div>
+      </div>
+
+      <!-- Badge 3: CAP Labs -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="accreditation-card">
+          <div class="accreditation-seal">
+            <i class="bi bi-virus"></i>
+          </div>
+          <h4 class="h6 fw-bold mb-1">CAP Certified</h4>
+          <p class="text-muted small mb-0">Pathology & Lab</p>
+        </div>
+      </div>
+
+      <!-- Badge 4: AHA Emergency -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="accreditation-card">
+          <div class="accreditation-seal">
+            <i class="bi bi-heart-pulse-fill" style="color: var(--accent-color);"></i>
+          </div>
+          <h4 class="h6 fw-bold mb-1">AHA Partner</h4>
+          <p class="text-muted small mb-0">Cardiovascular Life</p>
+        </div>
+      </div>
+
+      <!-- Badge 5: ISO 9001 -->
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="accreditation-card">
+          <div class="accreditation-seal">
+            <i class="bi bi-award-fill"></i>
+          </div>
+          <h4 class="h6 fw-bold mb-1">ISO 9001:2015</h4>
+          <p class="text-muted small mb-0">Management Standards</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     CALL TO ACTION STRIP
+     ========================================================================= -->
+<section class="py-5" style="background: linear-gradient(135deg, var(--primary-color) 0%, #073836 100%); color: #fff;">
+  <div class="container text-center">
+    <h2 class="h3 fw-bold text-white mb-3">Partner with Us for Your Family's Health</h2>
+    <p class="lead text-white-70 mb-4 mx-auto" style="max-width: 600px;">
+      Our doctors and support teams are here to guide you with care, respect, and clinical mastery.
+    </p>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom btn-lg shadow">
+        <i class="bi bi-calendar-check-fill me-1"></i>Book a Consultation
+      </a>
+      <a href="{% url 'doctors:doctor_list' %}" class="btn btn-outline-custom text-white border-white btn-lg">
+        <i class="bi bi-people-fill me-1"></i>Meet Our Doctors
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -957,3 +957,193 @@ a:hover {
   border-radius: 50%;
   box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.3);
 }
+
+/* ==========================================================================
+   ABOUT PAGE CUSTOM STYLES
+   ========================================================================== */
+
+.page-header-banner {
+  padding: 4rem 0 3.5rem;
+  background: radial-gradient(circle at 90% 15%, rgba(143, 185, 150, 0.2) 0%, transparent 45%),
+              radial-gradient(circle at 10% 85%, rgba(14, 95, 92, 0.08) 0%, transparent 50%),
+              var(--bg-color);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.breadcrumb-custom {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.breadcrumb-custom a {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.story-card {
+  height: 100%;
+  border-left: 4px solid var(--primary-color) !important;
+}
+
+.story-card.vision-card {
+  border-left: 4px solid var(--accent-color) !important;
+}
+
+/* Horizontal Timeline */
+.timeline-horizontal-container {
+  position: relative;
+  padding: 2rem 0;
+  overflow-x: auto;
+}
+
+.timeline-track {
+  display: flex;
+  gap: 1.5rem;
+  position: relative;
+  min-width: 820px;
+  padding: 1.5rem 0.5rem;
+}
+
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: 30px;
+  right: 30px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--support-color) 50%, var(--accent-color) 100%);
+  z-index: 1;
+}
+
+.timeline-milestone {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.timeline-node-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--white);
+  border: 4px solid var(--primary-color);
+  color: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(14, 95, 92, 0.15);
+  margin-bottom: 1.25rem;
+  transition: var(--transition-smooth);
+}
+
+.timeline-milestone:last-child .timeline-node-circle {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.timeline-milestone:hover .timeline-node-circle {
+  transform: scale(1.12);
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.timeline-milestone:last-child:hover .timeline-node-circle {
+  background-color: var(--accent-color);
+  color: var(--white);
+}
+
+.timeline-card {
+  text-align: left;
+  padding: 1.25rem !important;
+  font-size: 0.9rem;
+}
+
+/* Core Values Cards */
+.value-card {
+  text-align: center;
+  height: 100%;
+  padding: 2rem 1.5rem !important;
+}
+
+.value-icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(14, 95, 92, 0.1), rgba(143, 185, 150, 0.2));
+  color: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
+  transition: var(--transition-fast);
+}
+
+.value-card:hover .value-icon-box {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: scale(1.08);
+}
+
+/* Why Choose Us Cards */
+.why-us-card {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.why-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 12px;
+  background-color: var(--support-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  transition: var(--transition-fast);
+}
+
+.why-us-card:hover .why-icon {
+  background-color: var(--accent-color);
+  color: var(--white);
+}
+
+/* Accreditation Badges */
+.accreditation-card {
+  background-color: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  height: 100%;
+}
+
+.accreditation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--support-color);
+}
+
+.accreditation-seal {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--support-light);
+  color: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
