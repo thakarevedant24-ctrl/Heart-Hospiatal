@@ -2,6 +2,8 @@
 
 {% block title %}Appointment Confirmed ({{ ref_code }}) | Harborlight Multispecialty Hospital{% endblock %}
 
+{% block meta_description %}Official consultation request confirmation for patient {{ appointment.patient_name }} at Harborlight Multispecialty Hospital. Reference {{ ref_code }}.{% endblock %}
+
 {% block content %}
 <section class="py-5 bg-light-subtle border-bottom d-print-none">
   <div class="container text-center">
@@ -18,7 +20,7 @@
   </div>
 </section>
 
-<section class="py-5">
+<section class="py-5 reveal-on-scroll">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">

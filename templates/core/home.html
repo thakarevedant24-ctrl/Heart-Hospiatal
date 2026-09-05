@@ -3,6 +3,8 @@
 
 {% block title %}Harborlight Multispecialty Hospital | Compassionate Care, Modern Medicine{% endblock %}
 
+{% block meta_description %}Harborlight Multispecialty Hospital in Riverdale, TX provides 24/7 trauma emergency care, cardiology, neurology, pediatrics, and specialized surgical excellence. Book consultations online.{% endblock %}
+
 {% block content %}
 
 <!-- =========================================================================
@@ -62,7 +64,7 @@
 <!-- =========================================================================
      2. STATS BAR (Animated counters via IntersectionObserver)
      ========================================================================= -->
-<section class="stats-section" id="statsSection">
+<section class="stats-section reveal-on-scroll" id="statsSection">
   <div class="container">
     <div class="stats-bar-card">
       <div class="row g-0 align-items-center">
@@ -98,7 +100,7 @@
 <!-- =========================================================================
      3. DEPARTMENTS PREVIEW (Responsive grid pulled from Department model)
      ========================================================================= -->
-<section class="departments-section">
+<section class="departments-section reveal-on-scroll">
   <div class="container">
     <div class="section-header">
       <span class="section-tag">Clinical Excellence</span>
@@ -149,7 +151,7 @@
 <!-- =========================================================================
      4. FEATURED DOCTORS (Horizontal scrollable cards / carousel)
      ========================================================================= -->
-<section class="doctors-section">
+<section class="doctors-section reveal-on-scroll">
   <div class="container">
     <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
       <div>
@@ -167,45 +169,44 @@
       </div>
     </div>
 
+    <!-- Scrollable track container -->
     <div class="doctors-carousel-wrapper">
       <div class="doctors-scroll-track" id="doctorsScrollTrack">
         {% for doc in doctors %}
           <div class="doctor-card-item">
-            <div class="card-custom text-center h-100 p-4">
-              <!-- Doctor Photo or Icon -->
-              <div class="doctor-avatar-box">
+            <div class="card-custom doctor-card h-100">
+              <div class="doctor-img-box">
                 {% if doc.photo %}
-                  <img src="{{ doc.photo.url }}" alt="Dr. {{ doc.name }}">
+                  <img src="{{ doc.photo.url }}" alt="Dr. {{ doc.name }} - {{ doc.specialization }}" loading="lazy">
                 {% else %}
-                  <i class="bi bi-person-fill"></i>
+                  <div class="doctor-placeholder-avatar">
+                    <i class="bi bi-person-fill"></i>
+                  </div>
                 {% endif %}
+                <span class="dept-badge">{{ doc.department.name }}</span>
               </div>
-
-              <!-- Doctor Details -->
-              <h3 class="doctor-name">Dr. {{ doc.name }}</h3>
-              <div class="doctor-specialty">{{ doc.specialization }}</div>
-              <div class="doctor-qualification">{{ doc.qualification }}</div>
-
-              <div class="mb-3">
-                <span class="badge bg-light text-dark border rounded-pill small">
-                  {{ doc.department.name|truncatewords:3 }}
-                </span>
-              </div>
-
-              <div class="small text-muted mb-3">
-                <i class="bi bi-calendar-event me-1"></i>{{ doc.available_days }}
-              </div>
-
-              <div class="mt-auto">
-                <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-primary-custom w-100">
-                  <span>Consult Doctor</span>
-                </a>
+              <div class="doctor-card-body">
+                <h3 class="doctor-name">Dr. {{ doc.name }}</h3>
+                <p class="doctor-spec">{{ doc.specialization }}</p>
+                <div class="doctor-qualification">
+                  <i class="bi bi-mortarboard me-1 text-teal"></i>
+                  <span>{{ doc.qualification }}</span>
+                </div>
+                <div class="doctor-experience">
+                  <i class="bi bi-award me-1 text-accent"></i>
+                  <span>{{ doc.experience_years }} Years Clinical Exp.</span>
+                </div>
+                <div class="mt-3 pt-3 border-top">
+                  <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-primary-custom w-100">
+                    <i class="bi bi-calendar-plus"></i> Book Consultation
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         {% empty %}
-          <div class="w-100 text-center py-4">
-            <p class="text-muted">Physician roster is currently updating.</p>
+          <div class="p-4 text-center text-muted">
+            Physician profiles will be uploaded shortly.
           </div>
         {% endfor %}
       </div>
@@ -217,7 +218,7 @@
 <!-- =========================================================================
      5. TESTIMONIALS SLIDER (Patient reviews from Testimonial model)
      ========================================================================= -->
-<section class="testimonials-section">
+<section class="testimonials-section reveal-on-scroll">
   <div class="container">
     <div class="section-header">
       <span class="section-tag">Patient Stories</span>
@@ -287,7 +288,7 @@
 <!-- =========================================================================
      6. CALL-TO-ACTION (CTA) BANNER (Just above the footer)
      ========================================================================= -->
-<section class="cta-banner-section">
+<section class="cta-banner-section reveal-on-scroll">
   <div class="container">
     <div class="row align-items-center justify-content-between g-4">
       <div class="col-lg-8">

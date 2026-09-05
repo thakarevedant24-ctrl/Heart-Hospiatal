@@ -4,7 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>{% block title %}Harborlight Multispecialty Hospital | Compassionate Care, Modern Medicine{% endblock %}</title>
+
+  <!-- Meta SEO -->
+  <meta name="description" content="{% block meta_description %}Harborlight Multispecialty Hospital delivers world-class clinical care, 24/7 trauma emergency, cardiology, neurology, pediatrics, and advanced surgeries in Riverdale, TX.{% endblock %}">
+  <meta name="keywords" content="{% block meta_keywords %}hospital, healthcare, emergency care, cardiology, neurology, pediatrics, orthopedics, doctors, Riverdale TX{% endblock %}">
+  <meta name="author" content="Harborlight Multispecialty Hospital">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}Harborlight Multispecialty Hospital | Compassionate Care, Modern Medicine{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Advanced clinical care, 24/7 trauma emergency, specialized outpatient services, and board-certified doctors in Riverdale, TX.{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{% static 'images/harborlight-og-banner.svg' %}{% endblock %}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:site_name" content="Harborlight Multispecialty Hospital">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}Harborlight Multispecialty Hospital{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Compassionate Care, Modern Medicine. Advanced healthcare and 24/7 trauma care in Riverdale, TX.{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}{% static 'images/harborlight-og-banner.svg' %}{% endblock %}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+  <link rel="alternate icon" href="{% static 'images/favicon.svg' %}">
   
   <!-- Google Fonts: Poppins (Headings) & Inter (Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,23 +48,26 @@
 </head>
 <body>
 
+  <!-- Accessibility Skip to Main Content Link -->
+  <a href="#main-content" class="skip-to-main-link">Skip to main content</a>
+
   <!-- Sticky Navbar with Top Bar Included -->
   {% include 'includes/navbar.html' %}
 
   <!-- Django Messages Alert Banner -->
   {% if messages %}
-    <div class="container my-3">
+    <div class="container my-3 d-print-none">
       {% for message in messages %}
         <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show shadow-sm" role="alert" style="border-radius: 12px;">
-          {{ message }}
+          <i class="bi bi-info-circle-fill me-2"></i>{{ message }}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       {% endfor %}
     </div>
   {% endif %}
 
-  <!-- Main Body Content -->
-  <main class="flex-grow-1">
+  <!-- Main Body Content with Accessibility Landmark -->
+  <main id="main-content" class="flex-grow-1" tabindex="-1">
     {% block content %}
     {% endblock %}
   </main>
@@ -48,10 +75,29 @@
   <!-- 4-Column Footer with Social Icons -->
   {% include 'includes/footer.html' %}
 
+  <!-- Floating Action Buttons: WhatsApp Chat & Back to Top -->
+  <aside aria-label="Quick Actions" class="floating-actions-container d-print-none">
+    <!-- Back to Top Button -->
+    <button type="button" id="backToTopBtn" class="floating-btn back-to-top-btn" aria-label="Back to top of page" title="Back to top">
+      <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- WhatsApp Chat Floating Button -->
+    <a href="https://wa.me/15550107890?text=Hello%20Harborlight%20Hospital,%20I%20have%20an%20inquiry%20regarding%20consultations." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="floating-btn whatsapp-btn" 
+       aria-label="Chat with Harborlight Hospital on WhatsApp" 
+       title="Chat with us on WhatsApp">
+      <i class="bi bi-whatsapp"></i>
+      <span class="whatsapp-btn-text">Chat with us</span>
+    </a>
+  </aside>
+
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   
-  <!-- Custom Vanilla JS (Hamburger toggle, UI behaviors) -->
+  <!-- Custom Vanilla JS (Hamburger toggle, UI behaviors, animations) -->
   <script src="{% static 'js/main.js' %}"></script>
   
   {% block extra_js %}{% endblock %}

@@ -3,6 +3,8 @@
 
 {% block title %}{{ department.name }} | Harborlight Multispecialty Hospital{% endblock %}
 
+{% block meta_description %}{{ department.short_description|truncatewords:28 }} Harborlight Multispecialty Hospital, Riverdale, TX.{% endblock %}
+
 {% block content %}
 
 <!-- =========================================================================
@@ -33,10 +35,10 @@
       </div>
 
       <!-- Pre-filled Booking Action Button -->
-      <div class="col-lg-4 text-lg-end">
+      <div class="col-lg-4 text-center text-lg-end">
         <a href="{% url 'appointments:book_appointment' %}?department={{ department.slug }}" 
-           class="btn btn-accent-custom btn-lg shadow">
-          <i class="bi bi-calendar2-check-fill me-1"></i>
+           class="btn btn-accent-custom btn-lg shadow-sm">
+          <i class="bi bi-calendar-plus-fill me-1"></i>
           <span>Book with this Department</span>
         </a>
       </div>
@@ -48,7 +50,7 @@
 <!-- =========================================================================
      DEPARTMENT FULL DESCRIPTION & CLINICAL OVERVIEW
      ========================================================================= -->
-<section class="py-5">
+<section class="py-5 reveal-on-scroll">
   <div class="container">
     <div class="row g-5">
       <div class="col-lg-8">

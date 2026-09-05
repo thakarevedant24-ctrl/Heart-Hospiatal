@@ -177,4 +177,48 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // 6. Back to Top Button
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 280) {
+        backToTopBtn.classList.add('show');
+      } else {
+        backToTopBtn.classList.remove('show');
+      }
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // 7. Scroll-Reveal Animations (IntersectionObserver)
+  const revealElements = document.querySelectorAll('.reveal-on-scroll, [data-aos]');
+  if (revealElements.length > 0) {
+    // Accessibility check: immediately show if user prefers reduced motion
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealElements.forEach(el => el.classList.add('is-revealed', 'aos-animate'));
+    } else {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed', 'aos-animate');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.1
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+    }
+  }
 });
+
