@@ -3,67 +3,373 @@
 {% block title %}Book an Appointment | Harborlight Multispecialty Hospital{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <div class="text-center mb-4">
-        <span class="badge-status mb-2">Easy Scheduling</span>
-        <h1 class="display-5 fw-bold">Book a Consultation</h1>
-        <p class="text-muted">Schedule your visit with our specialized clinical faculty.</p>
+<!-- Booking Hero Banner -->
+<section class="py-5 bg-light-subtle border-bottom">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-3">
+        <li class="breadcrumb-item"><a href="{% url 'core:home' %}" class="text-teal text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Book Consultation</li>
+      </ol>
+    </nav>
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <span class="badge rounded-pill bg-teal text-white px-3 py-2 fw-normal mb-2">
+          <i class="bi bi-calendar-check me-1"></i> Easy Patient Scheduling
+        </span>
+        <h1 class="display-5 fw-bold text-dark-navy mb-2">Book a Clinical Consultation</h1>
+        <p class="text-muted lead mb-0">
+          Connect with world-class medical specialists across all disciplines. Same-day urgent and advance appointments available.
+        </p>
       </div>
-
-      <div class="card-custom p-4 p-md-5">
-        <form method="post" action="#">
-          {% csrf_token %}
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Patient Full Name</label>
-              <input type="text" class="form-control" placeholder="e.g. John Doe">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Contact Phone</label>
-              <input type="tel" class="form-control" placeholder="+1 (555) 000-0000">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Email Address</label>
-              <input type="email" class="form-control" placeholder="john@example.com">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Department</label>
-              <select class="form-select">
-                <option selected>Select Department...</option>
-                <option>Cardiology</option>
-                <option>Neurology</option>
-                <option>Pediatrics</option>
-                <option>Orthopedics</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Preferred Date</label>
-              <input type="date" class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Preferred Time Slot</label>
-              <select class="form-select">
-                <option>Morning (09:00 AM - 12:00 PM)</option>
-                <option>Afternoon (01:00 PM - 04:00 PM)</option>
-                <option>Evening (05:00 PM - 08:00 PM)</option>
-              </select>
-            </div>
-            <div class="col-12">
-              <label class="form-label fw-semibold">Symptoms / Consultation Reason</label>
-              <textarea class="form-control" rows="3" placeholder="Briefly describe your medical concern..."></textarea>
-            </div>
-            <div class="col-12 mt-4 text-end">
-              <button type="button" class="btn btn-accent-custom px-4 py-2">
-                <i class="bi bi-check2-circle me-1"></i>Confirm Appointment Request
-              </button>
-            </div>
+      <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+        <div class="p-3 bg-white rounded-3 shadow-sm d-inline-flex align-items-center border">
+          <div class="rounded-circle bg-coral-subtle p-3 text-coral me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+            <i class="bi bi-telephone-fill fs-5"></i>
           </div>
-        </form>
+          <div class="text-start">
+            <span class="d-block small text-muted text-uppercase fw-semibold">Need Urgent Help?</span>
+            <a href="tel:+15550107890" class="fw-bold text-dark-navy text-decoration-none">+1 (555) 010-7890</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</section>
+
+<!-- Pre-fill Alert if Doctor / Department was selected from another page -->
+<div class="container mt-4">
+  {% if preselected_doctor %}
+    <div class="alert alert-info alert-dismissible fade show rounded-3 shadow-sm d-flex align-items-center" role="alert">
+      <i class="bi bi-person-check-fill fs-4 text-teal me-3"></i>
+      <div>
+        <strong>Booking with Dr. {{ preselected_doctor.name }}</strong> ({{ preselected_doctor.specialization }} &bull; {{ preselected_doctor.department.name }}).
+        Your form below has been pre-configured with this specialist.
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% elif preselected_department %}
+    <div class="alert alert-info alert-dismissible fade show rounded-3 shadow-sm d-flex align-items-center" role="alert">
+      <i class="bi bi-building-check fs-4 text-teal me-3"></i>
+      <div>
+        <strong>Booking in {{ preselected_department.name }}</strong>.
+        Select your preferred specialist or leave as "Any Available Specialist".
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endif %}
+
+  <!-- Django Messages (Errors or Notifications) -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
 </div>
+
+<!-- Main Booking Container -->
+<section class="py-4 pb-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Left Column: The Form -->
+      <div class="col-lg-8">
+        <div class="card-custom p-4 p-md-5">
+          <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4">
+            <div>
+              <h2 class="h4 fw-bold text-dark-navy mb-1">Patient & Appointment Information</h2>
+              <p class="text-muted small mb-0">Please fill out all required clinical contact and scheduling details.</p>
+            </div>
+            <span class="badge bg-light text-muted border px-2 py-1 small">Step 1 of 2</span>
+          </div>
+
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger rounded-3 mb-4">
+              {% for error in form.non_field_errors %}
+                <p class="mb-0"><i class="bi bi-exclamation-triangle-fill me-1"></i> {{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <form method="post" action="{% url 'appointments:book_appointment' %}" id="appointmentForm" novalidate>
+            {% csrf_token %}
+
+            <div class="row g-3">
+              <!-- Patient Name -->
+              <div class="col-md-6">
+                <label for="{{ form.patient_name.id_for_label }}" class="form-label fw-semibold text-dark-navy">
+                  Patient Full Name <span class="text-coral">*</span>
+                </label>
+                {{ form.patient_name }}
+                {% if form.patient_name.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.patient_name.errors.0 }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Email -->
+              <div class="col-md-6">
+                <label for="{{ form.email.id_for_label }}" class="form-label fw-semibold text-dark-navy">
+                  Email Address <span class="text-coral">*</span>
+                </label>
+                {{ form.email }}
+                <div class="form-text small">Booking receipt and reminders will be emailed here.</div>
+                {% if form.email.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.email.errors.0 }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Phone -->
+              <div class="col-md-6">
+                <label for="{{ form.phone.id_for_label }}" class="form-label fw-semibold text-dark-navy">
+                  Contact Phone Number <span class="text-coral">*</span>
+                </label>
+                {{ form.phone }}
+                {% if form.phone.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.phone.errors.0 }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Department Selection -->
+              <div class="col-md-6">
+                <label for="{{ form.department.id_for_label }}" class="form-label fw-semibold text-dark-navy">
+                  Clinical Department <span class="text-coral">*</span>
+                </label>
+                {{ form.department }}
+                {% if form.department.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.department.errors.0 }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Doctor Selection (Dynamic AJAX Filter) -->
+              <div class="col-md-6">
+                <label for="{{ form.doctor.id_for_label }}" class="form-label fw-semibold text-dark-navy d-flex justify-content-between align-items-center">
+                  <span>Preferred Specialist</span>
+                  <span id="doctorLoadingSpinner" class="spinner-border spinner-border-sm text-teal d-none" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </span>
+                </label>
+                {{ form.doctor }}
+                <div class="form-text small">Optional. Leave unselected for earliest available practitioner.</div>
+                {% if form.doctor.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.doctor.errors.0 }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Preferred Date -->
+              <div class="col-md-6">
+                <label for="{{ form.preferred_date.id_for_label }}" class="form-label fw-semibold text-dark-navy">
+                  Preferred Consultation Date <span class="text-coral">*</span>
+                </label>
+                {{ form.preferred_date }}
+                <div class="form-text small">Past dates are not permitted. Earliest available: Today.</div>
+                {% if form.preferred_date.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.preferred_date.errors.0 }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Preferred Time Slot -->
+              <div class="col-md-6">
+                <label for="{{ form.preferred_time.id_for_label }}" class="form-label fw-semibold text-dark-navy">
+                  Preferred Time Slot <span class="text-coral">*</span>
+                </label>
+                {{ form.preferred_time }}
+                <div class="form-text small">30-minute standard clinical consultation windows.</div>
+                {% if form.preferred_time.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.preferred_time.errors.0 }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Medical Notes / Symptoms -->
+              <div class="col-12">
+                <label for="{{ form.notes.id_for_label }}" class="form-label fw-semibold text-dark-navy">
+                  Reason for Consultation / Symptoms
+                </label>
+                {{ form.notes }}
+                <div class="form-text small">Briefly describe your symptoms, current medications, or specific physician requests.</div>
+                {% if form.notes.errors %}
+                  <div class="text-danger small mt-1">
+                    {{ form.notes.errors.0 }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <!-- Submission Callout & Button -->
+              <div class="col-12 mt-4 pt-3 border-top d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+                <div class="text-muted small">
+                  <i class="bi bi-shield-lock-fill text-teal me-1"></i> Your personal health data is processed confidentially.
+                </div>
+                <button type="submit" class="btn btn-accent-custom px-4 py-2 text-nowrap shadow-sm">
+                  <i class="bi bi-check-circle-fill me-2"></i>Confirm Appointment Request
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right Column: Clinic Schedule & Helpful Info -->
+      <div class="col-lg-4">
+        <!-- Clinic Hours Card -->
+        <div class="card-custom p-4 mb-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle bg-teal-subtle p-2 text-teal me-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="bi bi-clock-fill fs-5"></i>
+            </div>
+            <h3 class="h5 fw-bold text-dark-navy mb-0">Consultation Hours</h3>
+          </div>
+          <ul class="list-unstyled mb-0 small">
+            <li class="d-flex justify-content-between py-2 border-bottom">
+              <span class="text-muted">Monday – Friday:</span>
+              <span class="fw-semibold text-dark-navy">08:00 AM – 08:00 PM</span>
+            </li>
+            <li class="d-flex justify-content-between py-2 border-bottom">
+              <span class="text-muted">Saturday:</span>
+              <span class="fw-semibold text-dark-navy">09:00 AM – 05:00 PM</span>
+            </li>
+            <li class="d-flex justify-content-between py-2 border-bottom">
+              <span class="text-muted">Sunday:</span>
+              <span class="fw-semibold text-dark-navy">Emergency Only</span>
+            </li>
+            <li class="d-flex justify-content-between py-2">
+              <span class="text-muted">Emergency & Trauma:</span>
+              <span class="fw-bold text-coral">24 Hours / 7 Days</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- What to Bring Card -->
+        <div class="card-custom p-4 mb-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle bg-sage-subtle p-2 text-teal me-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="bi bi-card-checklist fs-5"></i>
+            </div>
+            <h3 class="h5 fw-bold text-dark-navy mb-0">What to Bring</h3>
+          </div>
+          <ul class="list-unstyled mb-0 small text-muted">
+            <li class="mb-2 d-flex align-items-start">
+              <i class="bi bi-check-circle-fill text-teal me-2 mt-1"></i>
+              <span>Government-issued photo identification (Driver's license, Passport, National ID).</span>
+            </li>
+            <li class="mb-2 d-flex align-items-start">
+              <i class="bi bi-check-circle-fill text-teal me-2 mt-1"></i>
+              <span>Active health insurance policy card or employer coverage guarantee.</span>
+            </li>
+            <li class="mb-2 d-flex align-items-start">
+              <i class="bi bi-check-circle-fill text-teal me-2 mt-1"></i>
+              <span>Previous diagnostic images, lab results, and current medication dosages.</span>
+            </li>
+            <li class="d-flex align-items-start">
+              <i class="bi bi-check-circle-fill text-teal me-2 mt-1"></i>
+              <span>Please arrive <strong>15 minutes prior</strong> to your booked time window.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Need Assistance Help Box -->
+        <div class="card-custom p-4 bg-teal text-white">
+          <h4 class="h5 fw-bold mb-2">Have Scheduling Questions?</h4>
+          <p class="small opacity-75 mb-3">
+            Our patient relations desk can help verify insurance plans, book multidisciplinary consultations, or arrange mobility assistance.
+          </p>
+          <div class="d-grid gap-2">
+            <a href="tel:+15550107890" class="btn btn-accent-custom btn-sm">
+              <i class="bi bi-telephone-outbound me-1"></i> Call Front Desk
+            </a>
+            <a href="{% url 'core:contact' %}" class="btn btn-outline-light btn-sm rounded-pill">
+              <i class="bi bi-envelope me-1"></i> Send Inquiry
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
 
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const departmentSelect = document.getElementById('id_department');
+  const doctorSelect = document.getElementById('id_doctor');
+  const loadingSpinner = document.getElementById('doctorLoadingSpinner');
+  const dateInput = document.getElementById('id_preferred_date');
+
+  // Enforce minimum date as today in client-side HTML5 datepicker
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+  }
+
+  // Preselected doctor ID from server render if any
+  const preselectedDoctorId = "{{ preselected_doctor.id|default:'' }}";
+
+  function fetchDoctors(departmentId, preserveSelection = false) {
+    if (!departmentId) {
+      doctorSelect.innerHTML = '<option value="">-- Any Available Specialist --</option>';
+      return;
+    }
+
+    if (loadingSpinner) loadingSpinner.classList.remove('d-none');
+    doctorSelect.disabled = true;
+
+    const apiUrl = "{% url 'appointments:api_doctors' %}?department_id=" + encodeURIComponent(departmentId);
+
+    fetch(apiUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const currentlySelected = preserveSelection ? (doctorSelect.value || preselectedDoctorId) : '';
+        let optionsHtml = '<option value="">-- Any Available Specialist --</option>';
+
+        if (data.doctors && data.doctors.length > 0) {
+          data.doctors.forEach(doc => {
+            const isSelected = (String(doc.id) === String(currentlySelected)) ? 'selected' : '';
+            optionsHtml += `<option value="${doc.id}" ${isSelected}>Dr. ${doc.name} (${doc.specialization})</option>`;
+          });
+        }
+
+        doctorSelect.innerHTML = optionsHtml;
+      })
+      .catch(error => {
+        console.error('Error fetching doctors for department:', error);
+      })
+      .finally(() => {
+        doctorSelect.disabled = false;
+        if (loadingSpinner) loadingSpinner.classList.add('d-none');
+      });
+  }
+
+  // When department changes, dynamically update doctors
+  if (departmentSelect && doctorSelect) {
+    departmentSelect.addEventListener('change', function() {
+      fetchDoctors(this.value, false);
+    });
+
+    // If a department is pre-selected on page load and doctor is empty or preselected
+    if (departmentSelect.value && !doctorSelect.options.length) {
+      fetchDoctors(departmentSelect.value, true);
+    }
+  }
+});
+</script>
+{% endblock %}

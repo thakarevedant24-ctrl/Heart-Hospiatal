@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+
+{% block title %}Appointment Confirmed ({{ ref_code }}) | Harborlight Multispecialty Hospital{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light-subtle border-bottom d-print-none">
+  <div class="container text-center">
+    <div class="d-inline-flex align-items-center justify-content-center bg-teal-subtle text-teal rounded-circle mb-3" style="width: 72px; height: 72px;">
+      <i class="bi bi-check-circle-fill fs-1"></i>
+    </div>
+    <span class="badge rounded-pill bg-teal text-white px-3 py-2 fw-normal d-block mx-auto mb-2" style="width: fit-content;">
+      Submission Received
+    </span>
+    <h1 class="display-5 fw-bold text-dark-navy mb-2">Appointment Request Submitted</h1>
+    <p class="text-muted lead max-w-600 mx-auto">
+      Thank you, <strong>{{ appointment.patient_name }}</strong>. Your consultation request has been forwarded to our clinical scheduling desk.
+    </p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Printable Ticket Card -->
+        <div class="card-custom p-4 p-md-5 mb-4 position-relative border" id="printableTicket">
+          <div class="d-flex flex-wrap justify-content-between align-items-start border-bottom pb-4 mb-4 gap-3">
+            <div>
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <span class="fs-4 fw-bold text-teal">Harborlight Hospital</span>
+              </div>
+              <p class="text-muted small mb-0">12 Wellness Avenue, Riverdale, TX 75001 &bull; +1 (555) 010-7890</p>
+            </div>
+            <div class="text-md-end">
+              <span class="text-muted small text-uppercase d-block fw-semibold">Reference Code</span>
+              <div class="d-flex align-items-center gap-2 justify-content-md-end">
+                <span class="fs-4 fw-bolder font-monospace text-coral" id="refCodeText">{{ ref_code }}</span>
+                <button type="button" class="btn btn-sm btn-outline-custom d-print-none" onclick="copyRefCode()" title="Copy reference code">
+                  <i class="bi bi-clipboard" id="copyIcon"></i>
+                </button>
+              </div>
+              <span class="badge bg-warning-subtle text-dark border px-2 py-1 mt-1 small">
+                <i class="bi bi-hourglass-split me-1"></i> Status: {{ appointment.get_status_display }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Summary Grid -->
+          <h2 class="h5 fw-bold text-dark-navy mb-3">Booking Summary</h2>
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+              <div class="p-3 bg-light rounded-3">
+                <span class="small text-muted d-block">Patient Name</span>
+                <span class="fw-semibold text-dark-navy fs-6">{{ appointment.patient_name }}</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 bg-light rounded-3">
+                <span class="small text-muted d-block">Contact Phone</span>
+                <span class="fw-semibold text-dark-navy fs-6">{{ appointment.phone }}</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 bg-light rounded-3">
+                <span class="small text-muted d-block">Contact Email</span>
+                <span class="fw-semibold text-dark-navy fs-6">{{ appointment.email }}</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 bg-light rounded-3">
+                <span class="small text-muted d-block">Clinical Department</span>
+                <span class="fw-semibold text-dark-navy fs-6">{{ appointment.department.name }}</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 bg-light rounded-3">
+                <span class="small text-muted d-block">Assigned Doctor</span>
+                <span class="fw-semibold text-dark-navy fs-6">
+                  {% if appointment.doctor %}
+                    Dr. {{ appointment.doctor.name }} ({{ appointment.doctor.specialization }})
+                  {% else %}
+                    <span class="text-muted fst-italic">Any Available Specialist</span>
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 bg-light rounded-3">
+                <span class="small text-muted d-block">Consultation Date & Time</span>
+                <span class="fw-semibold text-dark-navy fs-6">
+                  <i class="bi bi-calendar3 me-1 text-teal"></i>{{ appointment.preferred_date|date:"l, F j, Y" }}
+                  <span class="mx-1">&bull;</span>
+                  <i class="bi bi-clock me-1 text-teal"></i>{{ appointment.preferred_time|time:"g:i A" }}
+                </span>
+              </div>
+            </div>
+
+            {% if appointment.notes %}
+              <div class="col-12">
+                <div class="p-3 bg-light rounded-3">
+                  <span class="small text-muted d-block">Consultation Symptoms / Notes</span>
+                  <p class="mb-0 small text-dark mt-1">{{ appointment.notes }}</p>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Important Patient Instructions Notice -->
+          <div class="alert alert-light border rounded-3 small text-muted mb-0">
+            <h6 class="fw-bold text-dark-navy mb-1"><i class="bi bi-info-circle-fill text-teal me-1"></i> Patient Notice:</h6>
+            Please present this booking reference at the Department Reception upon arrival. An electronic confirmation has been sent to <strong>{{ appointment.email }}</strong>. If you need to reschedule or cancel, please contact the hospital desk at least 4 hours in advance.
+          </div>
+        </div>
+
+        <!-- Next Steps Timeline -->
+        <div class="card-custom p-4 mb-4 d-print-none">
+          <h3 class="h5 fw-bold text-dark-navy mb-3">What to Expect Next</h3>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="text-center p-3 border rounded-3 h-100 bg-white">
+                <div class="rounded-circle bg-teal-subtle text-teal mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                  <span class="fw-bold">1</span>
+                </div>
+                <h4 class="h6 fw-bold text-dark-navy mb-1">Schedule Review</h4>
+                <p class="small text-muted mb-0">Our triage coordinators verify doctor availability and slot timing.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center p-3 border rounded-3 h-100 bg-white">
+                <div class="rounded-circle bg-sage-subtle text-teal mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                  <span class="fw-bold">2</span>
+                </div>
+                <h4 class="h6 fw-bold text-dark-navy mb-1">Confirmation Alert</h4>
+                <p class="small text-muted mb-0">You will receive an email or SMS with your room assignment.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center p-3 border rounded-3 h-100 bg-white">
+                <div class="rounded-circle bg-coral-subtle text-coral mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                  <span class="fw-bold">3</span>
+                </div>
+                <h4 class="h6 fw-bold text-dark-navy mb-1">Clinic Check-in</h4>
+                <p class="small text-muted mb-0">Arrive 15 mins early with your photo ID and insurance card.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 d-print-none">
+          <a href="{% url 'core:home' %}" class="btn btn-outline-custom">
+            <i class="bi bi-arrow-left me-1"></i> Return to Homepage
+          </a>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-outline-custom" onclick="window.print()">
+              <i class="bi bi-printer me-1"></i> Print Summary
+            </button>
+            <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom">
+              <i class="bi bi-calendar-plus me-1"></i> Book Another Visit
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function copyRefCode() {
+  const code = document.getElementById('refCodeText').innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    const icon = document.getElementById('copyIcon');
+    if (icon) {
+      icon.className = 'bi bi-clipboard-check text-success';
+      setTimeout(() => {
+        icon.className = 'bi bi-clipboard';
+      }, 2000);
+    }
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
+  });
+}
+</script>
+{% endblock %}

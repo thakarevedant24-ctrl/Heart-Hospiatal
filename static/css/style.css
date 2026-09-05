@@ -1362,4 +1362,60 @@ a:hover {
   }
 }
 
+/* ==========================================================================
+   BRAND UTILITIES & APPOINTMENT PRINT STYLES
+   ========================================================================== */
+.text-teal {
+  color: var(--primary-color) !important;
+}
+
+.text-coral {
+  color: var(--accent-color) !important;
+}
+
+.text-dark-navy {
+  color: var(--text-color) !important;
+}
+
+.bg-teal {
+  background-color: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+.bg-teal-subtle {
+  background-color: rgba(14, 95, 92, 0.08) !important;
+  color: var(--primary-color) !important;
+}
+
+.bg-coral-subtle {
+  background-color: rgba(255, 111, 89, 0.12) !important;
+  color: var(--accent-color) !important;
+}
+
+.bg-sage-subtle {
+  background-color: rgba(143, 185, 150, 0.2) !important;
+  color: var(--primary-color) !important;
+}
+
+.max-w-600 {
+  max-width: 600px;
+}
+
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, footer, nav, .d-print-none, .site-header, .site-footer {
+    display: none !important;
+  }
+  #printableTicket {
+    border: 2px solid #0E5F5C !important;
+    box-shadow: none !important;
+    padding: 20px !important;
+    margin: 0 !important;
+  }
+}
+
+
 

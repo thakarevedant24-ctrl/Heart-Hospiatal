@@ -8,6 +8,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from appointments import views as appointment_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
@@ -15,6 +17,7 @@ urlpatterns = [
     path('doctors/', include('doctors.urls', namespace='doctors')),
     path('gallery/', include('gallery.urls', namespace='gallery')),
     path('appointments/', include('appointments.urls', namespace='appointments')),
+    path('book/', appointment_views.book_appointment, name='book_alias'),
     path('dashboard/', include('dashboard.urls', namespace='dashboard')),
 ]
 
