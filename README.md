@@ -14,11 +14,11 @@ Harborlight Multispecialty Hospital is built around a distinct, professional hea
 |---|---|---|---|
 | **Site Name** | Harborlight Multispecialty Hospital | — | Header & Brand titles |
 | **Tagline** | *"Compassionate Care, Modern Medicine"* | — | Hero & Mission statement |
-| **Primary Color** | Deep Teal | `#0E5F5C` | Primary branding, buttons, headers, footer |
-| **Accent Color** | Warm Coral | `#FF6F59` | Action CTAs, booking buttons, highlights |
-| **Background** | Soft Ivory | `#FAF7F2` | Body background, soft surfaces |
-| **Dark Text** | Charcoal | `#26333D` | Readable typography & high-contrast content |
-| **Support Color** | Sage Green | `#8FB996` | Badges, card accents, icons |
+| **Primary Color** | Deep Medical Sapphire | `#0F3D69` | Primary branding, buttons, headers, footer |
+| **Accent Color** | Medical Cerulean | `#0284C7` | Action CTAs, booking buttons, highlights |
+| **Background** | Pristine Clinical Slate | `#F8FAFC` | Body background, modern crisp surfaces |
+| **Dark Text** | Deep Slate 900 | `#0F172A` | Ultra-readable AAA contrast typography |
+| **Support Color** | Clinical Emerald | `#059669` | Health indicators, badges, card accents |
 | **Headings Font** | Poppins | Google Fonts | Titles, headers, section titles |
 | **Body Font** | Inter | Google Fonts | Body copy, forms, navigation |
 

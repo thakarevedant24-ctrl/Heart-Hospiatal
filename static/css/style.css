@@ -1,38 +1,39 @@
 /* ==========================================================================
-   HARBORLIGHT MULTISPECIALTY HOSPITAL - CUSTOM DESIGN SYSTEM
-   Brand Kit: Deep Teal (#0E5F5C), Warm Coral (#FF6F59), Soft Ivory (#FAF7F2),
-              Charcoal (#26333D), Sage Green (#8FB996)
+   HARBORLIGHT MULTISPECIALTY HOSPITAL - PROFESSIONAL MEDICAL DESIGN SYSTEM
+   Palette: Deep Medical Sapphire (#0F3D69), Trust Cerulean (#0284C7), 
+            Pristine Slate (#F8FAFC), Charcoal (#0F172A), Clinical Emerald (#059669)
    ========================================================================== */
 
 :root {
-  /* Brand Kit Colors */
-  --primary-color: #0E5F5C;
-  --primary-dark: #083c3a;
-  --primary-light: #167e7a;
+  /* Brand Kit Colors - Professional Clinical Palette */
+  --primary-color: #0F3D69;       /* Deep Medical Sapphire Navy */
+  --primary-dark: #08233D;        /* Midnight Medical Navy */
+  --primary-light: #185896;       /* Royal Clinical Blue */
   
-  --accent-color: #FF6F59;
-  --accent-hover: #e85842;
-  --accent-light: #ffebe8;
+  --accent-color: #0284C7;        /* Medical Cerulean / Trust Cyan */
+  --accent-hover: #0369A1;        /* Deep Cerulean */
+  --accent-light: #E0F2FE;        /* Soft Sky Light Tint */
 
-  --bg-color: #FAF7F2;
-  --text-color: #26333D;
-  --text-muted: #64748b;
+  --bg-color: #F8FAFC;            /* Pristine Clinical Slate */
+  --bg-alt: #F1F5F9;              /* Secondary Section Slate Contrast */
+  --text-color: #0F172A;          /* Deep Slate 900 (High contrast AAA) */
+  --text-muted: #64748B;          /* Slate 500 */
 
-  --support-color: #8FB996;
-  --support-light: #eef6f0;
+  --support-color: #059669;       /* Clinical Vitality Emerald */
+  --support-light: #ECFDF5;       /* Mint / Emerald Light Tint */
 
   --white: #ffffff;
-  --border-light: rgba(14, 95, 92, 0.12);
+  --border-light: #E2E8F0;        /* Crisp Slate Border */
 
   /* Typography */
   --font-heading: 'Poppins', system-ui, -apple-system, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
   /* Elevations & Shadows */
-  --shadow-sm: 0 2px 8px rgba(14, 95, 92, 0.05);
-  --shadow-card: 0 10px 25px -3px rgba(14, 95, 92, 0.07), 0 4px 6px -2px rgba(14, 95, 92, 0.04);
-  --shadow-hover: 0 20px 35px -5px rgba(14, 95, 92, 0.15), 0 10px 10px -5px rgba(14, 95, 92, 0.04);
-  --shadow-accent: 0 8px 20px rgba(255, 111, 89, 0.28);
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 10px 25px -3px rgba(15, 61, 105, 0.06), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
+  --shadow-hover: 0 20px 35px -5px rgba(15, 61, 105, 0.12), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+  --shadow-accent: 0 8px 20px rgba(2, 132, 199, 0.28);
 
   /* Transitions */
   --transition-fast: all 0.2s ease-in-out;
@@ -135,7 +136,7 @@ a:hover {
   border-color: var(--primary-color) !important;
   color: var(--white) !important;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(14, 95, 92, 0.3);
+  box-shadow: 0 8px 20px rgba(15, 61, 105, 0.22);
 }
 
 /* Outline Button: Teal outline with fill on hover */
@@ -183,7 +184,7 @@ a:hover {
 .card-custom:hover {
   transform: translateY(-5px); /* hover lift effect */
   box-shadow: var(--shadow-hover) !important;
-  border-color: rgba(143, 185, 150, 0.45) !important;
+  border-color: rgba(2, 132, 199, 0.3) !important;
 }
 
 .card-icon {
@@ -211,7 +212,7 @@ a:hover {
    ========================================================================== */
 
 .top-bar {
-  background-color: var(--primary-color);
+  background-color: var(--primary-dark);
   color: rgba(255, 255, 255, 0.9);
   font-size: 0.85rem;
   padding: 0.45rem 0;
@@ -233,9 +234,9 @@ a:hover {
 }
 
 .top-bar .emergency-badge {
-  background-color: rgba(255, 111, 89, 0.25);
+  background-color: rgba(239, 68, 68, 0.2);
   color: #fff;
-  border: 1px solid rgba(255, 111, 89, 0.4);
+  border: 1px solid rgba(239, 68, 68, 0.4);
   padding: 0.15rem 0.6rem;
   border-radius: 50rem;
   font-size: 0.75rem;
@@ -254,9 +255,9 @@ a:hover {
 
 .navbar-custom {
   background-color: var(--white);
-  box-shadow: 0 4px 20px rgba(14, 95, 92, 0.06);
+  box-shadow: 0 4px 20px rgba(15, 61, 105, 0.05);
   padding: 0.85rem 0;
-  border-bottom: 1px solid rgba(14, 95, 92, 0.06);
+  border-bottom: 1px solid var(--border-light);
   transition: var(--transition-fast);
 }
 
@@ -277,14 +278,14 @@ a:hover {
 .navbar-logo-icon {
   width: 44px;
   height: 44px;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--support-color) 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--white);
   font-size: 1.45rem;
-  box-shadow: 0 4px 10px rgba(14, 95, 92, 0.2);
+  box-shadow: 0 4px 10px rgba(15, 61, 105, 0.18);
 }
 
 .brand-text-block {
@@ -375,7 +376,7 @@ a:hover {
     right: 0;
     background-color: var(--white);
     border-bottom: 2px solid var(--primary-color);
-    box-shadow: 0 15px 30px rgba(14, 95, 92, 0.15);
+    box-shadow: 0 15px 30px rgba(15, 61, 105, 0.12);
     padding: 1.5rem;
     flex-direction: column;
     align-items: stretch;
@@ -429,8 +430,8 @@ a:hover {
 .hero-section {
   position: relative;
   padding: 5.5rem 0 5rem;
-  background: radial-gradient(circle at 90% 10%, rgba(143, 185, 150, 0.22) 0%, transparent 45%),
-              radial-gradient(circle at 10% 90%, rgba(14, 95, 92, 0.1) 0%, transparent 55%),
+  background: radial-gradient(circle at 90% 10%, rgba(2, 132, 199, 0.12) 0%, transparent 45%),
+              radial-gradient(circle at 10% 90%, rgba(15, 61, 105, 0.07) 0%, transparent 55%),
               var(--bg-color);
   overflow: hidden;
 }
@@ -473,8 +474,8 @@ a:hover {
 }
 
 .hero-illustration-box {
-  background: linear-gradient(135deg, rgba(14, 95, 92, 0.06), rgba(143, 185, 150, 0.12));
-  border: 2px dashed rgba(14, 95, 92, 0.2);
+  background: linear-gradient(135deg, rgba(15, 61, 105, 0.04), rgba(2, 132, 199, 0.08));
+  border: 2px dashed rgba(15, 61, 105, 0.18);
   border-radius: 20px;
   padding: 2.5rem;
   text-align: center;
@@ -494,15 +495,15 @@ a:hover {
 .stats-bar-card {
   background-color: var(--white);
   border-radius: 16px;
-  box-shadow: 0 15px 35px rgba(14, 95, 92, 0.08);
-  border: 1px solid rgba(14, 95, 92, 0.08);
+  box-shadow: 0 15px 35px rgba(15, 61, 105, 0.06);
+  border: 1px solid var(--border-light);
   padding: 2rem 1.5rem;
 }
 
 .stat-item {
   text-align: center;
   padding: 0.5rem 1rem;
-  border-right: 1px solid rgba(14, 95, 92, 0.1);
+  border-right: 1px solid var(--border-light);
 }
 
 .stat-item:last-child {
@@ -530,7 +531,7 @@ a:hover {
 @media (max-width: 767.98px) {
   .stat-item {
     border-right: none;
-    border-bottom: 1px solid rgba(14, 95, 92, 0.08);
+    border-bottom: 1px solid var(--border-light);
     padding: 1rem 0;
   }
   .stat-item:last-child {
@@ -603,7 +604,7 @@ a:hover {
 
 .doctors-section {
   padding: 5rem 0;
-  background-color: #f5f0e8; /* slightly warmer ivory tone */
+  background-color: var(--bg-alt, #F1F5F9);
 }
 
 .doctors-carousel-wrapper {
@@ -644,7 +645,7 @@ a:hover {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--support-color));
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
   color: var(--white);
   display: flex;
   align-items: center;
@@ -652,7 +653,7 @@ a:hover {
   font-size: 2.2rem;
   margin: 0 auto 1.25rem;
   border: 4px solid var(--white);
-  box-shadow: 0 6px 16px rgba(14, 95, 92, 0.15);
+  box-shadow: 0 6px 16px rgba(15, 61, 105, 0.15);
   overflow: hidden;
 }
 
@@ -744,7 +745,7 @@ a:hover {
    ========================================================================== */
 
 .cta-banner-section {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #073836 100%);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 60%, var(--primary-light) 100%);
   color: var(--white);
   padding: 4.5rem 0;
   position: relative;
@@ -758,7 +759,7 @@ a:hover {
   right: -50px;
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(255, 111, 89, 0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.25) 0%, transparent 70%);
   border-radius: 50%;
 }
 
@@ -913,7 +914,7 @@ a:hover {
   background-color: var(--accent-color);
   color: var(--white);
   transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(255, 111, 89, 0.35);
+  box-shadow: 0 4px 10px rgba(2, 132, 199, 0.35);
 }
 
 /* Bottom Copyright Bar */
@@ -964,8 +965,8 @@ a:hover {
 
 .page-header-banner {
   padding: 4rem 0 3.5rem;
-  background: radial-gradient(circle at 90% 15%, rgba(143, 185, 150, 0.2) 0%, transparent 45%),
-              radial-gradient(circle at 10% 85%, rgba(14, 95, 92, 0.08) 0%, transparent 50%),
+  background: radial-gradient(circle at 90% 15%, rgba(2, 132, 199, 0.08) 0%, transparent 45%),
+              radial-gradient(circle at 10% 85%, rgba(15, 61, 105, 0.06) 0%, transparent 50%),
               var(--bg-color);
   border-bottom: 1px solid var(--border-light);
 }
@@ -1035,7 +1036,7 @@ a:hover {
   justify-content: center;
   font-weight: 700;
   font-size: 0.95rem;
-  box-shadow: 0 4px 12px rgba(14, 95, 92, 0.15);
+  box-shadow: 0 4px 12px rgba(15, 61, 105, 0.15);
   margin-bottom: 1.25rem;
   transition: var(--transition-smooth);
 }
@@ -1073,7 +1074,7 @@ a:hover {
   width: 60px;
   height: 60px;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(14, 95, 92, 0.1), rgba(143, 185, 150, 0.2));
+  background: linear-gradient(135deg, rgba(15, 61, 105, 0.08), rgba(2, 132, 199, 0.15));
   color: var(--primary-color);
   display: inline-flex;
   align-items: center;
@@ -1171,7 +1172,7 @@ a:hover {
 .gallery-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(143, 185, 150, 0.5);
+  border-color: rgba(2, 132, 199, 0.35);
 }
 
 .gallery-image-wrapper {
@@ -1196,7 +1197,7 @@ a:hover {
 .gallery-zoom-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(14, 95, 92, 0.45);
+  background: rgba(15, 61, 105, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1243,7 +1244,7 @@ a:hover {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background-color: rgba(14, 25, 24, 0.94);
+  background-color: rgba(8, 26, 46, 0.95);
   backdrop-filter: blur(8px);
   display: none;
   align-items: center;
@@ -1383,18 +1384,18 @@ a:hover {
 }
 
 .bg-teal-subtle {
-  background-color: rgba(14, 95, 92, 0.08) !important;
+  background-color: rgba(15, 61, 105, 0.08) !important;
   color: var(--primary-color) !important;
 }
 
 .bg-coral-subtle {
-  background-color: rgba(255, 111, 89, 0.12) !important;
+  background-color: rgba(2, 132, 199, 0.12) !important;
   color: var(--accent-color) !important;
 }
 
 .bg-sage-subtle {
-  background-color: rgba(143, 185, 150, 0.2) !important;
-  color: var(--primary-color) !important;
+  background-color: rgba(5, 150, 105, 0.15) !important;
+  color: var(--support-color) !important;
 }
 
 .max-w-600 {
@@ -1410,7 +1411,7 @@ a:hover {
     display: none !important;
   }
   #printableTicket {
-    border: 2px solid #0E5F5C !important;
+    border: 2px solid var(--primary-color) !important;
     box-shadow: none !important;
     padding: 20px !important;
     margin: 0 !important;
@@ -1500,7 +1501,7 @@ a:hover {
   background-color: var(--primary-color);
   color: #ffffff;
   font-size: 1.25rem;
-  box-shadow: 0 4px 15px rgba(14, 95, 92, 0.35);
+  box-shadow: 0 4px 15px rgba(15, 61, 105, 0.35);
   opacity: 0;
   visibility: hidden;
   transform: translateY(16px);
@@ -1516,7 +1517,7 @@ a:hover {
   background-color: var(--accent-color);
   color: #ffffff;
   transform: translateY(-3px);
-  box-shadow: 0 8px 22px rgba(255, 111, 89, 0.45);
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.45);
 }
 
 /* WhatsApp Floating Button */
