@@ -1,38 +1,263 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Hospital Gallery | Harborlight Multispecialty Hospital{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <div class="text-center mb-5">
-    <span class="badge-status mb-2">Hospital Campus</span>
-    <h1 class="display-5 fw-bold">Facility & Technology Gallery</h1>
-    <p class="text-muted">Take a tour of our modern operating suites, diagnostic suites, and patient care rooms.</p>
+
+<!-- =========================================================================
+     PAGE HEADER
+     ========================================================================= -->
+<section class="page-header-banner">
+  <div class="container text-center">
+    <div class="breadcrumb-custom">
+      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; <span>Gallery</span>
+    </div>
+    <span class="badge-status mb-2">Visual Tour</span>
+    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">Hospital & Campus Gallery</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 680px;">
+      Explore our state-of-the-art medical equipment, inpatient suites, emergency infrastructure, and community health events.
+    </p>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     GALLERY SECTION & CATEGORY FILTER
+     ========================================================================= -->
+<section class="py-5">
+  <div class="container">
+
+    <!-- Category Filter Tabs (Vanilla JS, No Page Reload) -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" id="galleryFilterTabs">
+      <button type="button" class="btn btn-sm btn-primary-custom gallery-filter-btn" data-category="all">
+        <i class="bi bi-grid-3x3-gap-fill me-1"></i>All Photos ({{ images.count }})
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-custom gallery-filter-btn" data-category="Hospital">
+        <i class="bi bi-hospital me-1"></i>Hospital
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-custom gallery-filter-btn" data-category="Equipment">
+        <i class="bi bi-cpu me-1"></i>Equipment
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-custom gallery-filter-btn" data-category="Events">
+        <i class="bi bi-calendar-event me-1"></i>Events
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-custom gallery-filter-btn" data-category="Rooms">
+        <i class="bi bi-door-open me-1"></i>Rooms
+      </button>
+    </div>
+
+    <!-- Responsive Gallery Grid -->
+    <div class="gallery-grid" id="galleryGridContainer">
+      {% for img in images %}
+        <div class="gallery-card gallery-item" 
+             data-category="{{ img.category }}"
+             data-src="{{ img.image.url }}"
+             data-title="{{ img.title }}"
+             tabindex="0"
+             role="button"
+             aria-label="View {{ img.title }}">
+          
+          <div class="gallery-image-wrapper">
+            <!-- Native loading="lazy" specification -->
+            <img src="{{ img.image.url }}" 
+                 alt="{{ img.title }}" 
+                 loading="lazy">
+            <div class="gallery-zoom-overlay">
+              <div class="gallery-zoom-icon">
+                <i class="bi bi-arrows-fullscreen"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-card-body">
+            <h3 class="gallery-card-title" title="{{ img.title }}">{{ img.title }}</h3>
+            <span class="badge bg-light text-dark border rounded-pill small ms-2">
+              {{ img.category }}
+            </span>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-center py-5">
+          <div class="card-icon mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.8rem;">
+            <i class="bi bi-images"></i>
+          </div>
+          <h4 class="h5 fw-bold">No gallery images available yet</h4>
+          <p class="text-muted small">New photographs of our medical facilities will be published soon.</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     VANILLA JS LIGHTBOX OVERLAY (No external libraries required)
+     ========================================================================= -->
+<div id="galleryLightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <!-- Close Button -->
+  <button type="button" class="lightbox-close-btn" id="lightboxClose" aria-label="Close Lightbox">&times;</button>
+
+  <!-- Navigation Previous -->
+  <button type="button" class="lightbox-nav-btn lightbox-prev-btn" id="lightboxPrev" aria-label="Previous Image">
+    <i class="bi bi-chevron-left"></i>
+  </button>
+
+  <!-- Lightbox Content Container -->
+  <div class="lightbox-container" id="lightboxContainer">
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="Enlarged gallery photo" class="lightbox-image">
+      <div class="lightbox-caption">
+        <h4 id="lightboxTitle" class="h5 mb-1 text-white fw-semibold"></h4>
+        <div class="d-flex align-items-center justify-content-center gap-2 mt-2">
+          <span id="lightboxCategory" class="badge bg-white text-dark rounded-pill px-3 py-1 small"></span>
+          <span id="lightboxCounter" class="small text-white-50"></span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card-custom">
-        <div class="card-icon"><i class="bi bi-camera"></i></div>
-        <h3 class="h5 fw-bold">Advanced Diagnostic Imaging</h3>
-        <p class="text-muted small">High-tesla MRI and ultra-low dose 128-slice CT scanners.</p>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card-custom">
-        <div class="card-icon"><i class="bi bi-shield-check"></i></div>
-        <h3 class="h5 fw-bold">Laminar Flow Operating Theatres</h3>
-        <p class="text-muted small">Ultra-clean, state-of-the-art modular surgical suites.</p>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card-custom">
-        <div class="card-icon"><i class="bi bi-hospital"></i></div>
-        <h3 class="h5 fw-bold">Comfort Care Patient Suites</h3>
-        <p class="text-muted small">Spacious, private recuperation rooms designed for patient healing.</p>
-      </div>
-    </div>
-  </div>
+  <!-- Navigation Next -->
+  <button type="button" class="lightbox-nav-btn lightbox-next-btn" id="lightboxNext" aria-label="Next Image">
+    <i class="bi bi-chevron-right"></i>
+  </button>
 </div>
+
 {% endblock %}
 
+{% block extra_js %}
+<script>
+/**
+ * Gallery Filtering & Lightbox Controller (Vanilla JS, Zero Dependencies)
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+  const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+  const lightbox = document.getElementById('galleryLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxCategory = document.getElementById('lightboxCategory');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+
+  let currentVisibleItems = [...galleryItems];
+  let currentIndex = 0;
+
+  // 1. Instant Category Filtering (No page reload)
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selectedCat = btn.getAttribute('data-category');
+
+      // Update button visual states
+      filterBtns.forEach(b => {
+        b.classList.remove('btn-primary-custom');
+        b.classList.add('btn-outline-custom');
+      });
+      btn.classList.remove('btn-outline-custom');
+      btn.classList.add('btn-primary-custom');
+
+      // Filter visible items
+      currentVisibleItems = [];
+      galleryItems.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (selectedCat === 'all' || itemCat === selectedCat) {
+          item.style.display = 'block';
+          item.style.opacity = '0';
+          setTimeout(() => {
+            item.style.transition = 'opacity 0.25s ease';
+            item.style.opacity = '1';
+          }, 10);
+          currentVisibleItems.push(item);
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 2. Lightbox Show Function
+  function openLightbox(index) {
+    if (currentVisibleItems.length === 0) return;
+    currentIndex = (index + currentVisibleItems.length) % currentVisibleItems.length;
+    const currentItem = currentVisibleItems[currentIndex];
+
+    const imgSrc = currentItem.getAttribute('data-src');
+    const title = currentItem.getAttribute('data-title');
+    const category = currentItem.getAttribute('data-category');
+
+    lightboxImg.src = imgSrc;
+    lightboxImg.alt = title;
+    lightboxTitle.textContent = title;
+    lightboxCategory.textContent = category;
+    lightboxCounter.textContent = `${currentIndex + 1} of ${currentVisibleItems.length}`;
+
+    lightbox.classList.add('is-active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // Prevent page scrolling
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  function nextImage() {
+    openLightbox(currentIndex + 1);
+  }
+
+  function prevImage() {
+    openLightbox(currentIndex - 1);
+  }
+
+  // Bind click & enter key on gallery cards
+  galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const visibleIndex = currentVisibleItems.indexOf(item);
+      if (visibleIndex !== -1) {
+        openLightbox(visibleIndex);
+      }
+    });
+
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const visibleIndex = currentVisibleItems.indexOf(item);
+        if (visibleIndex !== -1) {
+          openLightbox(visibleIndex);
+        }
+      }
+    });
+  });
+
+  // Lightbox navigation button events
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+  lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+
+  // Close when clicking directly on overlay background
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.id === 'lightboxContainer') {
+      closeLightbox();
+    }
+  });
+
+  // Keyboard navigation: Escape, ArrowLeft, ArrowRight
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('is-active')) return;
+
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === 'ArrowRight') {
+      nextImage();
+    } else if (e.key === 'ArrowLeft') {
+      prevImage();
+    }
+  });
+});
+</script>
+{% endblock %}

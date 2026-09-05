@@ -259,5 +259,42 @@ class Command(BaseCommand):
             if created:
                 self.stdout.write(f"Created Service: {srv.title}")
 
+        # 5. Gallery Images (generated cleanly with Pillow)
+        from gallery.models import GalleryImage
+        from PIL import Image, ImageDraw
+        import io
+        from django.core.files.base import ContentFile
+
+        gallery_data = [
+            {'title': 'Main Hospital Campus & Inpatient Pavilion', 'category': 'Hospital', 'bg': '#0E5F5C', 'label': 'Harborlight Hospital Main Campus'},
+            {'title': '24/7 Rapid Emergency & Trauma Entrance', 'category': 'Hospital', 'bg': '#167E7A', 'label': '24/7 Emergency & Trauma Entrance'},
+            {'title': '3-Tesla Precision MRI Diagnostic Suite', 'category': 'Equipment', 'bg': '#26333D', 'label': '3-Tesla MRI Imaging Center'},
+            {'title': 'Hybrid Cardiac Catheterization Operating Room', 'category': 'Equipment', 'bg': '#094341', 'label': 'Hybrid Cath Lab Suite'},
+            {'title': 'Annual Community Cardiac Wellness Camp', 'category': 'Events', 'bg': '#FF6F59', 'label': 'Community Cardiac Health Camp'},
+            {'title': 'World Health Day CME Seminar & Faculty Panel', 'category': 'Events', 'bg': '#E85842', 'label': 'Annual Medical CME Symposium'},
+            {'title': 'Deluxe Private Healing & Recovery Suite', 'category': 'Rooms', 'bg': '#8FB996', 'label': 'Deluxe Private Patient Suite'},
+            {'title': 'Intensive Care Unit (ICU) Multi-Bed Pod', 'category': 'Rooms', 'bg': '#4A6B53', 'label': 'Advanced ICU Critical Care Pod'},
+        ]
+
+        for g in gallery_data:
+            if not GalleryImage.objects.filter(title=g['title']).exists():
+                # Generate clean visual image with Pillow
+                img = Image.new('RGB', (800, 560), color=g['bg'])
+                draw = ImageDraw.Draw(img)
+                # Draw subtle decorative border & accent banner
+                draw.rectangle([20, 20, 780, 540], outline='#FFFFFF', width=3)
+                draw.rectangle([40, 240, 760, 320], fill='#FFFFFF')
+                # Draw category & title text
+                draw.text((60, 255), f"HARBORLIGHT HOSPITAL [{g['category'].upper()}]", fill='#0E5F5C')
+                draw.text((60, 280), g['label'], fill='#26333D')
+
+                buf = io.BytesIO()
+                img.save(buf, format='JPEG', quality=90)
+                file_name = f"{g['category'].lower()}_{g['title'][:15].replace(' ', '_').lower()}.jpg"
+
+                item = GalleryImage(title=g['title'], category=g['category'])
+                item.image.save(file_name, ContentFile(buf.getvalue()), save=True)
+                self.stdout.write(f"Created GalleryImage: {item.title}")
+
         self.stdout.write(self.style.SUCCESS('Successfully seeded database with Harborlight demonstration data!'))
 
