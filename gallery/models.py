@@ -12,7 +12,7 @@ class GalleryImage(models.Model):
     image = models.ImageField(upload_to='gallery/')
     category = models.CharField(
         max_length=50, 
-        choices=CATEGORY_CHOICES, 
+        blank=True,
         default='Hospital'
     )
     uploaded_at = models.DateTimeField(auto_now_add=True)
@@ -23,4 +23,4 @@ class GalleryImage(models.Model):
         verbose_name_plural = 'Gallery Images'
 
     def __str__(self):
-        return f"{self.title} ({self.category})"
+        return self.title

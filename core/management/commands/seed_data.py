@@ -259,42 +259,104 @@ class Command(BaseCommand):
             if created:
                 self.stdout.write(f"Created Service: {srv.title}")
 
-        # 5. Gallery Images (generated cleanly with Pillow)
+        # 5. Gallery Images (Professional Hospital Photography)
         from gallery.models import GalleryImage
+        import urllib.request
         from PIL import Image, ImageDraw
         import io
         from django.core.files.base import ContentFile
 
         gallery_data = [
-            {'title': 'Main Hospital Campus & Inpatient Pavilion', 'category': 'Hospital', 'bg': '#0E5F5C', 'label': 'Harborlight Hospital Main Campus'},
-            {'title': '24/7 Rapid Emergency & Trauma Entrance', 'category': 'Hospital', 'bg': '#167E7A', 'label': '24/7 Emergency & Trauma Entrance'},
-            {'title': '3-Tesla Precision MRI Diagnostic Suite', 'category': 'Equipment', 'bg': '#26333D', 'label': '3-Tesla MRI Imaging Center'},
-            {'title': 'Hybrid Cardiac Catheterization Operating Room', 'category': 'Equipment', 'bg': '#094341', 'label': 'Hybrid Cath Lab Suite'},
-            {'title': 'Annual Community Cardiac Wellness Camp', 'category': 'Events', 'bg': '#FF6F59', 'label': 'Community Cardiac Health Camp'},
-            {'title': 'World Health Day CME Seminar & Faculty Panel', 'category': 'Events', 'bg': '#E85842', 'label': 'Annual Medical CME Symposium'},
-            {'title': 'Deluxe Private Healing & Recovery Suite', 'category': 'Rooms', 'bg': '#8FB996', 'label': 'Deluxe Private Patient Suite'},
-            {'title': 'Intensive Care Unit (ICU) Multi-Bed Pod', 'category': 'Rooms', 'bg': '#4A6B53', 'label': 'Advanced ICU Critical Care Pod'},
+            {
+                'title': 'Main Hospital Pavilion & Healthcare Campus',
+                'file_name': 'hospital_main_campus.jpg',
+                'url': 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Advanced Surgical Operating Theatre',
+                'file_name': 'hospital_operating_theatre.jpg',
+                'url': 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Modern Hospital Wing & Patient Corridors',
+                'file_name': 'hospital_patient_corridor.jpg',
+                'url': 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Physician & Specialist Consultation Suite',
+                'file_name': 'hospital_consultation_suite.jpg',
+                'url': 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Private Inpatient Recovery & Healing Room',
+                'file_name': 'hospital_recovery_suite.jpg',
+                'url': 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Intensive Care Unit (ICU) Monitoring Station',
+                'file_name': 'hospital_icu_monitoring.jpg',
+                'url': 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Biomedical & Clinical Pathology Laboratory',
+                'file_name': 'hospital_diagnostic_lab.jpg',
+                'url': 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Digital Nursing & Patient Telemetry Hub',
+                'file_name': 'hospital_nursing_station.jpg',
+                'url': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': '24/7 Rapid Emergency & Trauma Response Bay',
+                'file_name': 'hospital_emergency_bay.jpg',
+                'url': 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Multidisciplinary Surgical Team in Operative Care',
+                'file_name': 'hospital_surgical_team.jpg',
+                'url': 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Precision Medical Technology & Monitoring',
+                'file_name': 'hospital_medical_technology.jpg',
+                'url': 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=1200&auto=format&fit=crop&q=80'
+            },
+            {
+                'title': 'Outpatient Medical Pavilion & Clinic Architecture',
+                'file_name': 'hospital_clinic_architecture.jpg',
+                'url': 'https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=1200&auto=format&fit=crop&q=80'
+            }
         ]
 
+        headers = {'User-Agent': 'Mozilla/5.0'}
         for g in gallery_data:
             if not GalleryImage.objects.filter(title=g['title']).exists():
-                # Generate clean visual image with Pillow
-                img = Image.new('RGB', (800, 560), color=g['bg'])
-                draw = ImageDraw.Draw(img)
-                # Draw subtle decorative border & accent banner
-                draw.rectangle([20, 20, 780, 540], outline='#FFFFFF', width=3)
-                draw.rectangle([40, 240, 760, 320], fill='#FFFFFF')
-                # Draw category & title text
-                draw.text((60, 255), f"HARBORLIGHT HOSPITAL [{g['category'].upper()}]", fill='#0E5F5C')
-                draw.text((60, 280), g['label'], fill='#26333D')
+                downloaded = False
+                try:
+                    req = urllib.request.Request(g['url'], headers=headers)
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        content = resp.read()
+                        item = GalleryImage(title=g['title'], category='Hospital')
+                        item.image.save(g['file_name'], ContentFile(content), save=True)
+                        downloaded = True
+                        self.stdout.write(f"Downloaded Gallery Photo: {item.title}")
+                except Exception:
+                    pass
 
-                buf = io.BytesIO()
-                img.save(buf, format='JPEG', quality=90)
-                file_name = f"{g['category'].lower()}_{g['title'][:15].replace(' ', '_').lower()}.jpg"
-
-                item = GalleryImage(title=g['title'], category=g['category'])
-                item.image.save(file_name, ContentFile(buf.getvalue()), save=True)
-                self.stdout.write(f"Created GalleryImage: {item.title}")
+                if not downloaded:
+                    # Offline fallback
+                    img = Image.new('RGB', (800, 560), color='#0F3D69')
+                    draw = ImageDraw.Draw(img)
+                    draw.rectangle([20, 20, 780, 540], outline='#0284C7', width=3)
+                    draw.rectangle([40, 240, 760, 320], fill='#FFFFFF')
+                    draw.text((60, 260), "HARBORLIGHT HOSPITAL", fill='#0F3D69')
+                    draw.text((60, 285), g['title'], fill='#0F172A')
+                    buf = io.BytesIO()
+                    img.save(buf, format='JPEG', quality=90)
+                    item = GalleryImage(title=g['title'], category='Hospital')
+                    item.image.save(g['file_name'], ContentFile(buf.getvalue()), save=True)
+                    self.stdout.write(f"Created Fallback Photo: {item.title}")
 
         self.stdout.write(self.style.SUCCESS('Successfully seeded database with Harborlight demonstration data!'))
 

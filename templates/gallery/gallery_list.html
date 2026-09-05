@@ -25,35 +25,15 @@
 
 
 <!-- =========================================================================
-     GALLERY SECTION & CATEGORY FILTER
+     GALLERY SECTION (Professional Hospital Showcase)
      ========================================================================= -->
 <section class="py-5 reveal-on-scroll">
   <div class="container">
-
-    <!-- Category Filter Tabs (Vanilla JS, No Page Reload) -->
-    <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" id="galleryFilterTabs">
-      <button type="button" class="btn btn-sm btn-primary-custom gallery-filter-btn" data-category="all">
-        <i class="bi bi-grid-3x3-gap-fill me-1"></i>All Photos ({{ images.count }})
-      </button>
-      <button type="button" class="btn btn-sm btn-outline-custom gallery-filter-btn" data-category="Hospital">
-        <i class="bi bi-hospital me-1"></i>Hospital
-      </button>
-      <button type="button" class="btn btn-sm btn-outline-custom gallery-filter-btn" data-category="Equipment">
-        <i class="bi bi-cpu me-1"></i>Equipment
-      </button>
-      <button type="button" class="btn btn-sm btn-outline-custom gallery-filter-btn" data-category="Events">
-        <i class="bi bi-calendar-event me-1"></i>Events
-      </button>
-      <button type="button" class="btn btn-sm btn-outline-custom gallery-filter-btn" data-category="Rooms">
-        <i class="bi bi-door-open me-1"></i>Rooms
-      </button>
-    </div>
 
     <!-- Responsive Gallery Grid -->
     <div class="gallery-grid" id="galleryGridContainer">
       {% for img in images %}
         <div class="gallery-card gallery-item" 
-             data-category="{{ img.category }}"
              data-src="{{ img.image.url }}"
              data-title="{{ img.title }}"
              tabindex="0"
@@ -74,9 +54,7 @@
 
           <div class="gallery-card-body">
             <h3 class="gallery-card-title" title="{{ img.title }}">{{ img.title }}</h3>
-            <span class="badge bg-light text-dark border rounded-pill small ms-2">
-              {{ img.category }}
-            </span>
+            <i class="bi bi-zoom-in text-muted fs-6 ms-2"></i>
           </div>
         </div>
       {% empty %}
@@ -113,8 +91,7 @@
       <div class="lightbox-caption">
         <h4 id="lightboxTitle" class="h5 mb-1 text-white fw-semibold"></h4>
         <div class="d-flex align-items-center justify-content-center gap-2 mt-2">
-          <span id="lightboxCategory" class="badge bg-white text-dark rounded-pill px-3 py-1 small"></span>
-          <span id="lightboxCounter" class="small text-white-50"></span>
+          <span id="lightboxCounter" class="badge bg-white text-dark rounded-pill px-3 py-1 small"></span>
         </div>
       </div>
     </div>
@@ -131,70 +108,32 @@
 {% block extra_js %}
 <script>
 /**
- * Gallery Filtering & Lightbox Controller (Vanilla JS, Zero Dependencies)
+ * Professional Gallery Lightbox Controller (Vanilla JS, Zero Dependencies)
  */
 document.addEventListener('DOMContentLoaded', () => {
-  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
   const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
   const lightbox = document.getElementById('galleryLightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxTitle = document.getElementById('lightboxTitle');
-  const lightboxCategory = document.getElementById('lightboxCategory');
   const lightboxCounter = document.getElementById('lightboxCounter');
   const lightboxClose = document.getElementById('lightboxClose');
   const lightboxPrev = document.getElementById('lightboxPrev');
   const lightboxNext = document.getElementById('lightboxNext');
 
-  let currentVisibleItems = [...galleryItems];
   let currentIndex = 0;
 
-  // 1. Instant Category Filtering (No page reload)
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const selectedCat = btn.getAttribute('data-category');
-
-      // Update button visual states
-      filterBtns.forEach(b => {
-        b.classList.remove('btn-primary-custom');
-        b.classList.add('btn-outline-custom');
-      });
-      btn.classList.remove('btn-outline-custom');
-      btn.classList.add('btn-primary-custom');
-
-      // Filter visible items
-      currentVisibleItems = [];
-      galleryItems.forEach(item => {
-        const itemCat = item.getAttribute('data-category');
-        if (selectedCat === 'all' || itemCat === selectedCat) {
-          item.style.display = 'block';
-          item.style.opacity = '0';
-          setTimeout(() => {
-            item.style.transition = 'opacity 0.25s ease';
-            item.style.opacity = '1';
-          }, 10);
-          currentVisibleItems.push(item);
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
-
-  // 2. Lightbox Show Function
   function openLightbox(index) {
-    if (currentVisibleItems.length === 0) return;
-    currentIndex = (index + currentVisibleItems.length) % currentVisibleItems.length;
-    const currentItem = currentVisibleItems[currentIndex];
+    if (galleryItems.length === 0) return;
+    currentIndex = (index + galleryItems.length) % galleryItems.length;
+    const currentItem = galleryItems[currentIndex];
 
     const imgSrc = currentItem.getAttribute('data-src');
     const title = currentItem.getAttribute('data-title');
-    const category = currentItem.getAttribute('data-category');
 
     lightboxImg.src = imgSrc;
     lightboxImg.alt = title;
     lightboxTitle.textContent = title;
-    lightboxCategory.textContent = category;
-    lightboxCounter.textContent = `${currentIndex + 1} of ${currentVisibleItems.length}`;
+    lightboxCounter.textContent = `Photo ${currentIndex + 1} of ${galleryItems.length}`;
 
     lightbox.classList.add('is-active');
     lightbox.setAttribute('aria-hidden', 'false');
@@ -217,21 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Bind click & enter key on gallery cards
-  galleryItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const visibleIndex = currentVisibleItems.indexOf(item);
-      if (visibleIndex !== -1) {
-        openLightbox(visibleIndex);
-      }
-    });
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => openLightbox(index));
 
     item.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        const visibleIndex = currentVisibleItems.indexOf(item);
-        if (visibleIndex !== -1) {
-          openLightbox(visibleIndex);
-        }
+        openLightbox(index);
       }
     });
   });
