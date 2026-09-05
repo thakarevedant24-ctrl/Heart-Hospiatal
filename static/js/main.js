@@ -135,4 +135,46 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 5000);
   });
+
+  // 5. Client-Side Services Grid Filtering
+  const filterTabs = document.querySelectorAll('#servicesFilterTabs .filter-btn');
+  const serviceCards = document.querySelectorAll('#servicesGridContainer .service-card-wrapper');
+
+  if (filterTabs.length > 0 && serviceCards.length > 0) {
+    filterTabs.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filterVal = btn.getAttribute('data-filter');
+
+        // Update active class on tabs
+        filterTabs.forEach(t => {
+          t.classList.remove('btn-primary-custom');
+          t.classList.add('btn-outline-custom');
+        });
+        btn.classList.remove('btn-outline-custom');
+        btn.classList.add('btn-primary-custom');
+
+        // Filter cards
+        serviceCards.forEach(card => {
+          const cardDept = card.getAttribute('data-dept');
+          if (filterVal === 'all' || cardDept === filterVal) {
+            card.style.display = 'block';
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.style.transition = 'opacity 0.25s ease';
+              card.style.opacity = '1';
+            }, 10);
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Update URL query parameter cleanly without reloading page
+        const newUrl = filterVal === 'all' 
+          ? window.location.pathname 
+          : `${window.location.pathname}?department=${filterVal}`;
+        window.history.replaceState({ path: newUrl }, '', newUrl);
+      });
+    });
+  }
 });

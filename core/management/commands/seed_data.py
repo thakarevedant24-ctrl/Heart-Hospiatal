@@ -171,17 +171,93 @@ class Command(BaseCommand):
             },
         ]
 
-        for t in testimonials_data:
-            testimonial, created = Testimonial.objects.get_or_create(
-                patient_name=t['patient_name'],
+        # 4. Services
+        services_data = [
+            {
+                'title': 'Echocardiography & Doppler Study',
+                'department': departments_dict['Cardiology & Vascular Center'],
+                'icon': 'bi-activity',
+                'short_description': 'Advanced non-invasive cardiac imaging evaluating heart chambers, valves, and systemic blood circulation.'
+            },
+            {
+                'title': 'Cardiac Catheterization & Angioplasty',
+                'department': departments_dict['Cardiology & Vascular Center'],
+                'icon': 'bi-heart-pulse-fill',
+                'short_description': 'Minimally invasive diagnostic angiograms, stent placements, and coronary artery disease interventions.'
+            },
+            {
+                'title': 'Comprehensive Stroke Unit & Thrombolysis',
+                'department': departments_dict['Neurology & Neurosurgery'],
+                'icon': 'bi-lightning-fill',
+                'short_description': 'Rapid response acute stroke assessment, clot-busting thrombolysis, and endovascular interventions.'
+            },
+            {
+                'title': 'Minimally Invasive Spine & Brain Surgery',
+                'department': departments_dict['Neurology & Neurosurgery'],
+                'icon': 'bi-cpu-fill',
+                'short_description': 'Microscopic and endoscopic neurosurgical interventions for spinal discs, tumors, and cranial conditions.'
+            },
+            {
+                'title': 'Level-III Neonatal Intensive Care (NICU)',
+                'department': departments_dict['Pediatrics & Child Wellness'],
+                'icon': 'bi-shield-heart',
+                'short_description': 'Dedicated multi-bed intensive care nursery for premature infants and critically ill newborns.'
+            },
+            {
+                'title': 'Pediatric Wellness & Immunization',
+                'department': departments_dict['Pediatrics & Child Wellness'],
+                'icon': 'bi-emoji-smile-fill',
+                'short_description': 'Comprehensive infant developmental checkups, preventative pediatric screenings, and scheduled vaccines.'
+            },
+            {
+                'title': 'Robotic Total Joint Replacement',
+                'department': departments_dict['Orthopedics & Sports Medicine'],
+                'icon': 'bi-gear-wide-connected',
+                'short_description': 'Computer-assisted robotic total hip and knee arthroplasty designed for rapid mobility and joint longevity.'
+            },
+            {
+                'title': 'Sports Medicine & Arthroscopic Surgery',
+                'department': departments_dict['Orthopedics & Sports Medicine'],
+                'icon': 'bi-person-arms-up',
+                'short_description': 'Keyhole minimally invasive surgery for ACL tears, rotator cuff repairs, and athletic trauma recovery.'
+            },
+            {
+                'title': '24/7 Trauma Resuscitation & ER',
+                'department': departments_dict['Emergency & Trauma Care'],
+                'icon': 'bi-hospital-fill',
+                'short_description': 'Immediate triage, shock stabilization, advanced airway support, and acute trauma resuscitation.'
+            },
+            {
+                'title': 'Critical Care Ambulance & Dispatch',
+                'department': departments_dict['Emergency & Trauma Care'],
+                'icon': 'bi-truck',
+                'short_description': 'Advanced cardiac life support (ACLS) mobile units equipped with onboard telemetry and ventilator systems.'
+            },
+            {
+                'title': 'Chemotherapy & Targeted Infusion',
+                'department': departments_dict['Oncology & Infusion Center'],
+                'icon': 'bi-droplet-fill',
+                'short_description': 'Outpatient oncology infusion suites with personalized clinical oncology nursing and targeted biologic therapy.'
+            },
+            {
+                'title': 'Comprehensive Cancer Screening & Biopsy',
+                'department': departments_dict['Oncology & Infusion Center'],
+                'icon': 'bi-search',
+                'short_description': 'Early detection mammography, image-guided fine needle biopsies, and preventive oncology consultations.'
+            },
+        ]
+
+        for s_info in services_data:
+            srv, created = Service.objects.get_or_create(
+                title=s_info['title'],
                 defaults={
-                    'message': t['message'],
-                    'rating': t['rating'],
-                    'is_approved': t['is_approved'],
+                    'department': s_info['department'],
+                    'icon': s_info['icon'],
+                    'short_description': s_info['short_description'],
                 }
             )
             if created:
-                self.stdout.write(f"Created Testimonial: {testimonial.patient_name}")
+                self.stdout.write(f"Created Service: {srv.title}")
 
         self.stdout.write(self.style.SUCCESS('Successfully seeded database with Harborlight demonstration data!'))
 

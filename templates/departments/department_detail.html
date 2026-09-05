@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ department.name }} | Harborlight Multispecialty Hospital{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================================
+     DEPARTMENT HEADER & ACTION HERO
+     ========================================================================= -->
+<section class="page-header-banner">
+  <div class="container">
+    <div class="breadcrumb-custom text-center text-md-start">
+      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; 
+      <a href="{% url 'departments:department_list' %}">Services</a> &nbsp;/&nbsp; 
+      <span>{{ department.name }}</span>
+    </div>
+
+    <div class="row align-items-center g-4 mt-1">
+      <div class="col-lg-8">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="card-icon mb-0" style="width: 54px; height: 54px; font-size: 1.6rem;">
+            <i class="bi {{ department.icon|default:'bi-heart-pulse-fill' }}"></i>
+          </div>
+          <div>
+            <span class="badge-status mb-1">Center of Clinical Excellence</span>
+            <h1 class="display-5 fw-bold mb-0" style="color: var(--primary-color);">{{ department.name }}</h1>
+          </div>
+        </div>
+        <p class="lead text-secondary mt-3 mb-0" style="max-width: 720px;">
+          {{ department.short_description }}
+        </p>
+      </div>
+
+      <!-- Pre-filled Booking Action Button -->
+      <div class="col-lg-4 text-lg-end">
+        <a href="{% url 'appointments:book_appointment' %}?department={{ department.slug }}" 
+           class="btn btn-accent-custom btn-lg shadow">
+          <i class="bi bi-calendar2-check-fill me-1"></i>
+          <span>Book with this Department</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     DEPARTMENT FULL DESCRIPTION & CLINICAL OVERVIEW
+     ========================================================================= -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-8">
+        <div class="card-custom p-4 p-md-5 mb-5">
+          <h2 class="h3 fw-bold mb-4" style="color: var(--primary-color);">Clinical Overview & Care Standards</h2>
+          <div class="text-secondary fs-6 leading-relaxed mb-4">
+            {{ department.full_description|linebreaks }}
+          </div>
+          
+          <div class="p-3 rounded-3 bg-light border d-flex align-items-center gap-3">
+            <i class="bi bi-shield-check text-success fs-3"></i>
+            <div>
+              <div class="fw-bold" style="color: var(--primary-color);">Accredited Department Protocols</div>
+              <div class="small text-muted">All diagnostic and surgical procedures adhere strictly to international patient safety and hygiene regulations.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             SERVICES UNDER THIS DEPARTMENT
+             =================================================================== -->
+        <div class="mb-5">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <span class="section-tag">Specialized Care</span>
+              <h2 class="h3 fw-bold mb-0" style="color: var(--primary-color);">Services Under {{ department.name }}</h2>
+            </div>
+            <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small">
+              {{ services.count }} Clinical Services
+            </span>
+          </div>
+
+          <div class="row g-3">
+            {% for service in services %}
+              <div class="col-md-6">
+                <div class="card-custom h-100 p-3">
+                  <div class="d-flex align-items-start gap-3">
+                    <div class="card-icon mb-0" style="width: 44px; height: 44px; min-width: 44px; font-size: 1.25rem;">
+                      <i class="bi {{ service.icon|default:'bi-check2-circle' }}"></i>
+                    </div>
+                    <div>
+                      <h3 class="h6 fw-bold mb-1" style="color: var(--primary-color);">{{ service.title }}</h3>
+                      <p class="text-muted small mb-0">
+                        {{ service.short_description }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <div class="col-12 text-center py-4 card-custom">
+                <p class="text-muted mb-0">Services for this department are being updated.</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             DOCTORS IN THIS DEPARTMENT
+             =================================================================== -->
+        <div>
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <span class="section-tag">Department Faculty</span>
+              <h2 class="h3 fw-bold mb-0" style="color: var(--primary-color);">Specialists in this Department</h2>
+            </div>
+            <span class="badge bg-light text-dark border px-3 py-2 rounded-pill small">
+              {{ doctors.count }} Clinicians
+            </span>
+          </div>
+
+          <div class="row g-4">
+            {% for doc in doctors %}
+              <div class="col-md-6">
+                <div class="card-custom text-center p-4 h-100 d-flex flex-column justify-content-between">
+                  <div>
+                    <div class="doctor-avatar-box mb-3">
+                      {% if doc.photo %}
+                        <img src="{{ doc.photo.url }}" alt="Dr. {{ doc.name }}">
+                      {% else %}
+                        <i class="bi bi-person-fill"></i>
+                      {% endif %}
+                    </div>
+                    <h3 class="h5 fw-bold mb-1">Dr. {{ doc.name }}</h3>
+                    <div class="text-accent fw-medium small mb-1" style="color: var(--accent-color);">
+                      {{ doc.specialization }}
+                    </div>
+                    <div class="small text-muted mb-2">{{ doc.qualification }} &bull; {{ doc.experience_years }}+ yrs experience</div>
+                    <p class="text-secondary small mb-3">
+                      {{ doc.bio|truncatewords:20 }}
+                    </p>
+                  </div>
+
+                  <div class="pt-3 border-top">
+                    <div class="small text-muted mb-2">
+                      <i class="bi bi-clock me-1"></i>{{ doc.available_days }}
+                    </div>
+                    <a href="{% url 'appointments:book_appointment' %}?department={{ department.slug }}&doctor={{ doc.id }}" 
+                       class="btn btn-sm btn-outline-custom w-100">
+                      <span>Schedule Consultation</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <div class="col-12 text-center py-4 card-custom">
+                <p class="text-muted mb-0">Physician schedules for this department are currently updating.</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Department Sidebar Quick Facts -->
+      <div class="col-lg-4">
+        <div class="sticky-top" style="top: 100px; z-index: 10;">
+          <div class="card-custom p-4 mb-4">
+            <h3 class="h5 fw-bold mb-3" style="color: var(--primary-color);">Department Highlights</h3>
+            <ul class="list-unstyled mb-4">
+              <li class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-clock-history text-accent fs-5" style="color: var(--accent-color);"></i>
+                <div>
+                  <div class="fw-semibold small">Consultation Hours</div>
+                  <div class="text-muted small">08:00 AM – 08:00 PM (Mon-Sat)</div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-telephone-fill text-accent fs-5" style="color: var(--accent-color);"></i>
+                <div>
+                  <div class="fw-semibold small">Direct Desk Contact</div>
+                  <div class="text-muted small">+1 (555) 010-7890 ext. 104</div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-geo-alt-fill text-accent fs-5" style="color: var(--accent-color);"></i>
+                <div>
+                  <div class="fw-semibold small">Campus Location</div>
+                  <div class="text-muted small">Building B, Floors 2 &amp; 3</div>
+                </div>
+              </li>
+              <li class="d-flex align-items-center gap-2">
+                <i class="bi bi-shield-check text-accent fs-5" style="color: var(--accent-color);"></i>
+                <div>
+                  <div class="fw-semibold small">Insurance Support</div>
+                  <div class="text-muted small">Cashless hospitalization accepted</div>
+                </div>
+              </li>
+            </ul>
+
+            <a href="{% url 'appointments:book_appointment' %}?department={{ department.slug }}" 
+               class="btn btn-accent-custom w-100 shadow-sm">
+              <i class="bi bi-calendar2-check-fill me-1"></i>Book with this Department
+            </a>
+          </div>
+
+          <!-- Emergency Notice -->
+          <div class="p-4 rounded-4 text-white shadow-sm" style="background: linear-gradient(135deg, var(--primary-color), #073836);">
+            <h4 class="h6 fw-bold mb-2"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Immediate Emergency?</h4>
+            <p class="small text-white-70 mb-3">
+              For acute conditions, cardiac chest pain, severe trauma, or pediatric emergencies, call our 24/7 hotline directly.
+            </p>
+            <a href="tel:+15550107890" class="btn btn-sm btn-outline-custom text-white border-white w-100">
+              <i class="bi bi-telephone-fill me-1"></i>Call Emergency: +1 (555) 010-7890
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

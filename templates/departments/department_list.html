@@ -1,38 +1,164 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Departments | Harborlight Multispecialty Hospital{% endblock %}
+{% block title %}Clinical Services & Departments | Harborlight Multispecialty Hospital{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <div class="text-center mb-5">
-    <span class="badge-status mb-2">Medical Specialties</span>
-    <h1 class="display-5 fw-bold">Hospital Departments</h1>
-    <p class="text-muted">Comprehensive medical disciplines staffed by board-certified specialists.</p>
-  </div>
 
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card-custom">
-        <div class="card-icon"><i class="bi bi-heart-pulse"></i></div>
-        <h3 class="h5 fw-bold">Cardiology</h3>
-        <p class="text-muted small">Interventional cardiac care, echocardiography, stress diagnostics, and coronary ICU.</p>
-      </div>
+<!-- =========================================================================
+     PAGE HEADER
+     ========================================================================= -->
+<section class="page-header-banner">
+  <div class="container text-center">
+    <div class="breadcrumb-custom">
+      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; <span>Services & Departments</span>
     </div>
-    <div class="col-md-4">
-      <div class="card-custom">
-        <div class="card-icon"><i class="bi bi-cpu"></i></div>
-        <h3 class="h5 fw-bold">Neurology & Neurosurgery</h3>
-        <p class="text-muted small">Advanced neurological diagnostics, stroke rapid response unit, and spinal surgery.</p>
-      </div>
+    <span class="badge-status mb-2">Clinical Disciplines</span>
+    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">Our Medical Services</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 680px;">
+      Explore our comprehensive suite of advanced diagnostic, surgical, and therapeutic healthcare services across specialized medical centers.
+    </p>
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     FILTER BAR & SERVICES GRID
+     ========================================================================= -->
+<section class="py-5">
+  <div class="container">
+
+    <!-- Desktop Filter Tabs (>= 768px) -->
+    <div class="d-none d-md-flex flex-wrap justify-content-center gap-2 mb-5" id="servicesFilterTabs">
+      <a href="{% url 'departments:department_list' %}" 
+         class="btn btn-sm {% if not selected_dept_slug or selected_dept_slug == 'all' %}btn-primary-custom{% else %}btn-outline-custom{% endif %} filter-btn" 
+         data-filter="all">
+        <i class="bi bi-grid-fill me-1"></i>All Services
+      </a>
+
+      {% for dept in departments %}
+        <a href="?department={{ dept.slug }}" 
+           class="btn btn-sm {% if selected_dept_slug == dept.slug %}btn-primary-custom{% else %}btn-outline-custom{% endif %} filter-btn" 
+           data-filter="{{ dept.slug }}">
+          <i class="bi {{ dept.icon|default:'bi-heart-pulse' }} me-1"></i>{{ dept.name }}
+        </a>
+      {% endfor %}
     </div>
-    <div class="col-md-4">
-      <div class="card-custom">
-        <div class="card-icon"><i class="bi bi-person-hearts"></i></div>
-        <h3 class="h5 fw-bold">Pediatrics</h3>
-        <p class="text-muted small">Specialized neonatal intensive care (NICU), pediatric surgery, and preventative wellness.</p>
-      </div>
+
+    <!-- Mobile Dropdown (< 768px) -->
+    <div class="d-md-none mb-4">
+      <label class="form-label fw-bold small text-muted text-uppercase">Filter By Department:</label>
+      <select class="form-select shadow-sm" id="servicesMobileFilter" onchange="location = this.value;">
+        <option value="{% url 'departments:department_list' %}" {% if not selected_dept_slug or selected_dept_slug == 'all' %}selected{% endif %}>
+          All Services
+        </option>
+        {% for dept in departments %}
+          <option value="?department={{ dept.slug }}" {% if selected_dept_slug == dept.slug %}selected{% endif %}>
+            {{ dept.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="row g-4" id="servicesGridContainer">
+      {% for service in services %}
+        <div class="col-md-6 col-lg-4 service-card-wrapper" data-dept="{% if service.department %}{{ service.department.slug }}{% else %}general{% endif %}">
+          <div class="card-custom h-100 d-flex flex-column justify-content-between p-4">
+            <div>
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="card-icon mb-0">
+                  <i class="bi {{ service.icon|default:'bi-activity' }}"></i>
+                </div>
+                {% if service.department %}
+                  <a href="{% url 'departments:department_detail' service.department.slug %}" 
+                     class="badge bg-light text-primary border rounded-pill text-decoration-none px-3 py-2 small" 
+                     style="color: var(--primary-color) !important; border-color: var(--support-color) !important;">
+                    <i class="bi {{ service.department.icon|default:'bi-tag' }} me-1"></i>{{ service.department.name }}
+                  </a>
+                {% endif %}
+              </div>
+
+              <h3 class="h5 fw-bold mb-2" style="color: var(--primary-color);">{{ service.title }}</h3>
+              <p class="text-secondary small mb-3">
+                {{ service.short_description }}
+              </p>
+            </div>
+
+            <div class="pt-3 border-top d-flex align-items-center justify-content-between">
+              {% if service.department %}
+                <a href="{% url 'departments:department_detail' service.department.slug %}" class="dept-link m-0 small">
+                  <span>Department Overview</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+                <a href="{% url 'appointments:book_appointment' %}?department={{ service.department.slug }}" 
+                   class="btn btn-sm btn-accent-custom" 
+                   title="Book Consultation for this service">
+                  <i class="bi bi-calendar-plus me-1"></i>Book
+                </a>
+              {% else %}
+                <a href="{% url 'appointments:book_appointment' %}" class="btn btn-sm btn-accent-custom">
+                  <i class="bi bi-calendar-plus me-1"></i>Book
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-center py-5">
+          <div class="card-icon mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.8rem;">
+            <i class="bi bi-search"></i>
+          </div>
+          <h4 class="h5 fw-bold">No services found for this department</h4>
+          <p class="text-muted small">Please select another department filter or view all services.</p>
+          <a href="{% url 'departments:department_list' %}" class="btn btn-sm btn-primary-custom mt-2">
+            View All Services
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================================================================
+     DEPARTMENT SHOWCASE CARDS (Links to each department detail)
+     ========================================================================= -->
+<section class="py-5" style="background-color: #f7f3ec;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Centres of Excellence</span>
+      <h2 class="section-title">Explore Specialized Departments</h2>
+      <p class="section-description">
+        Each department is equipped with dedicated surgical suites, intensive care units, and consultation clinics.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      {% for dept in departments %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card-custom h-100 p-4 d-flex flex-column justify-content-between">
+            <div>
+              <div class="card-icon">
+                <i class="bi {{ dept.icon|default:'bi-heart-pulse-fill' }}"></i>
+              </div>
+              <h3 class="h5 fw-bold mb-2">{{ dept.name }}</h3>
+              <p class="text-muted small mb-3">
+                {{ dept.short_description }}
+              </p>
+            </div>
+            <div>
+              <a href="{% url 'departments:department_detail' dept.slug %}" class="btn btn-sm btn-outline-custom w-100">
+                <span>View Department & Specialists</span>
+                <i class="bi bi-chevron-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
-</div>
+</section>
+
 {% endblock %}
-
