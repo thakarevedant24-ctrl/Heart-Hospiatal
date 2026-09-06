@@ -199,12 +199,7 @@ ALLOWED_HOSTS=127.0.0.1,localhost,testserver
 python manage.py migrate
 ```
 
-### 6. Create Admin Superuser
-```powershell
-python manage.py createsuperuser
-```
-
-### 7. Run the Development Server
+### 6. Run the Development Server
 ```powershell
 python manage.py runserver
 ```

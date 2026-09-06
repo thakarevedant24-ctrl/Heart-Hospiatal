@@ -136,6 +136,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email Configuration (Development Console Backend)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@cityhospital.example'
-ADMIN_EMAIL = 'admin@cityhospital.example'
+HOSPITAL_EMAIL = 'contact@cityhospital.example'
 
 

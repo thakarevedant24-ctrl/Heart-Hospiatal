@@ -70,7 +70,7 @@ def contact(request):
         if form.is_valid():
             contact_msg = form.save()
             
-            # Send email notification to admin via console backend
+            # Send email notification to hospital staff via console backend
             try:
                 subject = f"[City Heart Hospital] New Inquiry: {contact_msg.subject}"
                 body = (
@@ -81,12 +81,12 @@ def contact(request):
                     f"Subject: {contact_msg.subject}\n\n"
                     f"Message:\n{contact_msg.message}\n"
                 )
-                admin_email = getattr(settings, 'ADMIN_EMAIL', 'admin@cityhearthospital.example')
+                hospital_email = getattr(settings, 'HOSPITAL_EMAIL', 'info@cityhearthospital.example')
                 send_mail(
                     subject,
                     body,
                     settings.DEFAULT_FROM_EMAIL,
-                    [admin_email],
+                    [hospital_email],
                     fail_silently=True,
                 )
             except Exception:
