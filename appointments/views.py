@@ -71,7 +71,7 @@ Our 24/7 Chest Pain & Acute STEMI Emergency Hotline is available at +1 (555) 010
 Warm regards,
 Cardiac Patient Services Coordination Desk
 City Heart Hospital
-12 Wellness Avenue, Riverdale, TX 75001
+12 Heart Institute Marg, BKC, Bandra East, Mumbai, Maharashtra 400051
 Phone: +1 (555) 010-7890 | Email: info@cityhearthospital.example
 """
             from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@cityhearthospital.example')

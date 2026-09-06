@@ -171,7 +171,7 @@ class Command(BaseCommand):
             },
             {
                 'patient_name': 'Thomas Sterling',
-                'message': 'After years of frightening AFib episodes and palpitations, Dr. David Thorne performed a 3D catheter ablation. I am completely symptom-free and off medication. World-class heart care right here in Riverdale.',
+                'message': 'After years of frightening AFib episodes and palpitations, Dr. David Thorne performed a 3D catheter ablation. I am completely symptom-free and off medication. World-class heart care right here in Mumbai.',
                 'rating': 5,
                 'is_approved': True,
             },

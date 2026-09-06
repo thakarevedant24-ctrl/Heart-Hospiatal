@@ -42,7 +42,7 @@
   <!-- Bottom Details Bar -->
   <line x1="120" y1="510" x2="1080" y2="510" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.35"/>
   <text x="120" y="555" font-family="'Inter', sans-serif" font-size="20" fill="#94A3B8">
-    12 Wellness Avenue, Riverdale, TX 75001 &nbsp;|&nbsp; 24/7 Chest Pain Hotline: +1 (555) 010-7890 &nbsp;|&nbsp; info@cityhearthospital.example
+    BKC, Bandra East, Mumbai, Maharashtra 400051 &nbsp;|&nbsp; 24/7 Chest Pain Hotline: +1 (555) 010-7890 &nbsp;|&nbsp; info@cityhearthospital.example
   </text>
 </svg>
 

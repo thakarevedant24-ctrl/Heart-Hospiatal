@@ -23,10 +23,10 @@ Harborlight Multispecialty Hospital is built around a distinct, professional hea
 | **Body Font** | Inter | Google Fonts | Body copy, forms, navigation |
 
 ### 📍 Hospital Contact Information (Default)
-- **Address:** 12 Wellness Avenue, Riverdale, TX 75001
+- **Address:** 12 Heart Institute Marg, BKC, Bandra East, Mumbai, Maharashtra 400051
 - **Phone:** +1 (555) 010-7890
-- **Email:** info@harborlighthospital.example
-- **Emergency:** 24/7 Trauma & Outpatient Support
+- **Email:** info@cityhearthospital.example
+- **Emergency:** 24/7 Chest Pain & Acute STEMI Emergency Center
 
 ---
 
