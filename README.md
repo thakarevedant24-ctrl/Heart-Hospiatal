@@ -1,20 +1,20 @@
-# 🏥 Harborlight Multispecialty Hospital
+# 🫀 City Heart Hospital — Mumbai
 
-> *"Compassionate Care, Modern Medicine"*
+> *"Advanced Cardiology & Cardiothoracic Surgery"*
 
-A modern, full-featured hospital and healthcare management web platform built with **Django 5.x**, **Bootstrap 5**, and custom branded styling.
+A modern, full-featured web application for an exclusive **Heart Specialty Hospital** located at **Bandra Kurla Complex (BKC), Mumbai**, built with **Django 5.x**, **Bootstrap 5**, and responsive clinical UI.
 
 ---
 
 ## 🎨 Brand Identity & Palette
 
-Harborlight Multispecialty Hospital is built around a distinct, professional healthcare brand kit:
+City Heart Hospital is built around a distinct, professional healthcare brand kit:
 
 | Element | Specification | Hex / Value | Usage |
 |---|---|---|---|
-| **Site Name** | Harborlight Multispecialty Hospital | — | Header & Brand titles |
-| **Tagline** | *"Compassionate Care, Modern Medicine"* | — | Hero & Mission statement |
-| **Primary Color** | Deep Medical Sapphire | `#0F3D69` | Primary branding, buttons, headers, footer |
+| **Site Name** | City Heart Hospital | — | Header & Brand titles |
+| **Tagline** | *"Advanced Cardiology & Cardiothoracic Surgery"* | — | Hero & Mission statement |
+| **Primary Color** | Deep Medical Teal | `#0E5F5C` | Primary branding, buttons, headers, footer |
 | **Accent Color** | Medical Cerulean | `#0284C7` | Action CTAs, booking buttons, highlights |
 | **Background** | Pristine Clinical Slate | `#F8FAFC` | Body background, modern crisp surfaces |
 | **Dark Text** | Deep Slate 900 | `#0F172A` | Ultra-readable AAA contrast typography |
