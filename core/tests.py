@@ -57,15 +57,15 @@ class SiteWideSEOResponsivenessTests(TestCase):
         """About page renders with customized meta description and timeline."""
         response = self.client.get(reverse('core:about'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Discover City Hospital')
+        self.assertContains(response, 'Discover City Heart Hospital')
         self.assertContains(response, 'reveal-on-scroll')
 
     def test_contact_page_seo_and_accessibility(self):
         """Contact page includes proper meta tags, iframe title, and form labels."""
         response = self.client.get(reverse('core:contact'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Contact City Hospital')
-        self.assertContains(response, 'title="City Hospital Location"')
+        self.assertContains(response, 'Contact City Heart Hospital')
+        self.assertContains(response, 'title="City Heart Hospital Location"')
 
     def test_departments_and_doctors_meta_tags(self):
         """Department and Doctor pages contain custom titles and meta descriptions."""

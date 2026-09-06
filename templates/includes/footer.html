@@ -6,15 +6,15 @@
       <div class="col-lg-4 col-md-6">
         <div class="d-flex align-items-center gap-2 mb-3">
           <div class="navbar-logo-icon" style="width: 38px; height: 38px; font-size: 1.2rem; border-radius: 10px;">
-            <i class="bi bi-hospital"></i>
+            <i class="bi bi-heart-pulse-fill"></i>
           </div>
-          <h4 class="mb-0 text-white fw-bold" style="font-size: 1.2rem;">City Hospital</h4>
+          <h4 class="mb-0 text-white fw-bold" style="font-size: 1.2rem;">City Heart Hospital</h4>
         </div>
         <p class="text-white-50 mb-3" style="font-style: italic; font-size: 0.95rem;">
-          "Compassionate Care, Modern Medicine"
+          "Advanced Cardiology & Cardiothoracic Surgery"
         </p>
         <p class="footer-about-text">
-          City Hospital is dedicated to delivering patient-centric medical excellence with state-of-the-art diagnostic technologies, multidisciplinary specialized clinicians, and round-the-clock emergency care.
+          City Heart Hospital is an exclusive cardiovascular institute dedicated to pioneering catheter-based interventions, beating-heart bypass surgeries, pediatric heart defect corrections, and round-the-clock acute STEMI emergency care.
         </p>
       </div>
 
@@ -24,8 +24,8 @@
         <ul class="footer-links-list">
           <li><a href="{% url 'core:home' %}"><i class="bi bi-chevron-right small"></i>Home</a></li>
           <li><a href="{% url 'core:about' %}"><i class="bi bi-chevron-right small"></i>About Us</a></li>
-          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Services</a></li>
-          <li><a href="{% url 'doctors:doctor_list' %}"><i class="bi bi-chevron-right small"></i>Doctors</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Cardiac Care</a></li>
+          <li><a href="{% url 'doctors:doctor_list' %}"><i class="bi bi-chevron-right small"></i>Heart Specialists</a></li>
           <li><a href="{% url 'gallery:gallery_list' %}"><i class="bi bi-chevron-right small"></i>Gallery</a></li>
           <li><a href="{% url 'core:contact' %}"><i class="bi bi-chevron-right small"></i>Contact</a></li>
           <li><a href="{% url 'appointments:book_appointment' %}"><i class="bi bi-chevron-right small"></i>Book Appointment</a></li>
@@ -34,13 +34,13 @@
 
       <!-- Column 3: Departments List -->
       <div class="col-lg-3 col-md-6">
-        <h5 class="footer-heading">Departments</h5>
+        <h5 class="footer-heading">Cardiac Divisions</h5>
         <ul class="footer-links-list">
-          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Cardiology & Heart Care</a></li>
-          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Neurology & Neurosurgery</a></li>
-          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Pediatrics & Neonatal Care</a></li>
-          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Orthopedics & Joint Surgery</a></li>
-          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>24/7 Emergency & Trauma Center</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Interventional Cardiology</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Cardiothoracic Surgery (CTVS)</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Electrophysiology & Arrhythmia</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>Pediatric Heart Center</a></li>
+          <li><a href="{% url 'departments:department_list' %}"><i class="bi bi-chevron-right small"></i>24/7 Chest Pain & STEMI Unit</a></li>
         </ul>
       </div>
 
@@ -58,11 +58,11 @@
           </li>
           <li>
             <i class="bi bi-envelope-fill"></i>
-            <a href="mailto:info@cityhospital.example">info@cityhospital.example</a>
+            <a href="mailto:info@cityhearthospital.example">info@cityhearthospital.example</a>
           </li>
           <li>
-            <i class="bi bi-clock-fill"></i>
-            <span>Emergency Dept: Open 24/7</span>
+            <i class="bi bi-heart-pulse-fill" style="color: var(--accent-color);"></i>
+            <span>Chest Pain Emergency: 24/7/365</span>
           </li>
         </ul>
 
@@ -81,7 +81,7 @@
     <div class="footer-bottom-bar">
       <div class="row align-items-center">
         <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
-          &copy; 2026 City Hospital. All rights reserved.
+          &copy; 2026 City Heart Hospital. All rights reserved.
         </div>
         <div class="col-md-6 text-center text-md-end">
           <a href="{% url 'core:about' %}" class="me-3">Privacy Policy</a>

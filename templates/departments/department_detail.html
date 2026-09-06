@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ department.name }} | City Hospital{% endblock %}
+{% block title %}{{ department.name }} | City Heart Hospital{% endblock %}
 
-{% block meta_description %}{{ department.short_description|truncatewords:28 }} City Hospital, Riverdale, TX.{% endblock %}
+{% block meta_description %}{{ department.short_description|truncatewords:28 }} City Heart Hospital, Riverdale, TX.{% endblock %}
 
 {% block content %}
 
@@ -14,7 +14,7 @@
   <div class="container">
     <div class="breadcrumb-custom text-center text-md-start">
       <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; 
-      <a href="{% url 'departments:department_list' %}">Services</a> &nbsp;/&nbsp; 
+      <a href="{% url 'departments:department_list' %}">Cardiac Care</a> &nbsp;/&nbsp; 
       <span>{{ department.name }}</span>
     </div>
 
@@ -25,7 +25,7 @@
             <i class="bi {{ department.icon|default:'bi-heart-pulse-fill' }}"></i>
           </div>
           <div>
-            <span class="badge-status mb-1">Center of Clinical Excellence</span>
+            <span class="badge-status mb-1">Center of Cardiac Excellence</span>
             <h1 class="display-5 fw-bold mb-0" style="color: var(--primary-color);">{{ department.name }}</h1>
           </div>
         </div>
@@ -39,7 +39,7 @@
         <a href="{% url 'appointments:book_appointment' %}?department={{ department.slug }}" 
            class="btn btn-accent-custom btn-lg shadow-sm">
           <i class="bi bi-calendar-plus-fill me-1"></i>
-          <span>Book with this Department</span>
+          <span>Book with this Division</span>
         </a>
       </div>
     </div>
@@ -168,7 +168,7 @@
       <div class="col-lg-4">
         <div class="sticky-top" style="top: 100px; z-index: 10;">
           <div class="card-custom p-4 mb-4">
-            <h3 class="h5 fw-bold mb-3" style="color: var(--primary-color);">Department Highlights</h3>
+            <h3 class="h5 fw-bold mb-3" style="color: var(--primary-color);">Division Highlights</h3>
             <ul class="list-unstyled mb-4">
               <li class="d-flex align-items-center gap-2 mb-3">
                 <i class="bi bi-clock-history text-accent fs-5" style="color: var(--accent-color);"></i>
@@ -188,7 +188,7 @@
                 <i class="bi bi-geo-alt-fill text-accent fs-5" style="color: var(--accent-color);"></i>
                 <div>
                   <div class="fw-semibold small">Campus Location</div>
-                  <div class="text-muted small">Building B, Floors 2 &amp; 3</div>
+                  <div class="text-muted small">Heart Tower, Floors 2 &amp; 3</div>
                 </div>
               </li>
               <li class="d-flex align-items-center gap-2">
@@ -202,15 +202,15 @@
 
             <a href="{% url 'appointments:book_appointment' %}?department={{ department.slug }}" 
                class="btn btn-accent-custom w-100 shadow-sm">
-              <i class="bi bi-calendar2-check-fill me-1"></i>Book with this Department
+              <i class="bi bi-calendar2-check-fill me-1"></i>Book with this Division
             </a>
           </div>
 
           <!-- Emergency Notice -->
           <div class="p-4 rounded-4 text-white shadow-sm" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));">
-            <h4 class="h6 fw-bold mb-2"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Immediate Emergency?</h4>
+            <h4 class="h6 fw-bold mb-2"><i class="bi bi-heart-pulse-fill text-danger me-2"></i>Immediate Emergency?</h4>
             <p class="small text-white-70 mb-3">
-              For acute conditions, cardiac chest pain, severe trauma, or pediatric emergencies, call our 24/7 hotline directly.
+              For acute cardiac arrest, crushing chest pain, or suspected heart attack, call our 24/7 STEMI hotline immediately.
             </p>
             <a href="tel:+15550107890" class="btn btn-sm btn-outline-custom text-white border-white w-100">
               <i class="bi bi-telephone-fill me-1"></i>Call Emergency: +1 (555) 010-7890

@@ -16,36 +16,36 @@ def home(request):
     hero_slides = [
         {
             'image_url': '/media/gallery/hospital_clinical_suite.jpg',
-            'title': 'Excellence Services In Healthcare Management',
-            'subtitle': 'Dedicated to clinical expertise and compassionate care that transforms patient healing across all medical specialties.',
-            'primary_btn_text': 'Book Appointment',
+            'title': 'World-Class Heart & Cardiovascular Care',
+            'subtitle': 'Dedicated exclusively to advanced interventional cardiology, beating-heart bypass surgery, and 24/7 acute chest pain emergencies.',
+            'primary_btn_text': 'Book Cardiac Consultation',
             'primary_btn_url': '/book/',
-            'secondary_btn_text': 'Our Services',
+            'secondary_btn_text': 'Cardiac Divisions',
             'secondary_btn_url': '/departments/',
         },
         {
             'image_url': '/media/gallery/hospital_operating_theatre.jpg',
-            'title': 'Compassionate Care, Modern Medicine',
-            'subtitle': 'State-of-the-art operating suites, certified surgical faculty, and advanced medical infrastructure available 24/7.',
-            'primary_btn_text': 'Our Services',
+            'title': 'Pioneering Cardiothoracic Surgery & Catheterization',
+            'subtitle': 'State-of-the-art hybrid Cath Labs, minimally invasive valve replacements (TAVR), and 3D arrhythmia mapping guided by senior heart specialists.',
+            'primary_btn_text': 'Cardiac Procedures',
             'primary_btn_url': '/departments/',
-            'secondary_btn_text': 'Meet Our Doctors',
+            'secondary_btn_text': 'Meet Heart Specialists',
             'secondary_btn_url': '/doctors/',
         },
         {
             'image_url': '/media/gallery/hospital_main_campus.jpg',
-            'title': 'Advanced Diagnostics & Clinical Facilities',
-            'subtitle': 'High-precision 3-Tesla imaging, rapid ambulance response, and personalized recovery environments for your entire family.',
-            'primary_btn_text': 'Take a Tour',
-            'primary_btn_url': '/gallery/',
-            'secondary_btn_text': 'About City Hospital',
+            'title': '24/7 Chest Pain & Acute STEMI Emergency Center',
+            'subtitle': 'Rapid door-to-balloon angioplasty in under 45 minutes, Mobile Cardiac ICU ambulances, and round-the-clock intensive cardiac care.',
+            'primary_btn_text': 'Emergency Hotline',
+            'primary_btn_url': '/contact/',
+            'secondary_btn_text': 'About Heart Hospital',
             'secondary_btn_url': '/about/',
         },
     ]
 
     stats = {
         'years': 25,
-        'doctors_count': Doctor.objects.filter(is_active=True).count() or 18,
+        'doctors_count': Doctor.objects.filter(is_active=True).count() or 6,
         'departments_count': Department.objects.count() or 6,
         'patients_count': 50000,
     }
@@ -72,16 +72,16 @@ def contact(request):
             
             # Send email notification to admin via console backend
             try:
-                subject = f"[City Hospital] New Inquiry: {contact_msg.subject}"
+                subject = f"[City Heart Hospital] New Inquiry: {contact_msg.subject}"
                 body = (
-                    f"New patient message submitted via City Hospital website:\n\n"
+                    f"New patient message submitted via City Heart Hospital website:\n\n"
                     f"From: {contact_msg.name}\n"
                     f"Email: {contact_msg.email}\n"
                     f"Phone: {contact_msg.phone or 'Not provided'}\n"
                     f"Subject: {contact_msg.subject}\n\n"
                     f"Message:\n{contact_msg.message}\n"
                 )
-                admin_email = getattr(settings, 'ADMIN_EMAIL', 'admin@cityhospital.example')
+                admin_email = getattr(settings, 'ADMIN_EMAIL', 'admin@cityhearthospital.example')
                 send_mail(
                     subject,
                     body,

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Medical Faculty & Specialists | City Hospital{% endblock %}
+{% block title %}Cardiovascular Specialists & Surgeons | City Heart Hospital{% endblock %}
 
-{% block meta_description %}Meet the distinguished medical specialists, surgeons, and clinicians at City Hospital in Riverdale, TX. Book individual consultations.{% endblock %}
+{% block meta_description %}Meet the distinguished interventional cardiologists, CTVS heart surgeons, and electrophysiologists at City Heart Hospital in Riverdale, TX.{% endblock %}
 
 {% block content %}
 
@@ -13,12 +13,12 @@
 <section class="page-header-banner">
   <div class="container text-center">
     <div class="breadcrumb-custom">
-      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; <span>Doctors & Faculty</span>
+      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; <span>Cardiovascular Faculty</span>
     </div>
-    <span class="badge-status mb-2">Our Clinical Faculty</span>
-    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">Meet Our Medical Specialists</h1>
+    <span class="badge-status mb-2">Our Cardiovascular Specialists</span>
+    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">Meet Our Heart Specialists</h1>
     <p class="lead text-muted mx-auto" style="max-width: 680px;">
-      Our distinguished physicians and surgeons combine world-class credentials with human empathy to provide individualized care for every patient.
+      Our distinguished cardiologists, heart surgeons, and cardiac electrophysiologists combine world-class academic training with pioneering clinical mastery.
     </p>
   </div>
 </section>
@@ -34,7 +34,7 @@
     <div class="d-none d-md-flex flex-wrap justify-content-center gap-2 mb-5">
       <a href="{% url 'doctors:doctor_list' %}" 
          class="btn btn-sm {% if not selected_department_slug or selected_department_slug == 'all' %}btn-primary-custom{% else %}btn-outline-custom{% endif %}">
-        <i class="bi bi-people-fill me-1"></i>All Physicians ({{ doctors.count }})
+        <i class="bi bi-people-fill me-1"></i>All Heart Specialists ({{ doctors.count }})
       </a>
       {% for dept in departments %}
         <a href="?department={{ dept.slug }}" 
@@ -46,10 +46,10 @@
 
     <!-- Mobile Dropdown (< 768px) -->
     <div class="d-md-none mb-4">
-      <label class="form-label fw-bold small text-muted text-uppercase">Filter by Department:</label>
+      <label class="form-label fw-bold small text-muted text-uppercase">Filter by Cardiac Division:</label>
       <select class="form-select shadow-sm" onchange="location = this.value;">
         <option value="{% url 'doctors:doctor_list' %}" {% if not selected_department_slug or selected_department_slug == 'all' %}selected{% endif %}>
-          All Physicians
+          All Heart Specialists
         </option>
         {% for dept in departments %}
           <option value="?department={{ dept.slug }}" {% if selected_department_slug == dept.slug %}selected{% endif %}>
@@ -144,10 +144,10 @@
         <span class="section-tag">Quality of Care</span>
         <h2 class="h3 fw-bold mb-3" style="color: var(--primary-color);">Board-Certified, Compassion-Driven</h2>
         <p class="text-muted mb-4">
-          Every doctor practicing at City Hospital undergoes comprehensive credential verification, continuous medical education (CME), and clinical peer review to ensure that our patients receive gold-standard medical care.
+          Every specialist practicing at City Heart Hospital undergoes rigorous cardiovascular credential verification, continuous medical education (CME), and clinical peer review to ensure that our patients receive gold-standard cardiac care.
         </p>
         <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom">
-          <i class="bi bi-calendar2-plus-fill me-1"></i>Schedule a Consultation Today
+          <i class="bi bi-calendar2-plus-fill me-1"></i>Schedule a Cardiac Consultation Today
         </a>
       </div>
     </div>

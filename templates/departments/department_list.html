@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Clinical Services & Departments | City Hospital{% endblock %}
+{% block title %}Cardiac Services & Divisions | City Heart Hospital{% endblock %}
 
-{% block meta_description %}Explore specialized clinical treatments, outpatient care, and advanced surgical specialties at City Hospital in Riverdale, TX.{% endblock %}
+{% block meta_description %}Explore specialized cardiovascular treatments, hybrid Cath Lab interventions, beating-heart bypass surgery, and non-invasive diagnostics at City Heart Hospital in Riverdale, TX.{% endblock %}
 
 {% block content %}
 
@@ -13,12 +13,12 @@
 <section class="page-header-banner">
   <div class="container text-center">
     <div class="breadcrumb-custom">
-      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; <span>Services & Departments</span>
+      <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; <span>Cardiac Services &amp; Divisions</span>
     </div>
-    <span class="badge-status mb-2">Clinical Disciplines</span>
-    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">Our Medical Services</h1>
+    <span class="badge-status mb-2">Cardiovascular Specialties</span>
+    <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-color);">Specialized Cardiac Services</h1>
     <p class="lead text-muted mx-auto" style="max-width: 680px;">
-      Explore our comprehensive suite of advanced diagnostic, surgical, and therapeutic healthcare services across specialized medical centers.
+      Explore our comprehensive suite of advanced catheterization, surgical revascularization, and non-invasive cardiac procedures delivered by premier heart specialists.
     </p>
   </div>
 </section>
@@ -49,7 +49,7 @@
 
     <!-- Mobile Dropdown (< 768px) -->
     <div class="d-md-none mb-4">
-      <label class="form-label fw-bold small text-muted text-uppercase">Filter By Department:</label>
+      <label class="form-label fw-bold small text-muted text-uppercase">Filter By Cardiac Division:</label>
       <select class="form-select shadow-sm" id="servicesMobileFilter" onchange="location = this.value;">
         <option value="{% url 'departments:department_list' %}" {% if not selected_dept_slug or selected_dept_slug == 'all' %}selected{% endif %}>
           All Services
@@ -131,9 +131,9 @@
   <div class="container">
     <div class="section-header">
       <span class="section-tag">Centres of Excellence</span>
-      <h2 class="section-title">Explore Specialized Departments</h2>
+      <h2 class="section-title">Explore Specialized Cardiac Divisions</h2>
       <p class="section-description">
-        Each department is equipped with dedicated surgical suites, intensive care units, and consultation clinics.
+        Each division is equipped with dedicated catheterization labs, cardiac surgical suites, and specialized CICU beds.
       </p>
     </div>
 
@@ -152,7 +152,7 @@
             </div>
             <div>
               <a href="{% url 'departments:department_detail' dept.slug %}" class="btn btn-sm btn-outline-custom w-100">
-                <span>View Department & Specialists</span>
+                <span>View Division & Specialists</span>
                 <i class="bi bi-chevron-right ms-1"></i>
               </a>
             </div>

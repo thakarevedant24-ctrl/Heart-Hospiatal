@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Appointment Confirmed ({{ ref_code }}) | City Hospital{% endblock %}
+{% block title %}Appointment Confirmed ({{ ref_code }}) | City Heart Hospital{% endblock %}
 
-{% block meta_description %}Official consultation request confirmation for patient {{ appointment.patient_name }} at City Hospital. Reference {{ ref_code }}.{% endblock %}
+{% block meta_description %}Official cardiac consultation request confirmation for patient {{ appointment.patient_name }} at City Heart Hospital. Reference {{ ref_code }}.{% endblock %}
 
 {% block content %}
 <section class="py-5 bg-light-subtle border-bottom d-print-none">
@@ -13,9 +13,9 @@
     <span class="badge rounded-pill bg-teal text-white px-3 py-2 fw-normal d-block mx-auto mb-2" style="width: fit-content;">
       Submission Received
     </span>
-    <h1 class="display-5 fw-bold text-dark-navy mb-2">Appointment Request Submitted</h1>
+    <h1 class="display-5 fw-bold text-dark-navy mb-2">Cardiac Appointment Request Submitted</h1>
     <p class="text-muted lead max-w-600 mx-auto">
-      Thank you, <strong>{{ appointment.patient_name }}</strong>. Your consultation request has been forwarded to our clinical scheduling desk.
+      Thank you, <strong>{{ appointment.patient_name }}</strong>. Your consultation request has been forwarded to our cardiac clinical scheduling desk.
     </p>
   </div>
 </section>
@@ -29,7 +29,7 @@
           <div class="d-flex flex-wrap justify-content-between align-items-start border-bottom pb-4 mb-4 gap-3">
             <div>
               <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="fs-4 fw-bold text-teal">City Hospital</span>
+                <span class="fs-4 fw-bold text-teal">City Heart Hospital</span>
               </div>
               <p class="text-muted small mb-0">12 Wellness Avenue, Riverdale, TX 75001 &bull; +1 (555) 010-7890</p>
             </div>

@@ -4,48 +4,54 @@ from doctors.models import Doctor
 from core.models import Testimonial
 
 class Command(BaseCommand):
-    help = 'Seeds initial demonstration data for City Hospital'
+    help = 'Seeds initial demonstration data for City Heart Hospital'
 
     def handle(self, *args, **options):
-        self.stdout.write('Seeding initial data...')
+        self.stdout.write('Seeding initial cardiac specialty data for City Heart Hospital...')
 
-        # 1. Departments
+        # Clean existing non-cardiac or demo data cleanly
+        Service.objects.all().delete()
+        Doctor.objects.all().delete()
+        Department.objects.all().delete()
+        Testimonial.objects.all().delete()
+
+        # 1. Departments (6 Dedicated Cardiac Divisions)
         depts_data = [
             {
-                'name': 'Cardiology & Vascular Center',
+                'name': 'Interventional Cardiology & Cath Lab',
                 'icon': 'bi-heart-pulse-fill',
-                'short_description': 'Advanced diagnostics, catheterization laboratory, and non-invasive cardiac intensive care.',
-                'full_description': 'Our Cardiology department provides comprehensive preventive, diagnostic, and therapeutic heart care with state-of-the-art hybrid catheterization labs and echocardiography suites.'
+                'short_description': 'Advanced coronary angiograms, primary angioplasty (PAMI), complex stenting, and structural heart catheterization.',
+                'full_description': 'Our state-of-the-art hybrid catheterization laboratories operate 24/7 with zero-delay STEMI activation. Specialists perform complex coronary interventions, intravascular ultrasound (IVUS), optical coherence tomography (OCT), fractional flow reserve (FFR), and chronic total occlusion (CTO) revascularization with radial artery access.'
             },
             {
-                'name': 'Neurology & Neurosurgery',
-                'icon': 'bi-cpu-fill',
-                'short_description': 'Comprehensive brain, spine, and nervous system care with a 24/7 dedicated stroke emergency team.',
-                'full_description': 'Specialized neurology department equipped with modern electroencephalogram (EEG), electromyogram (EMG), and stereotactic neurosurgical operating facilities.'
+                'name': 'Cardiothoracic & Vascular Surgery (CTVS)',
+                'icon': 'bi-shield-plus',
+                'short_description': 'Minimally invasive cardiac surgery (MICS), coronary artery bypass grafting (CABG), valve repair, and aortic aneurysm surgery.',
+                'full_description': 'Equipped with ultra-clean laminar flow cardiac operating suites, our CTVS surgical faculty delivers world-class outcomes in beating-heart bypass surgeries, complex multivalve replacements, aortic root repairs, and heart-lung machine perfusion protocols.'
             },
             {
-                'name': 'Pediatrics & Child Wellness',
+                'name': 'Cardiac Electrophysiology & Arrhythmia Center',
+                'icon': 'bi-activity',
+                'short_description': 'Advanced 3D cardiac mapping, radiofrequency & cryoballoon catheter ablation, pacemaker & ICD implantation.',
+                'full_description': 'Dedicated to diagnosing and correcting complex heart rhythm disorders, atrial fibrillation (AFib), ventricular tachycardia, and heart block. We utilize high-density 3D mapping systems and implant leadless pacemakers, biventricular devices (CRT-D), and subcutaneous ICDs.'
+            },
+            {
+                'name': 'Pediatric & Congenital Heart Center',
                 'icon': 'bi-emoji-smile-fill',
-                'short_description': 'Gentle, compassionate medical care for infants, adolescents, and children, backed by Level-III NICU.',
-                'full_description': 'Dedicated to the holistic wellness and acute medical care of children from newborn to adolescence with family-centered care suites.'
+                'short_description': 'Compassionate cardiac care for neonates, infants, and children with congenital heart defects and structural anomalies.',
+                'full_description': 'Specialized pediatric cardiology unit providing neonate-to-adolescent structural heart interventions, pediatric echocardiography, ASD/VSD device closures, and congenital defect corrective surgeries backed by a dedicated Pediatric Cardiac ICU.'
             },
             {
-                'name': 'Orthopedics & Sports Medicine',
-                'icon': 'bi-person-arms-up',
-                'short_description': 'Minimally invasive joint replacements, robotic spine surgery, and sports injury rehabilitation.',
-                'full_description': 'Specializing in computer-assisted arthroplasty, complex trauma repair, spine stabilization, and physical rehabilitation.'
+                'name': 'Non-Invasive Cardiology & Advanced Diagnostics',
+                'icon': 'bi-clipboard2-pulse-fill',
+                'short_description': '3D Echocardiography, transesophageal echo (TEE), cardiac CT angiography, stress testing (TMT), and 24/7 Holter monitoring.',
+                'full_description': 'High-precision cardiac imaging and physiological diagnostics identifying coronary artery calcification, myocardial ischemia, valvular hemodynamics, and heart failure markers with minimal patient discomfort and zero radiation options.'
             },
             {
-                'name': 'Emergency & Trauma Care',
+                'name': '24/7 Chest Pain & Acute STEMI Emergency Center',
                 'icon': 'bi-hospital-fill',
-                'short_description': 'Round-the-clock level-1 trauma readiness with dedicated ambulance dispatch and ICU triage.',
-                'full_description': 'Rapid resuscitation and emergency stabilization center operational 24 hours a day, 365 days a year.'
-            },
-            {
-                'name': 'Oncology & Infusion Center',
-                'icon': 'bi-shield-shaded',
-                'short_description': 'Integrated medical and surgical cancer care with compassionate infusion and oncology suites.',
-                'full_description': 'State-of-the-art chemotherapy administration, precision oncology, immunotherapy, and dedicated patient support counseling.'
+                'short_description': 'Immediate emergency triage, rapid door-to-balloon angioplasty protocol (< 45 mins), and dedicated Mobile Cardiac ICU ambulances.',
+                'full_description': 'Round-the-clock emergency facility designed for rapid resuscitation of acute myocardial infarction, unstable angina, cardiogenic shock, and life-threatening arrhythmias, staffed by on-site cardiac intensivists and interventional cardiologists.'
             },
         ]
 
@@ -60,69 +66,68 @@ class Command(BaseCommand):
                 }
             )
             departments_dict[dept.name] = dept
-            if created:
-                self.stdout.write(f"Created Department: {dept.name}")
+            self.stdout.write(f"Created Cardiac Department: {dept.name}")
 
-        # 2. Doctors
+        # 2. Doctors (6 Cardiac Specialists)
         doctors_data = [
             {
                 'name': 'Elena Rostova',
-                'department': departments_dict['Cardiology & Vascular Center'],
-                'specialization': 'Interventional Cardiologist',
-                'qualification': 'MD, FACC, FSCAI',
-                'experience_years': 16,
-                'bio': 'Pioneering specialist in structural heart disease, complex angioplasty, and preventative cardiology.',
-                'available_days': 'Mon - Thu',
-                'is_active': True,
-            },
-            {
-                'name': 'Marcus Chen',
-                'department': departments_dict['Neurology & Neurosurgery'],
-                'specialization': 'Senior Neurosurgeon',
-                'qualification': 'MD, FACS, FAANS',
+                'department': departments_dict['Interventional Cardiology & Cath Lab'],
+                'specialization': 'Chief Interventional Cardiologist',
+                'qualification': 'MD, DM (Cardiology), FACC, FSCAI',
                 'experience_years': 18,
-                'bio': 'Internationally recognized for minimally invasive brain surgery, spinal decompression, and cerebrovascular therapy.',
-                'available_days': 'Mon, Wed, Fri',
-                'is_active': True,
-            },
-            {
-                'name': 'Sarah Jenkins',
-                'department': departments_dict['Pediatrics & Child Wellness'],
-                'specialization': 'Consultant Pediatrician',
-                'qualification': 'MD, FAAP',
-                'experience_years': 12,
-                'bio': 'Passionate advocate for pediatric preventive care, neonatal stabilization, and developmental health.',
+                'bio': 'Pioneering interventional cardiologist with over 4,500 successful coronary angioplasties and transcatheter aortic valve replacements (TAVR). Nationally recognized for complex radial stenting and acute STEMI interventions.',
                 'available_days': 'Mon - Fri',
                 'is_active': True,
             },
             {
+                'name': 'Marcus Vance',
+                'department': departments_dict['Cardiothoracic & Vascular Surgery (CTVS)'],
+                'specialization': 'Chief Cardiothoracic Surgeon',
+                'qualification': 'MD, MCh (CTVS), FACS, FETCS',
+                'experience_years': 22,
+                'bio': 'Internationally acclaimed cardiac surgeon specializing in minimally invasive beating-heart coronary bypass (CABG), aortic aneurysm repair, and mitral valve reconstruction with exceptional clinical safety records.',
+                'available_days': 'Mon, Wed, Fri',
+                'is_active': True,
+            },
+            {
                 'name': 'David Thorne',
-                'department': departments_dict['Orthopedics & Sports Medicine'],
-                'specialization': 'Orthopedic & Joint Surgeon',
-                'qualification': 'MBBS, MS (Ortho), FAAOS',
-                'experience_years': 15,
-                'bio': 'Expert in robotic total knee and hip replacements and arthroscopic sports tendon reconstructions.',
+                'department': departments_dict['Cardiac Electrophysiology & Arrhythmia Center'],
+                'specialization': 'Senior Cardiac Electrophysiologist',
+                'qualification': 'MD, DM (Cardio), FHRS, CEPS',
+                'experience_years': 16,
+                'bio': 'Leading expert in complex cardiac electrophysiology, 3D anatomical mapping, radiofrequency catheter ablation for AFib, and implantation of biventricular CRT-D and leadless pacemakers.',
                 'available_days': 'Tue, Thu, Sat',
                 'is_active': True,
             },
             {
+                'name': 'Sarah Jenkins',
+                'department': departments_dict['Pediatric & Congenital Heart Center'],
+                'specialization': 'Director of Pediatric Cardiology',
+                'qualification': 'MD, FAAP, FACC',
+                'experience_years': 15,
+                'bio': 'Specializing in neonatal and pediatric congenital heart disease, fetal echocardiography, and percutaneous transcatheter device closure of atrial and ventricular septal defects.',
+                'available_days': 'Mon - Thu',
+                'is_active': True,
+            },
+            {
                 'name': 'Amina Al-Mansoor',
-                'department': departments_dict['Emergency & Trauma Care'],
-                'specialization': 'Emergency Care Director',
-                'qualification': 'MD, FACEP',
-                'experience_years': 14,
-                'bio': 'Dedicated to rapid trauma triage, critical care resuscitation, and emergency patient stabilization.',
+                'department': departments_dict['24/7 Chest Pain & Acute STEMI Emergency Center'],
+                'specialization': 'Director of Cardiac Critical Care & STEMI Unit',
+                'qualification': 'MD, FCCP, FESC',
+                'experience_years': 17,
+                'bio': 'Pioneered our rapid < 45 minute door-to-balloon primary angioplasty protocol. Specialist in acute coronary syndromes, cardiogenic shock management, ECMO, and cardiac ICU resuscitation.',
                 'available_days': '24/7 Roster',
                 'is_active': True,
             },
             {
                 'name': 'Jonathan Ross',
-                'department': departments_dict['Oncology & Infusion Center'],
-                'specialization': 'Medical Oncologist',
-                'qualification': 'MD, PhD, FACP',
-                'experience_years': 20,
-                'bio': 'Focusing on targeted genomic cancer therapies, immunotherapy protocols, and compassionate oncology care.',
-                'available_days': 'Mon - Thu',
+                'department': departments_dict['Non-Invasive Cardiology & Advanced Diagnostics'],
+                'specialization': 'Consultant Non-Invasive Cardiologist & Imaging Specialist',
+                'qualification': 'MD, FASE, FSCMR',
+                'experience_years': 14,
+                'bio': 'Expert in advanced transesophageal echocardiography (TEE), 3D myocardial strain imaging, contrast cardiac MRI, and preventative cardiovascular risk stratification.',
+                'available_days': 'Mon - Fri',
                 'is_active': True,
             },
         ]
@@ -140,110 +145,106 @@ class Command(BaseCommand):
                     'is_active': doc_info['is_active'],
                 }
             )
-            if created:
-                self.stdout.write(f"Created Doctor: Dr. {doc.name}")
+            self.stdout.write(f"Created Cardiologist: Dr. {doc.name}")
 
-        # 3. Testimonials
+        # 3. Testimonials (Heart Patient Recovery Stories)
         testimonials_data = [
             {
                 'patient_name': 'Eleanor Vance',
-                'message': 'The cardiology team at City Hospital provided extraordinary care during my surgery. Every doctor and nurse treated me with deep kindness and patience.',
+                'message': 'When I suffered sudden chest pressure at home, City Heart Hospital’s STEMI emergency team and Dr. Elena Rostova had me in the Cath Lab within 35 minutes. Their rapid angioplasty saved my heart muscle and my life.',
                 'rating': 5,
                 'is_approved': True,
             },
             {
                 'patient_name': 'Robert Martinez',
-                'message': 'From the moment I checked in at Emergency to my discharge after orthopedic rehabilitation, the staff went above and beyond. Truly modern medicine with a human touch.',
+                'message': 'Undergoing beating-heart bypass surgery was terrifying, but Dr. Marcus Vance and the CTVS surgical team gave me complete confidence. Today my heart is pumping stronger than it has in ten years.',
                 'rating': 5,
                 'is_approved': True,
             },
             {
                 'patient_name': 'Sophie Lin & Family',
-                'message': 'Dr. Jenkins took such great care of our daughter during her hospital stay. City Hospital’s pediatric department is warm, reassuring, and second to none.',
+                'message': 'Dr. Sarah Jenkins and the pediatric cardiac team diagnosed and repaired our infant son’s ASD defect with such incredible kindness and precision. We will forever be grateful to City Heart Hospital.',
                 'rating': 5,
                 'is_approved': True,
             },
             {
                 'patient_name': 'Thomas Sterling',
-                'message': 'The state-of-the-art facilities and knowledgeable specialists made all the difference in my recovery. Booking was seamless and the care was outstanding.',
+                'message': 'After years of frightening AFib episodes and palpitations, Dr. David Thorne performed a 3D catheter ablation. I am completely symptom-free and off medication. World-class heart care right here in Riverdale.',
                 'rating': 5,
                 'is_approved': True,
             },
         ]
 
-        # 4. Services
+        for t in testimonials_data:
+            Testimonial.objects.create(
+                patient_name=t['patient_name'],
+                message=t['message'],
+                rating=t['rating'],
+                is_approved=t['is_approved']
+            )
+        self.stdout.write('Created Heart Recovery Testimonials.')
+
+        # 4. Services (10 Dedicated Cardiac Services)
         services_data = [
             {
-                'title': 'Echocardiography & Doppler Study',
-                'department': departments_dict['Cardiology & Vascular Center'],
-                'icon': 'bi-activity',
-                'short_description': 'Advanced non-invasive cardiac imaging evaluating heart chambers, valves, and systemic blood circulation.'
-            },
-            {
-                'title': 'Cardiac Catheterization & Angioplasty',
-                'department': departments_dict['Cardiology & Vascular Center'],
+                'title': 'Primary Angioplasty (PAMI) & Stenting',
+                'department': departments_dict['Interventional Cardiology & Cath Lab'],
                 'icon': 'bi-heart-pulse-fill',
-                'short_description': 'Minimally invasive diagnostic angiograms, stent placements, and coronary artery disease interventions.'
+                'short_description': 'Immediate catheterization and drug-eluting stent implantation for acute myocardial infarction with rapid door-to-balloon protocol.'
             },
             {
-                'title': 'Comprehensive Stroke Unit & Thrombolysis',
-                'department': departments_dict['Neurology & Neurosurgery'],
-                'icon': 'bi-lightning-fill',
-                'short_description': 'Rapid response acute stroke assessment, clot-busting thrombolysis, and endovascular interventions.'
+                'title': 'Transcatheter Aortic Valve Replacement (TAVR / TAVI)',
+                'department': departments_dict['Interventional Cardiology & Cath Lab'],
+                'icon': 'bi-shield-check',
+                'short_description': 'Minimally invasive percutaneous valve replacement for severe aortic stenosis without opening the chest.'
             },
             {
-                'title': 'Minimally Invasive Spine & Brain Surgery',
-                'department': departments_dict['Neurology & Neurosurgery'],
-                'icon': 'bi-cpu-fill',
-                'short_description': 'Microscopic and endoscopic neurosurgical interventions for spinal discs, tumors, and cranial conditions.'
+                'title': 'Minimally Invasive CABG (Beating-Heart Bypass)',
+                'department': departments_dict['Cardiothoracic & Vascular Surgery (CTVS)'],
+                'icon': 'bi-shield-plus',
+                'short_description': 'Off-pump coronary artery bypass surgery performed through small incisions, promoting faster recovery and less blood loss.'
             },
             {
-                'title': 'Level-III Neonatal Intensive Care (NICU)',
-                'department': departments_dict['Pediatrics & Child Wellness'],
-                'icon': 'bi-shield-heart',
-                'short_description': 'Dedicated multi-bed intensive care nursery for premature infants and critically ill newborns.'
-            },
-            {
-                'title': 'Pediatric Wellness & Immunization',
-                'department': departments_dict['Pediatrics & Child Wellness'],
-                'icon': 'bi-emoji-smile-fill',
-                'short_description': 'Comprehensive infant developmental checkups, preventative pediatric screenings, and scheduled vaccines.'
-            },
-            {
-                'title': 'Robotic Total Joint Replacement',
-                'department': departments_dict['Orthopedics & Sports Medicine'],
+                'title': 'Heart Valve Repair & Aortic Reconstruction',
+                'department': departments_dict['Cardiothoracic & Vascular Surgery (CTVS)'],
                 'icon': 'bi-gear-wide-connected',
-                'short_description': 'Computer-assisted robotic total hip and knee arthroplasty designed for rapid mobility and joint longevity.'
+                'short_description': 'Specialized surgical repair and biological valve replacements for mitral, aortic, and tricuspid valve diseases.'
             },
             {
-                'title': 'Sports Medicine & Arthroscopic Surgery',
-                'department': departments_dict['Orthopedics & Sports Medicine'],
-                'icon': 'bi-person-arms-up',
-                'short_description': 'Keyhole minimally invasive surgery for ACL tears, rotator cuff repairs, and athletic trauma recovery.'
+                'title': '3D Cardiac Mapping & Arrhythmia Catheter Ablation',
+                'department': departments_dict['Cardiac Electrophysiology & Arrhythmia Center'],
+                'icon': 'bi-activity',
+                'short_description': 'Precision radiofrequency and cryoablation targeting atrial fibrillation, flutter, and ventricular tachycardias.'
             },
             {
-                'title': '24/7 Trauma Resuscitation & ER',
-                'department': departments_dict['Emergency & Trauma Care'],
+                'title': 'Pacemaker, ICD & CRT-D Implantation',
+                'department': departments_dict['Cardiac Electrophysiology & Arrhythmia Center'],
+                'icon': 'bi-cpu-fill',
+                'short_description': 'Implantation of modern leadless pacemakers and automated cardiac defibrillators for arrhythmia control and heart failure.'
+            },
+            {
+                'title': 'Pediatric Interventional Defect Closure (ASD/VSD/PDA)',
+                'department': departments_dict['Pediatric & Congenital Heart Center'],
+                'icon': 'bi-emoji-smile-fill',
+                'short_description': 'Non-surgical device closures for congenital structural heart defects in children and young adults.'
+            },
+            {
+                'title': '3D Echocardiography & Transesophageal Echo (TEE)',
+                'department': departments_dict['Non-Invasive Cardiology & Advanced Diagnostics'],
+                'icon': 'bi-clipboard2-pulse-fill',
+                'short_description': 'High-resolution ultrasound imaging of heart chambers, valves, and hemodynamics for precise cardiac evaluation.'
+            },
+            {
+                'title': '24/7 Chest Pain Triage & Rapid STEMI Protocol',
+                'department': departments_dict['24/7 Chest Pain & Acute STEMI Emergency Center'],
                 'icon': 'bi-hospital-fill',
-                'short_description': 'Immediate triage, shock stabilization, advanced airway support, and acute trauma resuscitation.'
+                'short_description': 'Zero-delay cardiac emergency assessment, point-of-care Troponin-I biomarkers, and immediate Cath Lab transfer.'
             },
             {
-                'title': 'Critical Care Ambulance & Dispatch',
-                'department': departments_dict['Emergency & Trauma Care'],
+                'title': 'Mobile Cardiac ICU Ambulance & Telemetry Dispatch',
+                'department': departments_dict['24/7 Chest Pain & Acute STEMI Emergency Center'],
                 'icon': 'bi-truck',
-                'short_description': 'Advanced cardiac life support (ACLS) mobile units equipped with onboard telemetry and ventilator systems.'
-            },
-            {
-                'title': 'Chemotherapy & Targeted Infusion',
-                'department': departments_dict['Oncology & Infusion Center'],
-                'icon': 'bi-droplet-fill',
-                'short_description': 'Outpatient oncology infusion suites with personalized clinical oncology nursing and targeted biologic therapy.'
-            },
-            {
-                'title': 'Comprehensive Cancer Screening & Biopsy',
-                'department': departments_dict['Oncology & Infusion Center'],
-                'icon': 'bi-search',
-                'short_description': 'Early detection mammography, image-guided fine needle biopsies, and preventive oncology consultations.'
+                'short_description': 'Advanced life support ambulances equipped with 12-lead digital ECG transmission, defibrillators, and ventilator support.'
             },
         ]
 
@@ -256,8 +257,7 @@ class Command(BaseCommand):
                     'short_description': s_info['short_description'],
                 }
             )
-            if created:
-                self.stdout.write(f"Created Service: {srv.title}")
+            self.stdout.write(f"Created Cardiac Service: {srv.title}")
 
         # 5. Gallery Images (Professional Hospital Photography)
         from gallery.models import GalleryImage
@@ -350,7 +350,7 @@ class Command(BaseCommand):
                     draw = ImageDraw.Draw(img)
                     draw.rectangle([20, 20, 780, 540], outline='#0284C7', width=3)
                     draw.rectangle([40, 240, 760, 320], fill='#FFFFFF')
-                    draw.text((60, 260), "CITY HOSPITAL", fill='#0F3D69')
+                    draw.text((60, 260), "CITY HEART HOSPITAL", fill='#0F3D69')
                     draw.text((60, 285), g['title'], fill='#0F172A')
                     buf = io.BytesIO()
                     img.save(buf, format='JPEG', quality=90)
@@ -358,5 +358,5 @@ class Command(BaseCommand):
                     item.image.save(g['file_name'], ContentFile(buf.getvalue()), save=True)
                     self.stdout.write(f"Created Fallback Photo: {item.title}")
 
-        self.stdout.write(self.style.SUCCESS('Successfully seeded database with City Hospital demonstration data!'))
+        self.stdout.write(self.style.SUCCESS('Successfully seeded database with City Heart Hospital specialized cardiac data!'))
 

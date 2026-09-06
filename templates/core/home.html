@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}City Hospital | Compassionate Care, Modern Medicine{% endblock %}
+{% block title %}City Heart Hospital | Advanced Cardiology & Cardiac Surgery{% endblock %}
 
-{% block meta_description %}City Hospital in Riverdale, TX provides 24/7 trauma emergency care, cardiology, neurology, pediatrics, and specialized surgical excellence. Book consultations online.{% endblock %}
+{% block meta_description %}City Heart Hospital in Riverdale, TX is an exclusive cardiac hospital offering 24/7 chest pain emergency, primary angioplasty, beating-heart bypass, and arrhythmia ablation.{% endblock %}
 
 {% block content %}
 
@@ -79,25 +79,25 @@
         <!-- Stat 1: Years of Service -->
         <div class="col-6 col-md-3 stat-item">
           <div class="stat-number" data-target="{{ stats.years|default:25 }}" data-suffix="+">0</div>
-          <p class="stat-label">Years of Service</p>
+          <p class="stat-label">Years of Cardiac Care</p>
         </div>
 
         <!-- Stat 2: Expert Doctors -->
         <div class="col-6 col-md-3 stat-item">
-          <div class="stat-number" data-target="{{ stats.doctors_count|default:18 }}" data-suffix="+">0</div>
-          <p class="stat-label">Expert Doctors</p>
+          <div class="stat-number" data-target="{{ stats.doctors_count|default:6 }}" data-suffix="+">0</div>
+          <p class="stat-label">Heart Specialists</p>
         </div>
 
         <!-- Stat 3: Departments -->
         <div class="col-6 col-md-3 stat-item">
           <div class="stat-number" data-target="{{ stats.departments_count|default:6 }}" data-suffix="+">0</div>
-          <p class="stat-label">Clinical Departments</p>
+          <p class="stat-label">Cardiac Divisions</p>
         </div>
 
         <!-- Stat 4: Happy Patients -->
         <div class="col-6 col-md-3 stat-item">
           <div class="stat-number" data-target="{{ stats.patients_count|default:50000 }}" data-suffix="+">0</div>
-          <p class="stat-label">Happy Patients</p>
+          <p class="stat-label">Heart Procedures Done</p>
         </div>
       </div>
     </div>
@@ -111,15 +111,15 @@
             <div>
               <div class="quick-feature-header">
                 <div class="quick-feature-icon icon-emergency">
-                  <i class="bi bi-shield-plus"></i>
+                  <i class="bi bi-heart-pulse-fill"></i>
                 </div>
                 <span class="live-status-pill">
                   <span class="live-dot"></span> 24/7 LIVE
                 </span>
               </div>
-              <h3 class="quick-feature-title">24/7 Emergency Available</h3>
+              <h3 class="quick-feature-title">24/7 Chest Pain Unit</h3>
               <p class="quick-feature-desc">
-                Rapid trauma center, cardiac resuscitation unit, and certified emergency surgical staff ready round-the-clock.
+                Rapid door-to-balloon primary angioplasty protocol (&lt; 45 mins) and on-duty cardiac interventionalists ready round-the-clock.
               </p>
             </div>
             <div class="quick-feature-action">
@@ -132,6 +132,7 @@
         </div>
 
         <!-- 2. ICU Ambulance Service -->
+        <!-- 2. Mobile Cardiac ICU Ambulance Service -->
         <div class="col-12 col-md-6 col-lg-3">
           <div class="quick-feature-card h-100">
             <div>
@@ -141,9 +142,9 @@
                 </div>
                 <span class="badge bg-light text-primary border">Rapid Dispatch</span>
               </div>
-              <h3 class="quick-feature-title">ICU Ambulance Service</h3>
+              <h3 class="quick-feature-title">Mobile Cardiac ICU</h3>
               <p class="quick-feature-desc">
-                GPS-tracked mobile intensive care ambulances equipped with advanced life-support (ALS) and paramedic teams.
+                GPS-tracked mobile intensive care ambulances equipped with onboard 12-lead digital ECG telemetry, defibrillators, and ventilator support.
               </p>
             </div>
             <div class="quick-feature-action">
@@ -154,19 +155,19 @@
           </div>
         </div>
 
-        <!-- 3. 24/7 Pharmacy & Diagnostic Lab -->
+        <!-- 3. 24/7 Hybrid Cath Lab & Diagnostics -->
         <div class="col-12 col-md-6 col-lg-3">
           <div class="quick-feature-card h-100">
             <div>
               <div class="quick-feature-header">
                 <div class="quick-feature-icon icon-pharmacy">
-                  <i class="bi bi-capsule"></i>
+                  <i class="bi bi-activity"></i>
                 </div>
-                <span class="badge bg-light border" style="color: var(--accent-color) !important;">All Hours</span>
+                <span class="badge bg-light border" style="color: var(--accent-color) !important;">Zero Delay</span>
               </div>
-              <h3 class="quick-feature-title">24/7 Pharmacy & Lab</h3>
+              <h3 class="quick-feature-title">24/7 Hybrid Cath Lab</h3>
               <p class="quick-feature-desc">
-                Fully stocked hospital pharmacy, automated pathology testing lab, and high-precision digital X-ray/CT imaging.
+                Immediate diagnostic coronary angiograms, rapid point-of-care Troponin-I biomarkers, and high-precision 3D echocardiography.
               </p>
             </div>
             <div class="quick-feature-action">
@@ -187,14 +188,14 @@
                 </div>
                 <span class="badge bg-light text-success border">Board Certified</span>
               </div>
-              <h3 class="quick-feature-title">Expert Doctors On-Duty</h3>
+              <h3 class="quick-feature-title">On-Duty Cardiologists</h3>
               <p class="quick-feature-desc">
-                Leading multi-specialty consultants across Cardiology, Neurology, Orthopedics & Pediatrics ready to assist.
+                Dedicated interventional cardiologists, CTVS surgeons, and electrophysiologists available for emergency and OPD care.
               </p>
             </div>
             <div class="quick-feature-action">
               <a href="{% url 'appointments:book_appointment' %}" class="quick-feature-link">
-                <span>Book Consultation</span>
+                <span>Book Cardiac Consultation</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -212,10 +213,10 @@
 <section class="departments-section reveal-on-scroll">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">Clinical Excellence</span>
-      <h2 class="section-title">Specialized Medical Departments</h2>
+      <span class="section-tag">Cardiac Divisions</span>
+      <h2 class="section-title">Specialized Cardiovascular Centers</h2>
       <p class="section-description">
-        State-of-the-art medical disciplines offering comprehensive diagnostic, surgical, and therapeutic treatments.
+        World-class cardiac divisions delivering advanced catheterization, surgical revascularization, and non-invasive diagnostics.
       </p>
     </div>
 
@@ -234,7 +235,7 @@
             </div>
             <div>
               <a href="{% url 'departments:department_list' %}" class="dept-link">
-                <span>Explore Department</span>
+                <span>Explore Division</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -242,14 +243,14 @@
         </div>
       {% empty %}
         <div class="col-12 text-center py-4">
-          <p class="text-muted">Clinical departments will be listed shortly.</p>
+          <p class="text-muted">Cardiac divisions will be listed shortly.</p>
         </div>
       {% endfor %}
     </div>
 
     <div class="text-center mt-5">
       <a href="{% url 'departments:department_list' %}" class="btn btn-outline-custom">
-        <span>View All Services & Procedures</span>
+        <span>View All Cardiac Services & Procedures</span>
         <i class="bi bi-arrow-right"></i>
       </a>
     </div>
@@ -264,8 +265,8 @@
   <div class="container">
     <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
       <div>
-        <span class="section-tag">Our Faculty</span>
-        <h2 class="section-title mb-0">Meet Our Dedicated Physicians</h2>
+        <span class="section-tag">Cardiac Faculty</span>
+        <h2 class="section-title mb-0">Meet Our Cardiovascular Specialists</h2>
       </div>
       <!-- Scroll Navigation Buttons -->
       <div class="d-flex gap-2 mt-3 mt-md-0">
@@ -331,9 +332,9 @@
   <div class="container">
     <div class="section-header">
       <span class="section-tag">Patient Stories</span>
-      <h2 class="section-title">What Our Patients Say</h2>
+      <h2 class="section-title">What Our Heart Patients Say</h2>
       <p class="section-description">
-        Real experiences and heartfelt words from patients and families cared for at City Hospital.
+        Real experiences and heartfelt words from patients whose lives were transformed and saved at City Heart Hospital.
       </p>
     </div>
 
@@ -369,7 +370,7 @@
                 </div>
 
                 <h4 class="patient-author">{{ t.patient_name }}</h4>
-                <div class="small text-muted">Verified Patient Experience</div>
+                <div class="small text-muted">Verified Cardiac Patient</div>
               </div>
             </div>
           {% endfor %}
@@ -402,20 +403,20 @@
     <div class="row align-items-center justify-content-between g-4">
       <div class="col-lg-8">
         <span class="badge bg-white text-dark rounded-pill px-3 py-2 mb-3 fw-semibold shadow-sm">
-          <i class="bi bi-heart-pulse-fill me-1" style="color: var(--accent-color);"></i>Ready to Take the Next Step?
+          <i class="bi bi-heart-pulse-fill me-1" style="color: var(--accent-color);"></i>Protect Your Heart Health
         </span>
-        <h2 class="cta-title">Your Health & Healing Are Our Highest Priority</h2>
+        <h2 class="cta-title">Advanced Cardiac Care &amp; 24/7 Emergency Readiness</h2>
         <p class="cta-subtitle">
-          Whether you need a routine consultation, specialized diagnostic assessment, or surgical care, our clinical experts are here for you.
+          Whether you need an urgent cardiac assessment, preventative lipid screening, second surgical opinion, or advanced arrhythmia therapy, our cardiologists are here for you.
         </p>
         <div class="d-flex flex-wrap align-items-center gap-3">
           <a href="{% url 'appointments:book_appointment' %}" class="btn btn-accent-custom btn-lg shadow">
             <i class="bi bi-calendar2-plus-fill"></i>
-            <span>Book an Appointment Now</span>
+            <span>Book Cardiac Consultation</span>
           </a>
           <a href="tel:+15550107890" class="cta-phone-box">
             <i class="bi bi-telephone-fill"></i>
-            <span>Emergency: +1 (555) 010-7890</span>
+            <span>Chest Pain Hotline: +1 (555) 010-7890</span>
           </a>
         </div>
       </div>
@@ -424,7 +425,7 @@
         <div class="cta-opd-card text-start shadow-sm">
           <div class="d-flex align-items-center gap-2 mb-3">
             <i class="bi bi-clock-history fs-4 text-white"></i>
-            <h4 class="h5 fw-bold text-white mb-0">Outpatient &amp; OPD Hours</h4>
+            <h4 class="h5 fw-bold text-white mb-0">Cardiology OPD Hours</h4>
           </div>
           <div class="cta-opd-line">
             <span class="cta-opd-badge">OPD</span>
@@ -432,7 +433,7 @@
           </div>
           <div class="cta-opd-line pt-2 border-top border-white border-opacity-20">
             <span class="cta-opd-badge emergency">24/7</span>
-            <span class="text-white fw-bold">Emergency / Trauma Unit: Open 24/7/365</span>
+            <span class="text-white fw-bold">Chest Pain &amp; STEMI Unit: Open 24/7/365</span>
           </div>
         </div>
       </div>

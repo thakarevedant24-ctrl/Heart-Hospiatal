@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Dr. {{ doctor.name }} | {{ doctor.specialization }} | City Hospital{% endblock %}
+{% block title %}Dr. {{ doctor.name }} | {{ doctor.specialization }} | City Heart Hospital{% endblock %}
 
-{% block meta_description %}Book an appointment with Dr. {{ doctor.name }}, {{ doctor.qualification }} at City Hospital. Specialist in {{ doctor.specialization }} with {{ doctor.experience_years }} years of clinical experience.{% endblock %}
+{% block meta_description %}Book an appointment with Dr. {{ doctor.name }}, {{ doctor.qualification }} at City Heart Hospital. Specialist in {{ doctor.specialization }} with {{ doctor.experience_years }} years of clinical experience.{% endblock %}
 
 {% block content %}
 
@@ -14,13 +14,13 @@
   <div class="container">
     <div class="breadcrumb-custom text-center text-md-start">
       <a href="{% url 'core:home' %}">Home</a> &nbsp;/&nbsp; 
-      <a href="{% url 'doctors:doctor_list' %}">Doctors</a> &nbsp;/&nbsp; 
+      <a href="{% url 'doctors:doctor_list' %}">Heart Specialists</a> &nbsp;/&nbsp; 
       <span>Dr. {{ doctor.name }}</span>
     </div>
 
     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mt-2">
       <div>
-        <span class="badge-status mb-1">Board-Certified Faculty</span>
+        <span class="badge-status mb-1">Cardiovascular Specialist</span>
         <h1 class="display-5 fw-bold mb-0" style="color: var(--primary-color);">Dr. {{ doctor.name }}</h1>
         <div class="text-accent fs-5 fw-semibold mt-1" style="color: var(--accent-color);">
           {{ doctor.specialization }}
@@ -29,7 +29,7 @@
       <div>
         <a href="{% url 'appointments:book_appointment' %}?department={{ doctor.department.slug }}&doctor={{ doctor.id }}" 
            class="btn btn-accent-custom btn-lg shadow">
-          <i class="bi bi-calendar2-check-fill me-1"></i>Book Appointment
+          <i class="bi bi-calendar2-check-fill me-1"></i>Book Cardiac Consultation
         </a>
       </div>
     </div>
@@ -138,10 +138,10 @@
           <div class="card-custom p-4 p-md-5 mb-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
               <h3 class="h4 fw-bold mb-0" style="color: var(--primary-color);">
-                Clinical Procedures in {{ doctor.department.name }}
+                Cardiac Procedures in {{ doctor.department.name }}
               </h3>
               <a href="{% url 'departments:department_detail' doctor.department.slug %}" class="small text-decoration-none fw-semibold">
-                View Department <i class="bi bi-arrow-right"></i>
+                View Division <i class="bi bi-arrow-right"></i>
               </a>
             </div>
 
@@ -167,9 +167,9 @@
         <div class="card-custom p-4">
           <h4 class="h5 fw-bold mb-3" style="color: var(--primary-color);"><i class="bi bi-info-circle-fill me-2" style="color: var(--support-color);"></i>Preparing for Your Consultation</h4>
           <ul class="small text-secondary mb-0">
-            <li class="mb-2">Please bring prior medical records, diagnostic lab reports, and medication histories.</li>
-            <li class="mb-2">Arrive 15 minutes prior to your scheduled consultation time for vitals registration.</li>
-            <li>Same-day urgent appointments may be accommodated through our outpatient triage desk.</li>
+            <li class="mb-2">Please bring prior cardiac diagnostic tests (ECG, echo, angiograms) and medication list.</li>
+            <li class="mb-2">Arrive 15 minutes prior to your scheduled consultation time for blood pressure and vitals registration.</li>
+            <li>Urgent cardiac evaluations may be accommodated through our chest pain triage desk.</li>
           </ul>
         </div>
       </div>

@@ -23,26 +23,26 @@
 
   <!-- Brand Typography -->
   <text x="250" y="210" font-family="'Poppins', sans-serif" font-size="56" font-weight="bold" fill="#FFFFFF">
-    City Hospital
+    City Heart Hospital
   </text>
 
   <!-- Tagline -->
-  <text x="120" y="320" font-family="'Poppins', sans-serif" font-size="38" font-weight="600" fill="#38BDF8">
-    "Compassionate Care, Modern Medicine"
+  <text x="120" y="320" font-family="'Poppins', sans-serif" font-size="36" font-weight="600" fill="#38BDF8">
+    "Advanced Cardiology &amp; Cardiothoracic Surgery"
   </text>
 
   <!-- Key Clinical Highlights -->
   <text x="120" y="400" font-family="'Inter', sans-serif" font-size="24" fill="#F8FAFC" fill-opacity="0.95">
-    &bull; 24/7 Emergency &amp; Trauma Center &nbsp;&nbsp;&bull; Cardiology &amp; Vascular Surgery &nbsp;&nbsp;&bull; Neurology
+    &bull; 24/7 Chest Pain &amp; STEMI Center &nbsp;&nbsp;&bull; Hybrid Cath Lab Angioplasty &nbsp;&nbsp;&bull; CTVS Heart Bypass (CABG)
   </text>
   <text x="120" y="445" font-family="'Inter', sans-serif" font-size="24" fill="#F8FAFC" fill-opacity="0.95">
-    &bull; Pediatrics &amp; Neonatal Care &nbsp;&nbsp;&bull; Orthopedics &amp; Joint Reconstruction &nbsp;&nbsp;&bull; Advanced Diagnostics
+    &bull; Arrhythmia &amp; 3D Mapping &nbsp;&nbsp;&bull; Pediatric Heart Surgery &nbsp;&nbsp;&bull; Non-Invasive 3D Echo Diagnostics
   </text>
 
   <!-- Bottom Details Bar -->
   <line x1="120" y1="510" x2="1080" y2="510" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.35"/>
   <text x="120" y="555" font-family="'Inter', sans-serif" font-size="20" fill="#94A3B8">
-    12 Wellness Avenue, Riverdale, TX 75001 &nbsp;|&nbsp; 24/7 Line: +1 (555) 010-7890 &nbsp;|&nbsp; info@cityhospital.example
+    12 Wellness Avenue, Riverdale, TX 75001 &nbsp;|&nbsp; 24/7 Chest Pain Hotline: +1 (555) 010-7890 &nbsp;|&nbsp; info@cityhearthospital.example
   </text>
 </svg>
 

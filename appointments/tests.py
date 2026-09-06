@@ -123,7 +123,7 @@ class AppointmentBookingTests(TestCase):
         self.assertEqual(appointment.preferred_date, self.tomorrow)
 
         # Check confirmation message and reference on confirmation page
-        ref_code = f"HL-{appointment.id:05d}"
+        ref_code = f"CHH-{appointment.id:05d}"
         self.assertContains(response, ref_code)
         self.assertContains(response, 'Sarah Connor')
 
@@ -189,7 +189,7 @@ class AppointmentBookingTests(TestCase):
         url = reverse('appointments:booking_confirmation', kwargs={'pk': appointment.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, f"HL-{appointment.id:05d}")
+        self.assertContains(response, f"CHH-{appointment.id:05d}")
         self.assertContains(response, "Grace Hopper")
         self.assertContains(response, escape(self.dept_neuro.name))
         self.assertContains(response, self.doc_neuro.name)

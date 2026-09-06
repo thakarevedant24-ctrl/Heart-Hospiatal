@@ -31,18 +31,18 @@ def book_appointment(request):
             appointment.save()
 
             # Format confirmation email
-            ref_code = f"HL-{appointment.id:05d}"
+            ref_code = f"CHH-{appointment.id:05d}"
             formatted_date = appointment.preferred_date.strftime('%A, %B %d, %Y')
             formatted_time = appointment.preferred_time.strftime('%I:%M %p')
             doctor_display = (
                 f"Dr. {appointment.doctor.name} ({appointment.doctor.specialization})"
-                if appointment.doctor else "Any Available Clinical Specialist"
+                if appointment.doctor else "Any Available Cardiac Specialist"
             )
 
-            email_subject = f"Appointment Request Received [{ref_code}] - City Hospital"
+            email_subject = f"Appointment Request Received [{ref_code}] - City Heart Hospital"
             email_body = f"""Dear {appointment.patient_name},
 
-Thank you for choosing City Hospital. We have successfully received your consultation request.
+Thank you for choosing City Heart Hospital. We have successfully received your cardiac consultation request.
 
 ==================================================
 APPOINTMENT SUMMARY
@@ -61,20 +61,20 @@ Consultation Reason / Notes:
 ==================================================
 WHAT HAPPENS NEXT?
 ==================================================
-1. Our clinical triage coordinators will review practitioner schedules and verify your time slot.
-2. You will receive an SMS/email confirmation once your consultation is locked into our clinic calendar.
-3. On the day of your visit, please arrive 15 minutes early and present your photo ID and health insurance card at the main reception.
+1. Our cardiac clinical triage coordinators will review specialist schedules and verify your time slot.
+2. You will receive an SMS/email confirmation once your consultation is locked into our cardiology clinic calendar.
+3. On the day of your visit, please arrive 15 minutes early and present your photo ID, previous cardiac reports, and health insurance card at the main reception.
 
-Need immediate medical assistance?
-Our 24/7 Emergency & Trauma Hotline is available at +1 (555) 010-7890.
+Need immediate emergency cardiac assistance?
+Our 24/7 Chest Pain & Acute STEMI Emergency Hotline is available at +1 (555) 010-7890.
 
 Warm regards,
-Patient Services Coordination Desk
-City Hospital
+Cardiac Patient Services Coordination Desk
+City Heart Hospital
 12 Wellness Avenue, Riverdale, TX 75001
-Phone: +1 (555) 010-7890 | Email: info@cityhospital.example
+Phone: +1 (555) 010-7890 | Email: info@cityhearthospital.example
 """
-            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@cityhospital.example')
+            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@cityhearthospital.example')
             try:
                 send_mail(
                     email_subject,
@@ -146,7 +146,7 @@ def booking_confirmation(request, pk):
         Appointment.objects.select_related('department', 'doctor'),
         pk=pk
     )
-    ref_code = f"HL-{appointment.id:05d}"
+    ref_code = f"CHH-{appointment.id:05d}"
     return render(request, 'appointments/booking_confirmation.html', {
         'appointment': appointment,
         'ref_code': ref_code,
