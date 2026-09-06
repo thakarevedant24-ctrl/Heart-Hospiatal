@@ -66,13 +66,13 @@ WHAT HAPPENS NEXT?
 3. On the day of your visit, please arrive 15 minutes early and present your photo ID, previous cardiac reports, and health insurance card at the main reception.
 
 Need immediate emergency cardiac assistance?
-Our 24/7 Chest Pain & Acute STEMI Emergency Hotline is available at +1 (555) 010-7890.
+Our 24/7 Chest Pain & Acute STEMI Emergency Hotline is available at +91XXXXXXXX50.
 
 Warm regards,
 Cardiac Patient Services Coordination Desk
 City Heart Hospital
 12 Heart Institute Marg, BKC, Bandra East, Mumbai, Maharashtra 400051
-Phone: +1 (555) 010-7890 | Email: info@cityhearthospital.example
+Phone: +91XXXXXXXX50 | Email: info@cityhearthospital.example
 """
             from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@cityhearthospital.example')
             try:

@@ -18,7 +18,7 @@ class ContactForm(forms.ModelForm):
             }),
             'phone': forms.TextInput(attrs={
                 'class': 'form-control rounded-3',
-                'placeholder': '+1 (555) 000-0000',
+                'placeholder': '+91XXXXXXXX50',
             }),
             'subject': forms.TextInput(attrs={
                 'class': 'form-control rounded-3',

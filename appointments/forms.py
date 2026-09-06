@@ -59,7 +59,7 @@ class AppointmentForm(forms.ModelForm):
             }),
             'phone': forms.TextInput(attrs={
                 'class': 'form-control rounded-3',
-                'placeholder': '+1 (555) 000-0000',
+                'placeholder': '+91XXXXXXXX50',
                 'required': 'required',
             }),
             'department': forms.Select(attrs={

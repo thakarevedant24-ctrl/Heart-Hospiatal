@@ -48,7 +48,7 @@ class SiteWideSEOResponsivenessTests(TestCase):
         # Floating Action Buttons
         self.assertContains(response, 'id="backToTopBtn"')
         self.assertContains(response, 'whatsapp-btn')
-        self.assertContains(response, 'wa.me/15550107890')
+        self.assertContains(response, 'wa.me/91XXXXXXXX50')
 
         # Scroll-reveal classes
         self.assertContains(response, 'reveal-on-scroll')

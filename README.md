@@ -24,7 +24,7 @@ City Heart Hospital is built around a distinct, professional healthcare brand ki
 
 ### 📍 Hospital Contact Information (Default)
 - **Address:** 12 Heart Institute Marg, BKC, Bandra East, Mumbai, Maharashtra 400051
-- **Phone:** +1 (555) 010-7890
+- **Phone:** +91XXXXXXXX50
 - **Email:** info@cityhearthospital.example
 - **Emergency:** 24/7 Chest Pain & Acute STEMI Emergency Center
 
