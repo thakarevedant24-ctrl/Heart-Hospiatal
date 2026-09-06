@@ -1,5 +1,5 @@
 /**
- * Harborlight Multispecialty Hospital - Frontend Core JS
+ * City Heart Hospital — Mumbai - Frontend Core JS
  * Handles responsive navigation toggle, stats counter IntersectionObserver,
  * and horizontal carousel scrolling.
  */

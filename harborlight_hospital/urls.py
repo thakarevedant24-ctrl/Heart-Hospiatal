@@ -1,6 +1,6 @@
 """
 URL configuration for harborlight_hospital project.
-Harborlight Multispecialty Hospital - "Compassionate Care, Modern Medicine"
+City Heart Hospital — Mumbai - "Advanced Cardiology & Cardiothoracic Surgery"
 """
 
 from django.contrib import admin
