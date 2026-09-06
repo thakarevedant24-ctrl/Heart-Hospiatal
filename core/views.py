@@ -15,7 +15,7 @@ def home(request):
     
     hero_slides = [
         {
-            'image_url': '/media/gallery/hospital_clinical_suite.jpg',
+            'image_url': '/media/gallery/heart_hospital_cath_lab.jpg',
             'title': 'World-Class Heart & Cardiovascular Care',
             'subtitle': 'Dedicated exclusively to advanced interventional cardiology, beating-heart bypass surgery, and 24/7 acute chest pain emergencies.',
             'primary_btn_text': 'Book Cardiac Consultation',
@@ -24,7 +24,7 @@ def home(request):
             'secondary_btn_url': '/departments/',
         },
         {
-            'image_url': '/media/gallery/hospital_operating_theatre.jpg',
+            'image_url': '/media/gallery/heart_hospital_ctvs_surgery.jpg',
             'title': 'Pioneering Cardiothoracic Surgery & Catheterization',
             'subtitle': 'State-of-the-art hybrid Cath Labs, minimally invasive valve replacements (TAVR), and 3D arrhythmia mapping guided by senior heart specialists.',
             'primary_btn_text': 'Cardiac Procedures',
@@ -33,7 +33,7 @@ def home(request):
             'secondary_btn_url': '/doctors/',
         },
         {
-            'image_url': '/media/gallery/hospital_main_campus.jpg',
+            'image_url': '/media/gallery/heart_hospital_main_campus.jpg',
             'title': '24/7 Chest Pain & Acute STEMI Emergency Center',
             'subtitle': 'Rapid door-to-balloon angioplasty in under 45 minutes, Mobile Cardiac ICU ambulances, and round-the-clock intensive cardiac care.',
             'primary_btn_text': 'Emergency Hotline',

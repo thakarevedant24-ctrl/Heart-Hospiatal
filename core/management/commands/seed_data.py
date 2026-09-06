@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from departments.models import Department, Service
 from doctors.models import Doctor
 from core.models import Testimonial
+from gallery.models import GalleryImage
 
 class Command(BaseCommand):
     help = 'Seeds initial demonstration data for City Heart Hospital'
@@ -14,6 +15,7 @@ class Command(BaseCommand):
         Doctor.objects.all().delete()
         Department.objects.all().delete()
         Testimonial.objects.all().delete()
+        GalleryImage.objects.all().delete()
 
         # 1. Departments (6 Dedicated Cardiac Divisions)
         depts_data = [
@@ -259,8 +261,7 @@ class Command(BaseCommand):
             )
             self.stdout.write(f"Created Cardiac Service: {srv.title}")
 
-        # 5. Gallery Images (Professional Hospital Photography)
-        from gallery.models import GalleryImage
+        # 5. Gallery Images (Specialized Cardiac Hospital Facilities & Procedures)
         import urllib.request
         from PIL import Image, ImageDraw
         import io
@@ -268,95 +269,94 @@ class Command(BaseCommand):
 
         gallery_data = [
             {
-                'title': 'Main Hospital Pavilion & Healthcare Campus',
-                'file_name': 'hospital_main_campus.jpg',
-                'url': 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=1200&auto=format&fit=crop&q=80'
+                'title': 'Biplane Hybrid Catheterization Lab (Cath Lab)',
+                'file_name': 'heart_hospital_cath_lab.jpg',
+                'url': 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Advanced Surgical Operating Theatre',
-                'file_name': 'hospital_operating_theatre.jpg',
-                'url': 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&auto=format&fit=crop&q=80'
+                'title': 'Cardiothoracic Surgery & Beating-Heart Bypass Suite',
+                'file_name': 'heart_hospital_ctvs_surgery.jpg',
+                'url': 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Modern Hospital Wing & Patient Corridors',
-                'file_name': 'hospital_patient_corridor.jpg',
-                'url': 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&auto=format&fit=crop&q=80'
+                'title': 'Cardiac Intensive Care Unit (CICU / CCU)',
+                'file_name': 'heart_hospital_cicu_monitoring.jpg',
+                'url': 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Physician & Specialist Consultation Suite',
-                'file_name': 'hospital_consultation_suite.jpg',
-                'url': 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=1200&auto=format&fit=crop&q=80'
+                'title': 'Continuous 12-Lead ECG & Arrhythmia Telemetry Station',
+                'file_name': 'heart_hospital_ecg_telemetry.jpg',
+                'url': 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Private Inpatient Recovery & Healing Room',
-                'file_name': 'hospital_recovery_suite.jpg',
-                'url': 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1200&auto=format&fit=crop&q=80'
+                'title': 'Advanced 3D Echocardiography & Color Doppler Suite',
+                'file_name': 'heart_hospital_3d_echocardiography.jpg',
+                'url': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Intensive Care Unit (ICU) Monitoring Station',
-                'file_name': 'hospital_icu_monitoring.jpg',
-                'url': 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1200&auto=format&fit=crop&q=80'
+                'title': '24/7 Acute Chest Pain & STEMI Resuscitation Bay',
+                'file_name': 'heart_hospital_chest_pain_emergency.jpg',
+                'url': 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Biomedical & Clinical Pathology Laboratory',
-                'file_name': 'hospital_diagnostic_lab.jpg',
-                'url': 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&auto=format&fit=crop&q=80'
+                'title': '640-Slice Coronary CT Angiography & Imaging Console',
+                'file_name': 'heart_hospital_coronary_ct_angio.jpg',
+                'url': 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Digital Nursing & Patient Telemetry Hub',
-                'file_name': 'hospital_nursing_station.jpg',
-                'url': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80'
+                'title': 'Mobile Cardiac ICU & Pre-Hospital Telemetry Ambulance',
+                'file_name': 'heart_hospital_mobile_cardiac_icu.jpg',
+                'url': 'https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': '24/7 Rapid Emergency & Trauma Response Bay',
-                'file_name': 'hospital_emergency_bay.jpg',
-                'url': 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=1200&auto=format&fit=crop&q=80'
+                'title': 'Private Inpatient Post-Cardiac Surgery Recovery Suite',
+                'file_name': 'heart_hospital_inpatient_recovery.jpg',
+                'url': 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Multidisciplinary Surgical Team in Operative Care',
-                'file_name': 'hospital_surgical_team.jpg',
-                'url': 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&auto=format&fit=crop&q=80'
+                'title': 'Cardiovascular Clinical Consultation & OPD Clinic',
+                'file_name': 'heart_hospital_cardiac_consultation.jpg',
+                'url': 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Precision Medical Technology & Monitoring',
-                'file_name': 'hospital_medical_technology.jpg',
-                'url': 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=1200&auto=format&fit=crop&q=80'
+                'title': 'Pediatric Cardiology & Congenital Heart Examination Bay',
+                'file_name': 'heart_hospital_pediatric_cardiology.jpg',
+                'url': 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=1200&auto=format&fit=crop&q=80',
             },
             {
-                'title': 'Outpatient Medical Pavilion & Clinic Architecture',
-                'file_name': 'hospital_clinic_architecture.jpg',
-                'url': 'https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=1200&auto=format&fit=crop&q=80'
-            }
+                'title': 'City Heart Hospital Main Cardiovascular Pavilion',
+                'file_name': 'heart_hospital_main_campus.jpg',
+                'url': 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=1200&auto=format&fit=crop&q=80',
+            },
         ]
 
         headers = {'User-Agent': 'Mozilla/5.0'}
         for g in gallery_data:
-            if not GalleryImage.objects.filter(title=g['title']).exists():
-                downloaded = False
-                try:
-                    req = urllib.request.Request(g['url'], headers=headers)
-                    with urllib.request.urlopen(req, timeout=10) as resp:
-                        content = resp.read()
-                        item = GalleryImage(title=g['title'], category='Hospital')
-                        item.image.save(g['file_name'], ContentFile(content), save=True)
-                        downloaded = True
-                        self.stdout.write(f"Downloaded Gallery Photo: {item.title}")
-                except Exception:
-                    pass
-
-                if not downloaded:
-                    # Offline fallback
-                    img = Image.new('RGB', (800, 560), color='#0F3D69')
-                    draw = ImageDraw.Draw(img)
-                    draw.rectangle([20, 20, 780, 540], outline='#0284C7', width=3)
-                    draw.rectangle([40, 240, 760, 320], fill='#FFFFFF')
-                    draw.text((60, 260), "CITY HEART HOSPITAL", fill='#0F3D69')
-                    draw.text((60, 285), g['title'], fill='#0F172A')
-                    buf = io.BytesIO()
-                    img.save(buf, format='JPEG', quality=90)
+            downloaded = False
+            try:
+                req = urllib.request.Request(g['url'], headers=headers)
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    content = resp.read()
                     item = GalleryImage(title=g['title'], category='Hospital')
-                    item.image.save(g['file_name'], ContentFile(buf.getvalue()), save=True)
-                    self.stdout.write(f"Created Fallback Photo: {item.title}")
+                    item.image.save(g['file_name'], ContentFile(content), save=True)
+                    downloaded = True
+                    self.stdout.write(f"Downloaded Heart Hospital Photo: {item.title}")
+            except Exception as e:
+                self.stdout.write(f"Download failed for {g['title']}: {e}")
+
+            if not downloaded:
+                # Offline fallback with City Heart Hospital branding
+                img = Image.new('RGB', (800, 560), color='#0E5F5C')
+                draw = ImageDraw.Draw(img)
+                draw.rectangle([20, 20, 780, 540], outline='#FF6F59', width=3)
+                draw.rectangle([40, 240, 760, 320], fill='#FFFFFF')
+                draw.text((60, 260), "CITY HEART HOSPITAL - CARDIOLOGY", fill='#0E5F5C')
+                draw.text((60, 285), g['title'], fill='#26333D')
+                buf = io.BytesIO()
+                img.save(buf, format='JPEG', quality=90)
+                item = GalleryImage(title=g['title'], category='Hospital')
+                item.image.save(g['file_name'], ContentFile(buf.getvalue()), save=True)
+                self.stdout.write(f"Created Fallback Heart Photo: {item.title}")
 
         self.stdout.write(self.style.SUCCESS('Successfully seeded database with City Heart Hospital specialized cardiac data!'))
 
