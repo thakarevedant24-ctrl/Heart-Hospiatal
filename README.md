@@ -83,10 +83,6 @@ hospital_website/
 │   ├── views.py                     # Booking workflow
 │   └── urls.py
 │
-├── dashboard/                       # Staff & internal hospital portal
-│   ├── views.py                     # Staff overview & appointment tracking
-│   └── urls.py
-│
 ├── templates/                       # Project template hierarchy
 │   ├── base.html                    # Base layout with fonts, CDN, & branding
 │   ├── includes/
@@ -96,8 +92,7 @@ hospital_website/
 │   ├── departments/                 # department_list.html
 │   ├── doctors/                     # doctor_list.html
 │   ├── gallery/                     # gallery_list.html
-│   ├── appointments/                # book_appointment.html
-│   └── dashboard/                   # index.html
+│   └── appointments/                # book_appointment.html
 │
 ├── static/                          # Static assets
 │   ├── css/style.css                # Brand kit variables & component styles
@@ -214,8 +209,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Visit the running application at: **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**  
-Access the Django Administration panel at: **[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)**
+Visit the running application at: **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**
 
 ---
 
@@ -230,8 +224,6 @@ Access the Django Administration panel at: **[http://127.0.0.1:8000/admin/](http
 | `/doctors/` | `doctors:doctor_list` | Medical faculty roster |
 | `/gallery/` | `gallery:gallery_list` | Facilities & campus photo gallery |
 | `/appointments/` | `appointments:book_appointment` | Patient appointment booking |
-| `/dashboard/` | `dashboard:index` | Hospital staff management portal |
-| `/admin/` | `admin:index` | Django Admin management |
 
 ---
 

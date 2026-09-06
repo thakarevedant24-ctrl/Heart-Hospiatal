@@ -23,7 +23,6 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,testserver'
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -41,7 +40,6 @@ INSTALLED_APPS = [
     'doctors.apps.DoctorsConfig',
     'gallery.apps.GalleryConfig',
     'appointments.apps.AppointmentsConfig',
-    'dashboard.apps.DashboardConfig',
 ]
 
 MIDDLEWARE = [
