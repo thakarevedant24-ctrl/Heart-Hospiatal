@@ -70,10 +70,10 @@ class Command(BaseCommand):
             departments_dict[dept.name] = dept
             self.stdout.write(f"Created Cardiac Department: {dept.name}")
 
-        # 2. Doctors (6 Cardiac Specialists)
+        # 2. Doctors (6 Cardiac Specialists - Single Names Without Surnames)
         doctors_data = [
             {
-                'name': 'Elena Rostova',
+                'name': 'Rajesh',
                 'department': departments_dict['Interventional Cardiology & Cath Lab'],
                 'specialization': 'Chief Interventional Cardiologist',
                 'qualification': 'MD, DM (Cardiology), FACC, FSCAI',
@@ -83,7 +83,7 @@ class Command(BaseCommand):
                 'is_active': True,
             },
             {
-                'name': 'Marcus Vance',
+                'name': 'Arjun',
                 'department': departments_dict['Cardiothoracic & Vascular Surgery (CTVS)'],
                 'specialization': 'Chief Cardiothoracic Surgeon',
                 'qualification': 'MD, MCh (CTVS), FACS, FETCS',
@@ -93,7 +93,7 @@ class Command(BaseCommand):
                 'is_active': True,
             },
             {
-                'name': 'David Thorne',
+                'name': 'Rohan',
                 'department': departments_dict['Cardiac Electrophysiology & Arrhythmia Center'],
                 'specialization': 'Senior Cardiac Electrophysiologist',
                 'qualification': 'MD, DM (Cardio), FHRS, CEPS',
@@ -103,7 +103,7 @@ class Command(BaseCommand):
                 'is_active': True,
             },
             {
-                'name': 'Sarah Jenkins',
+                'name': 'Priya',
                 'department': departments_dict['Pediatric & Congenital Heart Center'],
                 'specialization': 'Director of Pediatric Cardiology',
                 'qualification': 'MD, FAAP, FACC',
@@ -113,7 +113,7 @@ class Command(BaseCommand):
                 'is_active': True,
             },
             {
-                'name': 'Amina Al-Mansoor',
+                'name': 'Sunita',
                 'department': departments_dict['24/7 Chest Pain & Acute STEMI Emergency Center'],
                 'specialization': 'Director of Cardiac Critical Care & STEMI Unit',
                 'qualification': 'MD, FCCP, FESC',
@@ -123,7 +123,7 @@ class Command(BaseCommand):
                 'is_active': True,
             },
             {
-                'name': 'Jonathan Ross',
+                'name': 'Vikram',
                 'department': departments_dict['Non-Invasive Cardiology & Advanced Diagnostics'],
                 'specialization': 'Consultant Non-Invasive Cardiologist & Imaging Specialist',
                 'qualification': 'MD, FASE, FSCMR',
@@ -152,26 +152,26 @@ class Command(BaseCommand):
         # 3. Testimonials (Heart Patient Recovery Stories)
         testimonials_data = [
             {
-                'patient_name': 'Eleanor Vance',
-                'message': 'When I suffered sudden chest pressure at home, City Heart Hospital’s STEMI emergency team and Dr. Elena Rostova had me in the Cath Lab within 35 minutes. Their rapid angioplasty saved my heart muscle and my life.',
+                'patient_name': 'Kavita Patel',
+                'message': 'When I suffered sudden chest pressure at home, City Heart Hospital’s STEMI emergency team and Dr. Rajesh had me in the Cath Lab within 35 minutes. Their rapid angioplasty saved my heart muscle and my life.',
                 'rating': 5,
                 'is_approved': True,
             },
             {
-                'patient_name': 'Robert Martinez',
-                'message': 'Undergoing beating-heart bypass surgery was terrifying, but Dr. Marcus Vance and the CTVS surgical team gave me complete confidence. Today my heart is pumping stronger than it has in ten years.',
+                'patient_name': 'Ramesh Mehta',
+                'message': 'Undergoing beating-heart bypass surgery was terrifying, but Dr. Arjun and the CTVS surgical team gave me complete confidence. Today my heart is pumping stronger than it has in ten years.',
                 'rating': 5,
                 'is_approved': True,
             },
             {
-                'patient_name': 'Sophie Lin & Family',
-                'message': 'Dr. Sarah Jenkins and the pediatric cardiac team diagnosed and repaired our infant son’s ASD defect with such incredible kindness and precision. We will forever be grateful to City Heart Hospital.',
+                'patient_name': 'Sunil & Family',
+                'message': 'Dr. Priya and the pediatric cardiac team diagnosed and repaired our infant son’s ASD defect with such incredible kindness and precision. We will forever be grateful to City Heart Hospital.',
                 'rating': 5,
                 'is_approved': True,
             },
             {
-                'patient_name': 'Thomas Sterling',
-                'message': 'After years of frightening AFib episodes and palpitations, Dr. David Thorne performed a 3D catheter ablation. I am completely symptom-free and off medication. World-class heart care right here in Mumbai.',
+                'patient_name': 'Pooja Deshmukh',
+                'message': 'After years of frightening AFib episodes and palpitations, Dr. Rohan performed a 3D catheter ablation. I am completely symptom-free and off medication. World-class heart care right here in Mumbai.',
                 'rating': 5,
                 'is_approved': True,
             },
@@ -330,8 +330,20 @@ class Command(BaseCommand):
             },
         ]
 
+        import os
+        from django.conf import settings
+
         headers = {'User-Agent': 'Mozilla/5.0'}
         for g in gallery_data:
+            existing_path = os.path.join(settings.MEDIA_ROOT, 'gallery', g['file_name'])
+            if os.path.exists(existing_path):
+                with open(existing_path, 'rb') as f:
+                    content = f.read()
+                item = GalleryImage(title=g['title'], category='Hospital')
+                item.image.save(g['file_name'], ContentFile(content), save=True)
+                self.stdout.write(f"Loaded Existing Heart Photo: {item.title}")
+                continue
+
             downloaded = False
             try:
                 req = urllib.request.Request(g['url'], headers=headers)

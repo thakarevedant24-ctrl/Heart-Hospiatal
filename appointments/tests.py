@@ -30,7 +30,7 @@ class AppointmentBookingTests(TestCase):
 
         # Create test doctors
         self.doc_cardio = Doctor.objects.create(
-            name="Elena Rostova",
+            name="Rajesh",
             department=self.dept_cardio,
             specialization="Interventional Cardiology",
             qualification="MD, FACC",
@@ -40,7 +40,7 @@ class AppointmentBookingTests(TestCase):
             is_active=True
         )
         self.doc_neuro = Doctor.objects.create(
-            name="Marcus Sterling",
+            name="Arjun",
             department=self.dept_neuro,
             specialization="Adult Neurology",
             qualification="MD, PhD",
