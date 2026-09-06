@@ -1,5 +1,5 @@
 """
-Django settings for harborlight_hospital project.
+Django settings for city_hospital project.
 City Heart Hospital — Mumbai - "Advanced Cardiology & Cardiothoracic Surgery"
 """
 
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'harborlight_hospital.urls'
+ROOT_URLCONF = 'city_hospital.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'harborlight_hospital.wsgi.application'
+WSGI_APPLICATION = 'city_hospital.wsgi.application'
 
 
 # Database

@@ -52,7 +52,7 @@ hospital_website/
 ├── .gitignore                       # Ignored cache, venv, and media files
 ├── README.md                        # Project documentation
 │
-├── harborlight_hospital/            # Project configuration
+├── city_hospital/                   # Project configuration
 │   ├── settings.py                  # Project settings (Apps, WhiteNoise, Crispy)
 │   ├── urls.py                      # Root URL router
 │   ├── wsgi.py                      # WSGI configuration

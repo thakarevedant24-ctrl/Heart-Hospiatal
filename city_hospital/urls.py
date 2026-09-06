@@ -1,5 +1,5 @@
 """
-URL configuration for harborlight_hospital project.
+URL configuration for city_hospital project.
 City Heart Hospital — Mumbai - "Advanced Cardiology & Cardiothoracic Surgery"
 """
 

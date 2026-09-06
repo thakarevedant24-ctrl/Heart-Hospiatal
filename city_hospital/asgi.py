@@ -1,5 +1,5 @@
 """
-ASGI config for harborlight_hospital project.
+ASGI config for city_hospital project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'harborlight_hospital.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'city_hospital.settings')
 
 application = get_asgi_application()
