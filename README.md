@@ -46,59 +46,46 @@ City Heart Hospital is built around a distinct, professional healthcare brand ki
 
 ```text
 hospital_website/
-├── manage.py                        # Django CLI entrypoint
+├── manage.py                        # Root CLI entrypoint (wraps backend)
 ├── requirements.txt                 # Dependencies specification
 ├── .env                             # Environment variables
 ├── .gitignore                       # Ignored cache, venv, and media files
 ├── README.md                        # Project documentation
 │
-├── city_hospital/                   # Project configuration
-│   ├── settings.py                  # Project settings (Apps, WhiteNoise, Crispy)
-│   ├── urls.py                      # Root URL router
-│   ├── wsgi.py                      # WSGI configuration
-│   └── asgi.py                      # ASGI configuration
+├── backend/                         # 🧠 Python & Django Backend
+│   ├── manage.py                    # Backend CLI runner
+│   ├── db.sqlite3                   # Database file
+│   ├── requirements.txt             # Backend dependencies
+│   ├── .env                         # Backend environment configuration
+│   │
+│   ├── city_hospital/               # Project core configuration
+│   │   ├── settings.py              # Settings (Apps, WhiteNoise, Crispy, Paths)
+│   │   ├── urls.py                  # Root URL router
+│   │   ├── wsgi.py                  # WSGI server configuration
+│   │   └── asgi.py                  # ASGI configuration
+│   │
+│   ├── core/                        # Public informational pages (models, views, forms, tests)
+│   ├── departments/                 # Clinical specialties & services (models, views, tests)
+│   ├── doctors/                     # Physician roster & profiles (models, views, tests)
+│   ├── gallery/                     # Campus & equipment media (models, views, tests)
+│   └── appointments/                # Patient consultation booking (models, views, forms, tests)
 │
-├── core/                            # Public informational pages
-│   ├── models.py                    # Testimonial & ContactMessage
-│   ├── views.py                     # Home, About, Contact
-│   └── urls.py                      # Routes for core pages
+├── frontend/                        # 🎨 Frontend Presentation Layer
+│   ├── templates/                   # Semantic HTML5 & Django templates
+│   │   ├── base.html                # Base layout with fonts, CDN, & branding
+│   │   ├── includes/                # Partial components (navbar.html, footer.html)
+│   │   ├── core/                    # home.html, about.html, contact.html
+│   │   ├── departments/             # department_list.html, department_detail.html
+│   │   ├── doctors/                 # doctor_list.html, doctor_detail.html
+│   │   ├── gallery/                 # gallery_list.html
+│   │   └── appointments/            # book_appointment.html, booking_confirmation.html
+│   │
+│   └── static/                      # Static assets
+│       ├── css/style.css            # Medical brand design system
+│       ├── js/main.js               # Client-side scripts & AJAX
+│       └── images/                  # Favicons, SVGs, and branding graphics
 │
-├── departments/                     # Clinical specialties & services
-│   ├── models.py                    # Department & Service
-│   ├── views.py                     # Department list & detail
-│   └── urls.py
-│
-├── doctors/                         # Physician roster & profiles
-│   ├── models.py                    # Doctor model (department FK, experience)
-│   ├── views.py                     # Doctor directory
-│   └── urls.py
-│
-├── gallery/                         # Campus & equipment media
-│   ├── models.py                    # GalleryImage (Hospital, Equipment, Events, Rooms)
-│   ├── views.py                     # Gallery list
-│   └── urls.py
-│
-├── appointments/                    # Online patient consultation booking
-│   ├── models.py                    # Appointment (department, doctor, date/time, status)
-│   ├── views.py                     # Booking workflow
-│   └── urls.py
-│
-├── templates/                       # Project template hierarchy
-│   ├── base.html                    # Base layout with fonts, CDN, & branding
-│   ├── includes/
-│   │   ├── navbar.html              # Top bar, branding, & responsive menu
-│   │   └── footer.html              # Hospital details, links, & copyright
-│   ├── core/                        # home.html, about.html, contact.html
-│   ├── departments/                 # department_list.html
-│   ├── doctors/                     # doctor_list.html
-│   ├── gallery/                     # gallery_list.html
-│   └── appointments/                # book_appointment.html
-│
-├── static/                          # Static assets
-│   ├── css/style.css                # Brand kit variables & component styles
-│   ├── js/main.js                   # Client-side scripts
-│   └── images/                      # Static branding images
-│
+├── staticfiles/                     # WhiteNoise compiled & compressed static assets
 └── media/                           # User-uploaded doctor photos & gallery files
 ```
 
