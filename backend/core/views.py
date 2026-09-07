@@ -13,9 +13,17 @@ def home(request):
     doctors = Doctor.objects.filter(is_active=True).select_related('department')[:8]
     testimonials = Testimonial.objects.filter(is_approved=True)[:6]
     
+    cath_img = GalleryImage.objects.filter(title__icontains='Catheterization').first()
+    ctvs_img = GalleryImage.objects.filter(title__icontains='Cardiothoracic').first()
+    campus_img = GalleryImage.objects.filter(title__icontains='Campus').first() or GalleryImage.objects.filter(title__icontains='Pavilion').first()
+
+    cath_url = cath_img.image.url if (cath_img and cath_img.image) else '/media/gallery/heart_hospital_cath_lab.jpg'
+    ctvs_url = ctvs_img.image.url if (ctvs_img and ctvs_img.image) else '/media/gallery/heart_hospital_ctvs_surgery.jpg'
+    campus_url = campus_img.image.url if (campus_img and campus_img.image) else '/media/gallery/heart_hospital_main_campus.jpg'
+
     hero_slides = [
         {
-            'image_url': '/media/gallery/heart_hospital_cath_lab.jpg',
+            'image_url': cath_url,
             'title': 'World-Class Heart & Cardiovascular Care',
             'subtitle': 'Dedicated exclusively to advanced interventional cardiology, beating-heart bypass surgery, and 24/7 acute chest pain emergencies.',
             'primary_btn_text': 'Book Cardiac Consultation',
@@ -24,7 +32,7 @@ def home(request):
             'secondary_btn_url': '/departments/',
         },
         {
-            'image_url': '/media/gallery/heart_hospital_ctvs_surgery.jpg',
+            'image_url': ctvs_url,
             'title': 'Pioneering Cardiothoracic Surgery & Catheterization',
             'subtitle': 'State-of-the-art hybrid Cath Labs, minimally invasive valve replacements (TAVR), and 3D arrhythmia mapping guided by senior heart specialists.',
             'primary_btn_text': 'Cardiac Procedures',
@@ -33,7 +41,7 @@ def home(request):
             'secondary_btn_url': '/doctors/',
         },
         {
-            'image_url': '/media/gallery/heart_hospital_main_campus.jpg',
+            'image_url': campus_url,
             'title': '24/7 Chest Pain & Acute STEMI Emergency Center',
             'subtitle': 'Rapid door-to-balloon angioplasty in under 45 minutes, Mobile Cardiac ICU ambulances, and round-the-clock intensive cardiac care.',
             'primary_btn_text': 'Emergency Hotline',
