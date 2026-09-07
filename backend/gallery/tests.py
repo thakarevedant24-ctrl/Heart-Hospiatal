@@ -16,6 +16,10 @@ class GalleryViewTests(TestCase):
             image=dummy_image
         )
 
+    def tearDown(self):
+        if self.image and self.image.image:
+            self.image.image.delete(save=False)
+
     def test_gallery_list_page_loads(self):
         response = self.client.get(reverse('gallery:gallery_list'))
         self.assertEqual(response.status_code, 200)

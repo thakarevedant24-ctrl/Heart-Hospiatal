@@ -46,11 +46,8 @@ City Heart Hospital is built around a distinct, professional healthcare brand ki
 
 ```text
 hospital_website/
-├── manage.py                        # Root CLI entrypoint (wraps backend)
-├── requirements.txt                 # Dependencies specification
-├── .env                             # Environment variables
-├── .gitignore                       # Ignored cache, venv, and media files
 ├── README.md                        # Project documentation
+├── .gitignore                       # Ignored cache, venv, and media files
 │
 ├── backend/                         # 🧠 Python & Django Backend
 │   ├── manage.py                    # Backend CLI runner
@@ -170,24 +167,19 @@ source .venv/bin/activate
 
 ### 3. Install Dependencies
 ```powershell
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
-### 4. Environment Variables
-Create a `.env` file at the root:
-```env
-DEBUG=True
-SECRET_KEY=your-secure-secret-key-here
-ALLOWED_HOSTS=127.0.0.1,localhost,testserver
-```
-
-### 5. Apply Migrations
+### 4. Apply Migrations
 ```powershell
-python manage.py migrate
+python backend/manage.py migrate
 ```
 
-### 6. Run the Development Server
+### 5. Run the Development Server
 ```powershell
+python backend/manage.py runserver
+# Or navigate to backend:
+cd backend
 python manage.py runserver
 ```
 
@@ -213,12 +205,17 @@ Visit the running application at: **[http://127.0.0.1:8000/](http://127.0.0.1:80
 
 Run Django system checks:
 ```powershell
-python manage.py check
+python backend/manage.py check
+```
+
+Run test suite (15 unit tests):
+```powershell
+python backend/manage.py test
 ```
 
 Collect static files with WhiteNoise:
 ```powershell
-python manage.py collectstatic --noinput
+python backend/manage.py collectstatic --noinput
 ```
 
 ---
