@@ -1928,11 +1928,16 @@ a:hover {
 
 /* Scroll-Reveal Animation Engine */
 .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(28px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
+}
+
+.js-anim .reveal-on-scroll:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(28px);
 }
 
 .reveal-on-scroll.is-revealed {

@@ -335,12 +335,14 @@ class Command(BaseCommand):
 
         headers = {'User-Agent': 'Mozilla/5.0'}
         for g in gallery_data:
+            rel_path = f"gallery/{g['file_name']}"
             existing_path = os.path.join(settings.MEDIA_ROOT, 'gallery', g['file_name'])
             if os.path.exists(existing_path):
-                with open(existing_path, 'rb') as f:
-                    content = f.read()
-                item = GalleryImage(title=g['title'], category='Hospital')
-                item.image.save(g['file_name'], ContentFile(content), save=True)
+                item = GalleryImage.objects.create(
+                    title=g['title'],
+                    category='Hospital',
+                    image=rel_path
+                )
                 self.stdout.write(f"Loaded Existing Heart Photo: {item.title}")
                 continue
 
@@ -349,8 +351,14 @@ class Command(BaseCommand):
                 req = urllib.request.Request(g['url'], headers=headers)
                 with urllib.request.urlopen(req, timeout=10) as resp:
                     content = resp.read()
-                    item = GalleryImage(title=g['title'], category='Hospital')
-                    item.image.save(g['file_name'], ContentFile(content), save=True)
+                    os.makedirs(os.path.dirname(existing_path), exist_ok=True)
+                    with open(existing_path, 'wb') as f:
+                        f.write(content)
+                    item = GalleryImage.objects.create(
+                        title=g['title'],
+                        category='Hospital',
+                        image=rel_path
+                    )
                     downloaded = True
                     self.stdout.write(f"Downloaded Heart Hospital Photo: {item.title}")
             except Exception as e:
@@ -364,10 +372,13 @@ class Command(BaseCommand):
                 draw.rectangle([40, 240, 760, 320], fill='#FFFFFF')
                 draw.text((60, 260), "CITY HEART HOSPITAL - CARDIOLOGY", fill='#0E5F5C')
                 draw.text((60, 285), g['title'], fill='#26333D')
-                buf = io.BytesIO()
-                img.save(buf, format='JPEG', quality=90)
-                item = GalleryImage(title=g['title'], category='Hospital')
-                item.image.save(g['file_name'], ContentFile(buf.getvalue()), save=True)
+                os.makedirs(os.path.dirname(existing_path), exist_ok=True)
+                img.save(existing_path, format='JPEG', quality=90)
+                item = GalleryImage.objects.create(
+                    title=g['title'],
+                    category='Hospital',
+                    image=rel_path
+                )
                 self.stdout.write(f"Created Fallback Heart Photo: {item.title}")
 
         self.stdout.write(self.style.SUCCESS('Successfully seeded database with City Heart Hospital specialized cardiac data!'))

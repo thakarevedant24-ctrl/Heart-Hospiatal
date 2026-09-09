@@ -200,10 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // 7. Scroll-Reveal Animations (IntersectionObserver)
   const revealElements = document.querySelectorAll('.reveal-on-scroll, [data-aos]');
   if (revealElements.length > 0) {
-    // Accessibility check: immediately show if user prefers reduced motion
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Accessibility check: immediately show if user prefers reduced motion or no IntersectionObserver
+    if (!window.IntersectionObserver || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
       revealElements.forEach(el => el.classList.add('is-revealed', 'aos-animate'));
     } else {
+      document.body.classList.add('js-anim');
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -213,11 +214,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }, {
         root: null,
-        rootMargin: '0px 0px -40px 0px',
-        threshold: 0.1
+        rootMargin: '0px 0px -20px 0px',
+        threshold: 0.05
       });
 
-      revealElements.forEach(el => revealObserver.observe(el));
+      revealElements.forEach(el => {
+        // Immediately reveal if already visible in initial viewport
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('is-revealed', 'aos-animate');
+        } else {
+          revealObserver.observe(el);
+        }
+      });
     }
   }
 
