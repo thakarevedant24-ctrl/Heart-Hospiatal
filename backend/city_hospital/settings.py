@@ -17,9 +17,17 @@ SECRET_KEY = config(
     default='django-insecure-t(0$mgj#38+%wcd7ga0g%vw@$l_ql^&g6%pr-q+4v51-qina#q'
 )
 
-DEBUG = config('DEBUG', default=True, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,testserver,.onrender.com', cast=Csv())
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,testserver', cast=Csv())
+RENDER_EXTERNAL_HOSTNAME = config('RENDER_EXTERNAL_HOSTNAME', default=None)
+if RENDER_EXTERNAL_HOSTNAME and RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='https://*.onrender.com,http://127.0.0.1,http://localhost',
+    cast=Csv()
+)
 
 
 # Application definition
