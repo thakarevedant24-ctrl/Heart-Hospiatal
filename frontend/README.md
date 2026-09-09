@@ -66,3 +66,4 @@ frontend/
 3. **Vanilla Lightbox Modal**: Image zoom with keyboard (`Esc`, arrows) and touch navigation.
 4. **Hero Slideshow**: Dynamic auto-playing cardiac hero slideshow with navigation controls.
 5. **Back to Top Button**: Smooth scroll-to-top triggered after 280px scroll depth.
+

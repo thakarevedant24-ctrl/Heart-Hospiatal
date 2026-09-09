@@ -62,3 +62,4 @@ python manage.py collectstatic --no-input
 - **Environment Handling**: Managed via `python-decouple` reading `backend/.env`.
 - **Allowed Hosts**: Supports localhost (`127.0.0.1`, `localhost`, `testserver`) and production Render domains (`.onrender.com`).
 - **CSRF**: Pre-configured with trusted origins for development and Render HTTPS domains.
+
